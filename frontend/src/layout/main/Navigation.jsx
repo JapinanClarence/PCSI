@@ -12,6 +12,8 @@ import {
 import Container from "@/components/common/container";
 import { Link } from "react-router";
 import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+import { images } from "@/constants/images";
 
 const components = [
   {
@@ -43,20 +45,17 @@ const components = [
 function Navigation() {
   return (
     <div className="relative">
-      <div className="fixed top-0 w-full backdrop-blur-md bg-dark-green shadow-sm z-[100] ">
-        <Container className="py-5 flex items-end justify-between">
-          <Link to={"/"}>
-            {/* <img src="/vite.svg" alt="LOGO" className="max-h-14 md:max-h-14" /> */}
-            <Button className={"rounded-full"}>
-              Philippine Coleopterists Society Incorporated
-            </Button>
+      <div className="fixed top-0 w-full bg-white backdrop-blur-md shadow-md z-[50] ">
+        <Container className="py-2 flex items-center justify-between">
+          <Link to={"/"} >
+            <img src={images.logo_landscape} alt="LOGO" className="max-h-14 md:max-h-20" />
           </Link>
           <NavigationMenu viewport={false} className={"z-50"}>
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuTrigger
-                  background="transparent"
-                  className={"hover:bg-transparent"}
+                  background=""
+                  className={""}
                 >
                   Home
                 </NavigationMenuTrigger>
@@ -96,13 +95,16 @@ function Navigation() {
                   <Link>News and Events</Link>
                 </NavigationMenuTrigger>
               </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger>
-                  <Link>Contact Us</Link>
-                </NavigationMenuTrigger>
-              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
+          <div>
+            <div className="bg-dark-green text-primary-foreground rounded-full text-sm font-medium pl-3 pr-1 flex items-center gap-2 py-1">
+                Contact Us <Button size={"icon"} className={"bg-white rounded-full text-black  hover:bg-white/80"}><ArrowRight/></Button>
+            </div>
+            {/* <Button className={"bg-lighter-green rounded-full hover:bg-lighter-green/90"}>
+              Contact Us <ArrowRight className="rounded-full bg-black p-1"/>
+            </Button> */}
+          </div>
         </Container>
       </div>
     </div>

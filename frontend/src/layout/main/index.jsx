@@ -1,6 +1,7 @@
 import { Link, Outlet, useNavigate } from "react-router";
 import React from "react";
 import Navigation from "./Navigation";
+import Footer from "./Footer";
 
 function MainLayout() {
   return (
@@ -9,6 +10,7 @@ function MainLayout() {
       <div className="pt-19">
         <Outlet />
       </div>
+      <Footer/>
     </div>
   );
 }

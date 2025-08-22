@@ -5,6 +5,11 @@ import beatle_4 from "@/assets/images/beatle_4.jpg"
 import beatle_5 from "@/assets/images/beatle_5.jpg"
 import beatle_6 from "@/assets/images/beatle_6.jpg"
 import beatle_7 from "@/assets/images/beatle_7.jpg"
+import logo_portrait from "@/assets/images/Logo-portrait.png"
+import logo_landscape from "@/assets/images/Logo_Landscape.png"
+import logo_square from "@/assets/images/logo_square.png";
+import logo_white from "@/assets/images/logo_white.png";
+import logo_square_white from "@/assets/images/logo_square_white.png";
 
 export const images = {
     beatle_1,
@@ -13,5 +18,10 @@ export const images = {
     beatle_4,
     beatle_5,
     beatle_6,
-    beatle_7
+    beatle_7,
+    logo_portrait,
+    logo_landscape,
+    logo_square,
+    logo_white,
+    logo_square_white
 }

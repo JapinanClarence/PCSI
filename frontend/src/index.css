@@ -42,6 +42,9 @@
 
   /* custom theme */
   --color-dark-green: var(--dark-green);
+  --color-lighter-green: var(--lighter-green);
+  --font-sans: "Raleway", sans-serif;
+  --font-serif: "Lora", serif;
 }
 
 :root {
@@ -79,7 +82,8 @@
   --sidebar-ring: oklch(0.723 0.219 149.579);
 
   /* custom theme */
-  --dark-green: oklch(26.6% 0.065 152.934);
+  --dark-green: oklch(26.539% 0.06512 152.793);
+  --lighter-green: oklch(60% 0.15 152.934);
 }
 
 .dark {
@@ -117,6 +121,7 @@
 
   /* custom theme */
   --dark-green: oklch(26.6% 0.065 152.934);
+  --lighter-green: oklch(60% 0.15 152.934);
 }
 
 @layer base {
@@ -197,4 +202,8 @@
   to {
     transform: scale(1.1); /* or your preferred zoom */
   }
+}
+
+body{
+  font-family: var(--font-sans);
 }

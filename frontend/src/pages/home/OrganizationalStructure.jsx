@@ -1,6 +1,7 @@
 import React from "react";
 import Container from "@/components/common/Container";
 import { Separator } from "@/components/ui/separator";
+import { useInView } from "@/hooks/useInView";
 
 function OrganizationalStructure() {
   const teamMembers = [
@@ -36,6 +37,16 @@ function OrganizationalStructure() {
     },
   ];
 
+  // Create refs and inView states for all team members at the top level
+  const [ref1, isInView1] = useInView({ threshold: 0.1 });
+  const [ref2, isInView2] = useInView({ threshold: 0.1 });
+  const [ref3, isInView3] = useInView({ threshold: 0.1 });
+  const [ref4, isInView4] = useInView({ threshold: 0.1 });
+  const [ref5, isInView5] = useInView({ threshold: 0.1 });
+
+  const memberRefs = [ref1, ref2, ref3, ref4, ref5];
+  const memberInView = [isInView1, isInView2, isInView3, isInView4, isInView5];
+
   return (
     <Container className="py-5">
       <div className="mb-12">
@@ -53,7 +64,15 @@ function OrganizationalStructure() {
         {/* Founding President, Secretary, and Treasurer */}
         <div className="space-y-8">
           {teamMembers.slice(0, 3).map((member, index) => (
-            <div key={index} className="text-center animate-float-in">
+            <div
+              key={index}
+              ref={memberRefs[index]}
+              className={`text-center ${
+                memberInView[index]
+                  ? `animate-float-in animation-delay-${index * 100}`
+                  : "opacity-0"
+              }`}
+            >
               <div className="relative mb-1">
                 <img
                   src={member.image}
@@ -61,14 +80,40 @@ function OrganizationalStructure() {
                   className="w-36 h-36 mx-auto rounded-full border-4 border-dark-green"
                 />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-1">
+              <h3
+                className={`text-xl font-semibold text-gray-900 mb-1 ${
+                  memberInView[index]
+                    ? `animate-fade-in-text animation-delay-${
+                        index * 100 + 100
+                      }`
+                    : "opacity-0"
+                }`}
+              >
                 {member.name}
               </h3>
-              <p className="text-dark-green font-medium mb-2">
+              <p
+                className={`text-dark-green font-medium mb-2 ${
+                  memberInView[index]
+                    ? `animate-fade-in-text animation-delay-${
+                        index * 100 + 200
+                      }`
+                    : "opacity-0"
+                }`}
+              >
                 {member.position}
               </p>
               {member.affiliation && (
-                <p className="text-dark-green text-sm">{member.affiliation}</p>
+                <p
+                  className={`text-dark-green text-sm ${
+                    memberInView[index]
+                      ? `animate-fade-in-text animation-delay-${
+                          index * 100 + 300
+                        }`
+                      : "opacity-0"
+                  }`}
+                >
+                  {member.affiliation}
+                </p>
               )}
             </div>
           ))}
@@ -81,7 +126,15 @@ function OrganizationalStructure() {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             {teamMembers.slice(3).map((member, index) => (
-              <div key={index} className="text-center mb-8 animate-float-in">
+              <div
+                key={index}
+                ref={memberRefs[index + 3]}
+                className={`text-center mb-8 ${
+                  memberInView[index + 3]
+                    ? `animate-float-in animation-delay-${(index + 3) * 100}`
+                    : "opacity-0"
+                }`}
+              >
                 <div className="relative mb-1">
                   <img
                     src={member.image}
@@ -89,11 +142,28 @@ function OrganizationalStructure() {
                     className="w-36 h-36 mx-auto rounded-full border-4 border-dark-green"
                   />
                 </div>
-                <h4 className="text-xl font-semibold text-gray-900 mb-1">
+                <h4
+                  className={`text-xl font-semibold text-gray-900 mb-1 ${
+                    memberInView[index + 3]
+                      ? `animate-fade-in-text animation-delay-${
+                          (index + 3) * 100 + 100
+                        }`
+                      : "opacity-0"
+                  }`}
+                >
                   {member.name}
                 </h4>
-
-                <p className="text-dark-green text-sm">{member.affiliation}</p>
+                <p
+                  className={`text-dark-green text-sm ${
+                    memberInView[index + 3]
+                      ? `animate-fade-in-text animation-delay-${
+                          (index + 3) * 100 + 200
+                        }`
+                      : "opacity-0"
+                  }`}
+                >
+                  {member.affiliation}
+                </p>
               </div>
             ))}
           </div>

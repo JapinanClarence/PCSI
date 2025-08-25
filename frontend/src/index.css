@@ -244,31 +244,63 @@ body {
   border-bottom-color: var(--dark-green) !important;
 }
 
-/* Sub-menu items hidden by default, shown on hover */
-.navigation-menu-content ul > li > ul {
-  display: none !important;
+/* Sub-menu visibility controlled by Collapsible (click-to-open) */
+[data-slot="navigation-menu-content"] [data-slot="collapsible-content"] {
+  display: none;
 }
 
-.navigation-menu-content ul > li.group:hover > ul,
-.navigation-menu-content ul > li.group:focus-within > ul {
-  display: block !important;
+[data-slot="navigation-menu-content"]
+  [data-slot="collapsible-content"][data-state="open"] {
+  display: block;
 }
 
-/* More specific selector for the training workshop sub-menu */
-.navigation-menu-content ul > li.group ul {
-  display: none !important;
+/* Ensure hover does not interfere with click-to-open behavior */
+[data-slot="navigation-menu-content"]
+  li.group:hover
+  [data-slot="collapsible-content"]:not([data-state="open"]),
+[data-slot="navigation-menu-content"]
+  li.group:focus-within
+  [data-slot="collapsible-content"]:not([data-state="open"]) {
+  display: none;
 }
 
-.navigation-menu-content ul > li.group:hover ul,
-.navigation-menu-content ul > li.group:focus-within ul {
-  display: block !important;
-}
-
-/* Float-in animation */
+/* Enhanced Float-in animation */
 @keyframes float-in {
   0% {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-float-in {
+  animation: float-in 0.8s ease-out forwards;
+}
+
+/* Fade-in animation for images */
+@keyframes fade-in-image {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in-image {
+  animation: fade-in-image 0.6s ease-out forwards;
+}
+
+/* Fade-in animation for text */
+@keyframes fade-in-text {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
   }
   100% {
     opacity: 1;
@@ -276,6 +308,39 @@ body {
   }
 }
 
-.animate-float-in {
-  animation: float-in 0.5s ease-out forwards;
+.animate-fade-in-text {
+  animation: fade-in-text 0.6s ease-out forwards;
+}
+
+/* Staggered animation delays */
+.animation-delay-100 {
+  animation-delay: 0.1s;
+}
+
+.animation-delay-200 {
+  animation-delay: 0.2s;
+}
+
+.animation-delay-300 {
+  animation-delay: 0.3s;
+}
+
+.animation-delay-400 {
+  animation-delay: 0.4s;
+}
+
+.animation-delay-500 {
+  animation-delay: 0.5s;
+}
+
+.animation-delay-600 {
+  animation-delay: 0.6s;
+}
+
+.animation-delay-700 {
+  animation-delay: 0.7s;
+}
+
+.animation-delay-800 {
+  animation-delay: 0.8s;
 }

@@ -204,6 +204,78 @@
   }
 }
 
-body{
+body {
   font-family: var(--font-sans);
+}
+
+/* Navigation Menu Hover Styles */
+.navigation-menu-content ul {
+  background-color: var(--dark-green) !important;
+  color: white !important;
+  display: flex !important;
+  flex-direction: column !important;
+  border-radius: var(--radius);
+  padding: 0.5rem;
+  min-width: 200px;
+}
+
+.navigation-menu-content ul li {
+  padding: 0.5rem;
+  border-radius: calc(var(--radius) - 2px);
+  transition: background-color 0.2s ease;
+}
+
+.navigation-menu-content ul li:hover {
+  background-color: lightgray !important;
+  color: black !important;
+}
+
+.navigation-menu-content ul li a {
+  color: inherit !important;
+  text-decoration: none;
+}
+
+.navigation-menu-content ul li a:hover {
+  color: inherit !important;
+}
+
+/* Active menu indicator */
+.border-b-2.border-dark-green {
+  border-bottom-color: var(--dark-green) !important;
+}
+
+/* Sub-menu items hidden by default, shown on hover */
+.navigation-menu-content ul > li > ul {
+  display: none !important;
+}
+
+.navigation-menu-content ul > li.group:hover > ul,
+.navigation-menu-content ul > li.group:focus-within > ul {
+  display: block !important;
+}
+
+/* More specific selector for the training workshop sub-menu */
+.navigation-menu-content ul > li.group ul {
+  display: none !important;
+}
+
+.navigation-menu-content ul > li.group:hover ul,
+.navigation-menu-content ul > li.group:focus-within ul {
+  display: block !important;
+}
+
+/* Float-in animation */
+@keyframes float-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-float-in {
+  animation: float-in 0.5s ease-out forwards;
 }

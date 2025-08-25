@@ -83,7 +83,6 @@ function Values() {
               and taking responsibility for all our actions.
             </p>
           </AccordionContent>
-          
         </AccordionItem>
       </Accordion>
     </Container>

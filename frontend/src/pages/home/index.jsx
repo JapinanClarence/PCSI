@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import Hero from "./Hero";
 import About from "./About";
 import Values from "./Values";
+import OrganizationalStructure from "./OrganizationalStructure";
 
 const Home = () => {
   return (
@@ -11,7 +12,8 @@ const Home = () => {
       <Hero />
       <div className="">
         <About />
-        <Values/>
+        <Values />
+        <OrganizationalStructure />
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ import {
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 import Container from "@/components/common/container";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { images } from "@/constants/images";
@@ -156,10 +156,12 @@ const newsEventsItems = [
 ];
 
 function Navigation() {
+  const location = useLocation();
+
   return (
     <div className="relative">
       <div className="fixed top-0 w-full bg-white backdrop-blur-md shadow-md z-[50] ">
-        <Container className="py-4 flex items-center justify-between">
+        <Container className="py-1 flex items-center justify-between">
           <Link to={"/"}>
             <img
               src={images.logo_landscape}
@@ -172,7 +174,11 @@ function Navigation() {
               <NavigationMenuItem>
                 <Link
                   to="/"
-                  className="border-b-2 border-dark-green px-4 py-2 text-sm font-medium"
+                  className={`py-2 px-2 text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-dark-green after:transition-all after:duration-300 hover:after:w-full ${
+                    location.pathname === "/"
+                      ? "border-b-2 border-dark-green"
+                      : ""
+                  }`}
                 >
                   Home
                 </Link>
@@ -180,7 +186,7 @@ function Navigation() {
               <NavigationMenuItem>
                 <NavigationMenuTrigger>Services</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="w-[300px] gap-2">
+                  <ul className="w-[300px] gap-1">
                     {servicesItems.map((item) => (
                       <li key={item.title} className="group">
                         {item.subItems ? (
@@ -194,15 +200,15 @@ function Navigation() {
                               </div>
                             </CollapsibleTrigger>
                             <CollapsibleContent>
-                              <ul className="ml-6 mt-1">
+                              <ul className="ml-4 mt-1">
                                 {item.subItems.map((subItem) => (
                                   <li key={subItem.title}>
                                     <NavigationMenuLink asChild>
                                       <Link
                                         to={subItem.href}
-                                        className="block px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
+                                        className="block px-2 py-1 rounded-md transition-colors"
                                       >
-                                        <div className="text-xs text-foreground hover:text-foreground">
+                                        <div className="text-md">
                                           {subItem.title}
                                         </div>
                                       </Link>
@@ -232,7 +238,7 @@ function Navigation() {
                   Membership & Affiliates
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="w-[200px] gap-2">
+                  <ul className="w-[200px] gap-1">
                     <li>
                       <NavigationMenuLink asChild>
                         <Link to="/affiliates">
@@ -256,30 +262,30 @@ function Navigation() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger>
+                <Link
+                  to="/strategic-initiatives"
+                  className={`px-3 py-2 text-sm font-medium whitespace-nowrap relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-dark-green after:transition-all after:duration-300 hover:after:w-full ${
+                    location.pathname === "/strategic-initiatives"
+                      ? "border-b-2 border-dark-green"
+                      : ""
+                  }`}
+                >
                   Strategic Initiatives
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="w-[200px] gap-2">
-                    {strategicInitiativesItems.map((item) => (
-                      <li key={item.title}>
-                        <NavigationMenuLink asChild>
-                          <Link to={item.href}>
-                            <div className="text-sm leading-none font-medium">
-                              {item.title}
-                            </div>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
+                </Link>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger>AJIS</NavigationMenuTrigger>
+                <NavigationMenuTrigger
+                  className={`${
+                    location.pathname.startsWith("/ajis")
+                      ? "border-b-2 border-dark-green rounded-none px-3 py-1.5 text-sm font-medium after:hidden"
+                      : ""
+                  }`}
+                >
+                  AJIS
+                </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="w-[200px] gap-2">
+                  <ul className="w-[200px] gap-1">
                     {ajisItems.map((item) => (
                       <li key={item.title}>
                         <NavigationMenuLink asChild>
@@ -298,7 +304,7 @@ function Navigation() {
               <NavigationMenuItem>
                 <NavigationMenuTrigger>Support</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="w-[200px] gap-2">
+                  <ul className="w-[200px] gap-1">
                     {supportItems.map((item) => (
                       <li key={item.title}>
                         <NavigationMenuLink asChild>
@@ -316,7 +322,7 @@ function Navigation() {
               <NavigationMenuItem>
                 <NavigationMenuTrigger>News & Events</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="w-[200px] gap-2">
+                  <ul className="w-[200px] gap-1">
                     {newsEventsItems.map((item) => (
                       <li key={item.title}>
                         <NavigationMenuLink asChild>
@@ -347,10 +353,10 @@ function Navigation() {
             </NavigationMenuList>
           </NavigationMenu>
           <div>
-            <div className="bg-dark-green text-primary-foreground rounded-full text-sm font-medium pl-3 pr-1 flex items-center gap-2 py-1">
+            <div className="bg-dark-green text-primary-foreground rounded-full text-xs font-medium pl-2 pr-0.5 flex items-center gap-1 py-0.5">
               Contact Us{" "}
               <Button
-                size={"icon"}
+                size={"sm"}
                 className={
                   "bg-white rounded-full text-black  hover:bg-white/80"
                 }

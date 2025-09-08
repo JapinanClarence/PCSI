@@ -10,7 +10,7 @@ import {
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 import Container from "@/components/common/Container";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { images } from "@/constants/images";

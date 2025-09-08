@@ -9,7 +9,7 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
-import Container from "@/components/common/container";
+import Container from "@/components/common/Container";
 import { Link } from "react-router";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";

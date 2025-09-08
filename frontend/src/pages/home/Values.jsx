@@ -20,10 +20,10 @@ function Values() {
         defaultValue="item-1"
       >
         <AccordionItem value="item-1">
-          <AccordionTrigger className={"font-serif"}>
-            Discipline &amp; Consistency.
+          <AccordionTrigger className={"font-serif text-1xl"}>
+            Discipline &amp; Consistency
           </AccordionTrigger>
-          <AccordionContent className="flex flex-col gap-4 text-balance">
+          <AccordionContent className="flex flex-col gap-4 px-3">
             <p>
               We cultivate self-control, develop internal motivation, and make
               conscious choices to achieve desired goals amongst our members. We
@@ -38,8 +38,10 @@ function Values() {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">
-          <AccordionTrigger className={"font-serif"}>Kindess</AccordionTrigger>
-          <AccordionContent className="flex flex-col gap-4 text-balance">
+          <AccordionTrigger className={"font-serif text-1xl"}>
+            Kindess
+          </AccordionTrigger>
+          <AccordionContent className="flex flex-col gap-4 px-3">
             <p>
               We value compassion, empathy, and generosity towards others, and
               even towards oneself. This also involves performing acts of
@@ -53,8 +55,10 @@ function Values() {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-3">
-          <AccordionTrigger className={"font-serif"}>Trust</AccordionTrigger>
-          <AccordionContent className="flex flex-col gap-4 text-balance">
+          <AccordionTrigger className={"font-serif text-1xl"}>
+            Trust
+          </AccordionTrigger>
+          <AccordionContent className="flex flex-col gap-4 px-3">
             <p>
               We encourage each member to have faith that things will work out,
               even when faced with uncertainty and challenges. This also
@@ -65,8 +69,10 @@ function Values() {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-4">
-          <AccordionTrigger className={"font-serif"}>Honesty</AccordionTrigger>
-          <AccordionContent className="flex flex-col gap-4 text-balance">
+          <AccordionTrigger className={"font-serif text-1xl"}>
+            Honesty
+          </AccordionTrigger>
+          <AccordionContent className="flex flex-col gap-4 px-3">
             <p>
               We promote truthfulness, integrity, and sincerity in thoughts,
               words, and actions. This also means being genuine and authentic,
@@ -75,15 +81,16 @@ function Values() {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-5">
-          <AccordionTrigger className={"font-serif"}>Teamwork</AccordionTrigger>
-          <AccordionContent className="flex flex-col gap-4 text-balance">
+          <AccordionTrigger className={"font-serif text-1xl"}>
+            Teamwork
+          </AccordionTrigger>
+          <AccordionContent className="flex flex-col gap-4 px-3">
             <p>
               We promote truthfulness, integrity, and sincerity in thoughts,
               words, and actions. This also means being genuine and authentic,
               and taking responsibility for all our actions.
             </p>
           </AccordionContent>
-          
         </AccordionItem>
       </Accordion>
     </Container>

@@ -12,94 +12,357 @@ import {
 import Container from "@/components/common/Container";
 import { Link } from "react-router";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { images } from "@/constants/images";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
-const components = [
+const servicesItems = [
   {
-    title: "Alert Dialog",
-    href: "/docs/primitives/alert-dialog",
+    title: "Beetle Species Identification",
+    href: "/services/beetle-identification",
   },
   {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
+    title: "Training Workshop on Coleopterology",
+    href: "/services/training-workshop",
+    subItems: [
+      {
+        title: "Specimen collection protocols",
+        href: "/services/training/collection-protocols",
+      },
+      {
+        title: "Specimen high-definition imaging",
+        href: "/services/training/hd-imaging",
+      },
+      {
+        title:
+          "Specimen examination: gross morphology, genitalia (basic: gross male and female genitalia examination)",
+        href: "/services/training/gross-examination",
+      },
+      {
+        title:
+          "Specimen examination: genitalia (advanced: endophallus examination)",
+        href: "/services/training/endophallus-examination",
+      },
+      {
+        title: "Specimen Standard Measurements",
+        href: "/services/training/standard-measurements",
+      },
+    ],
   },
   {
-    title: "Progress",
-    href: "/docs/primitives/progress",
+    title: "Basic Photoshop and QGIS",
+    href: "/services/training/photoshop-qgis",
   },
   {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
+    title: "Individual and Institutional Partnerships",
+    href: "/services/training/inidividual-institutional-partnerships",
+  },
+];
+
+const strategicInitiativesItems = [
+  {
+    title: "Sponsorships",
+    href: "/strategic-initiatives/sponsorships",
   },
   {
-    title: "Tabs",
-    href: "/docs/primitives/tabs",
+    title: "Endowment",
+    href: "/strategic-initiatives/endowment",
   },
   {
-    title: "Tooltip",
-    href: "/docs/primitives/tooltip",
+    title: "Scholarships",
+    href: "/strategic-initiatives/scholarships",
+  },
+];
+
+const ajisItems = [
+  {
+    title: "About the Journal",
+    href: "/ajis/about",
+  },
+  {
+    title: "Author Guidelines",
+    href: "/ajis/author-guidelines",
+  },
+  {
+    title: "Editorial Board",
+    href: "/ajis/editorial-board",
+  },
+  {
+    title: "Manuscript Preparation",
+    href: "/ajis/manuscript-preparation",
+  },
+  {
+    title: "Deposition",
+    href: "/ajis/deposition",
+  },
+  {
+    title: "Submission Process",
+    href: "/ajis/submission-process",
+  },
+  {
+    title: "Review Process",
+    href: "/ajis/review-process",
+  },
+  {
+    title: "Abstracting and Indexing",
+    href: "/ajis/abstracting-indexing",
+  },
+  {
+    title: "Submit Manuscript",
+    href: "/ajis/submit-manuscript",
+  },
+];
+
+const supportItems = [
+  {
+    title: "Become a member",
+    href: "/support/become-member",
+  },
+  {
+    title: "Volunteer",
+    href: "/support/volunteer",
+  },
+  {
+    title: "Donate",
+    href: "/support/donate",
+  },
+  {
+    title: "Merchandise",
+    href: "/support/merchandise",
+  },
+];
+
+const newsEventsItems = [
+  {
+    title: "Publications",
+    href: "/news-events/publications",
+  },
+  {
+    title: "Feature (Beetle of the Month)",
+    href: "/news-events/beetle-of-month",
+  },
+  {
+    title: "Announcements",
+    href: "/news-events/announcements",
+  },
+  {
+    title: "PCSI Facebook Page",
+    href: "https://web.facebook.com/philcolsoc",
   },
 ];
 
 function Navigation() {
+  const location = useLocation();
+
   return (
     <div className="relative">
       <div className="fixed top-0 w-full bg-white backdrop-blur-md shadow-md z-[50] ">
-        <Container className="py-2 flex items-center justify-between">
-          <Link to={"/"} >
-            <img src={images.logo_landscape} alt="LOGO" className="max-h-14 md:max-h-20" />
+        <Container className="py-1 flex items-center justify-between">
+          <Link to={"/"}>
+            <img
+              src={images.logo_landscape}
+              alt="LOGO"
+              className="max-h-14 md:max-h-20"
+            />
           </Link>
           <NavigationMenu viewport={false} className={"z-50"}>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuTrigger
-                  background=""
-                  className={""}
+                <Link
+                  to="/"
+                  className={`py-2 px-2 text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-dark-green after:transition-all after:duration-300 hover:after:w-full ${
+                    location.pathname === "/"
+                      ? "border-b-2 border-dark-green"
+                      : ""
+                  }`}
                 >
                   Home
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[200px] gap-2 md:w-[200px] md:grid-cols-2 lg:w-[300px]">
-                    {components.map((component) => (
-                      <ListItem
-                        key={component.title}
-                        title={component.title}
-                        href={component.href}
-                      />
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
+                </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <NavigationMenuTrigger>Services</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[200px] gap-2 md:w-[200px] md:grid-cols-2 lg:w-[300px]">
-                    {components.map((component) => (
-                      <ListItem
-                        key={component.title}
-                        title={component.title}
-                        href={component.href}
-                      />
+                  <ul className="w-[300px] gap-1">
+                    {servicesItems.map((item) => (
+                      <li key={item.title} className="group">
+                        {item.subItems ? (
+                          <Collapsible>
+                            <CollapsibleTrigger className="w-full group">
+                              <div className="text-sm leading-none font-medium flex items-center justify-between pl-2">
+                                {" "}
+                                {/* Adjusted padding-left */}
+                                {item.title}
+                                <ChevronDown className="ml-2 size-3 transition-transform group-data-[state=open]:rotate-180" />
+                              </div>
+                            </CollapsibleTrigger>
+                            <CollapsibleContent>
+                              <ul className="ml-4 mt-1">
+                                {item.subItems.map((subItem) => (
+                                  <li key={subItem.title}>
+                                    <NavigationMenuLink asChild>
+                                      <Link
+                                        to={subItem.href}
+                                        className="block px-2 py-1 rounded-md transition-colors"
+                                      >
+                                        <div className="text-md">
+                                          {subItem.title}
+                                        </div>
+                                      </Link>
+                                    </NavigationMenuLink>
+                                  </li>
+                                ))}
+                              </ul>
+                            </CollapsibleContent>
+                          </Collapsible>
+                        ) : (
+                          <NavigationMenuLink asChild>
+                            <Link to={item.href}>
+                              <div className="text-sm leading-none font-medium">
+                                {item.title}
+                              </div>
+                            </Link>
+                          </NavigationMenuLink>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>
+                  Membership & Affiliates
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="w-[200px] gap-1">
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <Link to="/affiliates">
+                          <div className="text-sm leading-none font-medium">
+                            Affiliates
+                          </div>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <Link to="/how-to-be-member">
+                          <div className="text-sm leading-none font-medium">
+                            How to be a member?
+                          </div>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <Link
+                  to="/strategic-initiatives"
+                  className={`px-3 py-2 text-sm font-medium whitespace-nowrap relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-dark-green after:transition-all after:duration-300 hover:after:w-full ${
+                    location.pathname === "/strategic-initiatives"
+                      ? "border-b-2 border-dark-green"
+                      : ""
+                  }`}
+                >
+                  Strategic Initiatives
+                </Link>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavigationMenuTrigger
+                  className={`${
+                    location.pathname.startsWith("/ajis")
+                      ? "border-b-2 border-dark-green rounded-none px-3 py-1.5 text-sm font-medium after:hidden"
+                      : ""
+                  }`}
+                >
+                  AJIS
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="w-[200px] gap-1">
+                    {ajisItems.map((item) => (
+                      <li key={item.title}>
+                        <NavigationMenuLink asChild>
+                          <Link to={item.href}>
+                            <div className="text-sm leading-none font-medium">
+                              {item.title}
+                            </div>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>Support</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="w-[200px] gap-1">
+                    {supportItems.map((item) => (
+                      <li key={item.title}>
+                        <NavigationMenuLink asChild>
+                          <Link to={item.href}>
+                            <div className="text-sm leading-none font-medium">
+                              {item.title}
+                            </div>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
                     ))}
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuTrigger>
-                  <Link>Support</Link>
-                </NavigationMenuTrigger>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger>
-                  <Link>News and Events</Link>
-                </NavigationMenuTrigger>
+                <NavigationMenuTrigger>News & Events</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="w-[200px] gap-1">
+                    {newsEventsItems.map((item) => (
+                      <li key={item.title}>
+                        <NavigationMenuLink asChild>
+                          {item.href.startsWith("http") ? (
+                            <a
+                              href={item.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="block"
+                            >
+                              <div className="text-sm leading-none font-medium">
+                                {item.title}
+                              </div>
+                            </a>
+                          ) : (
+                            <Link href={item.href}>
+                              <div className="text-sm leading-none font-medium">
+                                {item.title}
+                              </div>
+                            </Link>
+                          )}
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
           <div>
-            <div className="bg-dark-green text-primary-foreground rounded-full text-sm font-medium pl-3 pr-1 flex items-center gap-2 py-1">
-                Contact Us <Button size={"icon"} className={"bg-white rounded-full text-black  hover:bg-white/80"}><ArrowRight/></Button>
+            <div className="bg-dark-green text-primary-foreground rounded-full text-xs font-medium pl-2 pr-0.5 flex items-center gap-1 py-0.5">
+              Contact Us{" "}
+              <Button
+                size={"sm"}
+                className={
+                  "bg-white rounded-full text-black  hover:bg-white/80"
+                }
+              >
+                <ArrowRight />
+              </Button>
             </div>
             {/* <Button className={"bg-lighter-green rounded-full hover:bg-lighter-green/90"}>
               Contact Us <ArrowRight className="rounded-full bg-black p-1"/>
@@ -108,21 +371,6 @@ function Navigation() {
         </Container>
       </div>
     </div>
-  );
-}
-
-function ListItem({ title, href, ...props }) {
-  return (
-    <li {...props}>
-      <NavigationMenuLink asChild>
-        <Link href={href}>
-          <div className="text-sm leading-none font-medium">{title}</div>
-          {/* <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
-            {children}
-          </p> */}
-        </Link>
-      </NavigationMenuLink>
-    </li>
   );
 }
 

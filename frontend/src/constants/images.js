@@ -10,6 +10,10 @@ import logo_landscape from "@/assets/images/Logo_Landscape.png"
 import logo_square from "@/assets/images/logo_square.png";
 import logo_white from "@/assets/images/logo_white.png";
 import logo_square_white from "@/assets/images/logo_square_white.png";
+import milton from "@/assets/images/DrMilton.jpg"
+import jhonnel from "@/assets/images/DrJhonnel.webp"
+import ricksterlie from "@/assets/images/DrRicksterlie.png"
+import markjhon from "@/assets/images/MarkJhon.png"
 
 export const images = {
     beatle_1,
@@ -23,5 +27,9 @@ export const images = {
     logo_landscape,
     logo_square,
     logo_white,
-    logo_square_white
+    logo_square_white,
+    milton,
+    jhonnel,
+    ricksterlie,
+    markjhon
 }

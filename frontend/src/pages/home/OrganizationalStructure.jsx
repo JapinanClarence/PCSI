@@ -2,37 +2,38 @@ import React from "react";
 import Container from "@/components/common/Container";
 import { Separator } from "@/components/ui/separator";
 import { useInView } from "@/hooks/useInView";
+import { images } from "@/constants/images";
 
 function OrganizationalStructure() {
   const teamMembers = [
     {
       name: "Dr. Milton Norman B. Medina",
       position: "Founding President",
-      image: "/src/assets/images/DrMilton.jpg",
+      image: images.milton, // Using placeholder image
       affiliation: "",
     },
     {
       name: "Dr. Jhonnel P. Villegas",
       position: "Founding Secretary",
-      image: "/src/assets/images/DrJhonnel.webp", // Using placeholder image
+      image: images.jhonnel, // Using placeholder image
       affiliation: "",
     },
     {
       name: "Dr. Ricksterlie Verzosa",
       position: "Founding Treasurer",
-      image: "/src/assets/images/DrRicksterlie.png", // Using placeholder image
+      image: images.ricksterlie, // Using placeholder image
       affiliation: "",
     },
     {
       name: "Mark John Pepito",
       position: "Founding Member of the Board",
-      image: "/src/assets/images/MarkJhon.png", // Using placeholder image
+      image: images.markjhon, // Using placeholder image
       affiliation: "University of Mindanao, Davao City, Philippines",
     },
     {
       name: "Efrain Loidge Pajota",
       position: "Founding Member of the Board",
-      image: "/src/assets/images/beatle_4.jpg", // Using placeholder image
+      image: images.beatle_4, // Using placeholder image
       affiliation: "University of Mindanao, Davao City, Philippines",
     },
   ];

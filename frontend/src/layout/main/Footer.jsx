@@ -10,8 +10,8 @@ function Footer() {
     <div className="w-full">
       <div className="bg-dark-green">
         <Container className={" "}>
-          <div className="py-8 flex h-full gap-6">
-            <img src={images.logo_white} className="max-h-40" />
+          <div className="py-8 flex h-fit gap-6">
+            <img src={images.logo_white} className="max-h-48" />
             <div className="flex gap-4 text-sm text-primary-foreground font-medium">
               <div className="p-2 flex-col justify-between flex-none">
                 <h1 className="text-lg mb-2 font-serif">QUICK LINKS</h1>
@@ -55,14 +55,14 @@ function Footer() {
                 </div>
               </div>
               <Separator orientation="vertical" />
-              <div className="p-2">
-                <div>
-                  <h1 className="text-lg mb-2 font-serif">GET IN TOUCH</h1>
+              <div className="p-2 ">
+                <div className="space-y-2">
+                  <h1 className="text-lg font-serif">GET IN TOUCH</h1>
                   <p>
-                    <Mail className="inline mr-2" /> pcsi@gmail.com
+                    pcsi@gmail.com
                   </p>
                   <p>
-                    <Phone className="inline mr-2" /> +639 11 234 5678
+                   +639 11 234 5678
                   </p>
                   <p>
                     <a
@@ -71,14 +71,14 @@ function Footer() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center"
                     >
-                      <Facebook className="inline mr-2" /> PCSI Facebook Page
+                      PCSI Facebook Page
                     </a>
                   </p>
                 </div>
                 <div>
                   <h1 className="text-lg mb-2 mt-2 font-serif">LOCATION</h1>
                   <p>
-                    <MapPin className="inline mr-2" /> Guang-Guang, Dahican,
+                     Guang-Guang, Dahican,
                     City of Mati, Davao Oriental, 8200
                   </p>
                 </div>
@@ -92,15 +92,6 @@ function Footer() {
                 >
                   Be a member
                 </Button>
-                <div className="mt-4">
-                  <a href="https://info.flagcounter.com/rrZr">
-                    <img
-                      src="https://s01.flagcounter.com/count/rrZr/bg_032E15/txt_FFFFFF/border_FFFFFF/columns_5/maxflags_20/viewers_0/labels_1/pageviews_1/flags_0/percent_0/"
-                      alt="Flag Counter"
-                      border="0"
-                    />
-                  </a>
-                </div>
                 <div className="mt-4">
                   <p className="text-white py-2 text-xs">
                     Copyright © 2025. Philippine Coleopterists Society Inc. All

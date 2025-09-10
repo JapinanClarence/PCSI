@@ -48,16 +48,20 @@ function OrganizationalStructure() {
   const memberInView = [isInView1, isInView2, isInView3, isInView4, isInView5];
 
   return (
-    <Container className="py-5">
+    <Container
+      className="py-20"
+     
+    >
       <div className="mb-12">
-        <h1 className="font-serif font-bold text-3xl mb-2">
-          Organizational Structure
-        </h1>
-        <p className="text-md text-gray-600 max-w-2xl mb-2">
+        <h1 className="font-serif text-center font-bold text-3xl w-1/2 mx-auto mb-2">
           Meet the dedicated team leading the Philippine Coleopterological
           Society, Inc.
-        </p>
-        <Separator />
+        </h1>
+        {/* <p className="text-md text-gray-600 max-w-2xl mb-2">
+          Meet the dedicated team leading the Philippine Coleopterological
+          Society, Inc.
+        </p> */}
+        {/* <Separator /> */}
       </div>
 
       <div className="space-y-12">

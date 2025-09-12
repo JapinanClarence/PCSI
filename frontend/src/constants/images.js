@@ -14,6 +14,7 @@ import milton from "@/assets/images/DrMilton.jpg"
 import jhonnel from "@/assets/images/DrJhonnel.webp"
 import ricksterlie from "@/assets/images/DrRicksterlie.png"
 import markjhon from "@/assets/images/MarkJhon.png"
+import coleopterist from "@/assets/images/coleopterist.png"
 
 export const images = {
     beatle_1,
@@ -31,5 +32,6 @@ export const images = {
     milton,
     jhonnel,
     ricksterlie,
-    markjhon
+    markjhon,
+    coleopterist
 }

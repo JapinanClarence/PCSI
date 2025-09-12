@@ -184,54 +184,18 @@ function Navigation() {
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuTrigger>Services</NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="w-[300px] gap-1">
-                    {servicesItems.map((item) => (
-                      <li key={item.title} className="group">
-                        {item.subItems ? (
-                          <Collapsible>
-                            <CollapsibleTrigger className="w-full group">
-                              <div className="text-sm leading-none font-medium flex items-center justify-between pl-2">
-                                {" "}
-                                {/* Adjusted padding-left */}
-                                {item.title}
-                                <ChevronDown className="ml-2 size-3 transition-transform group-data-[state=open]:rotate-180" />
-                              </div>
-                            </CollapsibleTrigger>
-                            <CollapsibleContent>
-                              <ul className="ml-4 mt-1">
-                                {item.subItems.map((subItem) => (
-                                  <li key={subItem.title}>
-                                    <NavigationMenuLink asChild>
-                                      <Link
-                                        to={subItem.href}
-                                        className="block px-2 py-1 rounded-md transition-colors"
-                                      >
-                                        <div className="text-md">
-                                          {subItem.title}
-                                        </div>
-                                      </Link>
-                                    </NavigationMenuLink>
-                                  </li>
-                                ))}
-                              </ul>
-                            </CollapsibleContent>
-                          </Collapsible>
-                        ) : (
-                          <NavigationMenuLink asChild>
-                            <Link to={item.href}>
-                              <div className="text-sm leading-none font-medium">
-                                {item.title}
-                              </div>
-                            </Link>
-                          </NavigationMenuLink>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
+                <Link
+                  to="/services"
+                  className={`py-2 px-2 text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-dark-green after:transition-all after:duration-300 hover:after:w-full ${
+                    location.pathname === "/services"
+                      ? "border-b-2 border-dark-green"
+                      : ""
+                  }`}
+                >
+                  Services
+                </Link>
               </NavigationMenuItem>
+              
 
               <NavigationMenuItem>
                 <NavigationMenuTrigger>

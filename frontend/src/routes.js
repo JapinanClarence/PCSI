@@ -11,6 +11,7 @@ import ReviewProcess from "./pages/ajis/ReviewProcess";
 import AbstractingIndexing from "./pages/ajis/AbstractingIndexing";
 import SubmitManuscript from "./pages/ajis/SubmitManuscript";
 import StrategicInitiatives from "./pages/strategic/StrategicInitiatives";
+import Services from "./pages/services";
 
 const routes = createBrowserRouter([
   {
@@ -18,6 +19,9 @@ const routes = createBrowserRouter([
     Component: MainLayout,
     children: [
       { index: true, Component: Home },
+      {path:"/services", 
+        Component:Services 
+      },
       {
         path: "ajis/about",
         Component: About,

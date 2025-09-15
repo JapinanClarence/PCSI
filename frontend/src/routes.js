@@ -12,6 +12,7 @@ import AbstractingIndexing from "./pages/ajis/AbstractingIndexing";
 import SubmitManuscript from "./pages/ajis/SubmitManuscript";
 import StrategicInitiatives from "./pages/strategic/StrategicInitiatives";
 import Services from "./pages/services";
+import NewsAndEvents from "./pages/news-events";
 
 const routes = createBrowserRouter([
   {
@@ -19,44 +20,49 @@ const routes = createBrowserRouter([
     Component: MainLayout,
     children: [
       { index: true, Component: Home },
-      {path:"/services", 
-        Component:Services 
-      },
+      { path: "/services", Component: Services },
+      { path: "/news-events", Component: NewsAndEvents },
       {
-        path: "ajis/about",
-        Component: About,
-      },
-      {
-        path: "ajis/author-guidelines",
-        Component: AuthorGuidelines,
-      },
-      {
-        path: "ajis/manuscript-preparation",
-        Component: ManuscriptPreparation,
-      },
-      {
-        path: "ajis/editorial-board",
-        Component: EditorialBoard,
-      },
-      {
-        path: "ajis/deposition",
-        Component: Deposition,
-      },
-      {
-        path: "ajis/submission-process",
-        Component: SubmissionProcess,
-      },
-      {
-        path: "ajis/review-process",
-        Component: ReviewProcess,
-      },
-      {
-        path: "ajis/abstracting-indexing",
-        Component: AbstractingIndexing,
-      },
-      {
-        path: "ajis/submit-manuscript",
-        Component: SubmitManuscript,
+        path: "/ajis",
+        Component: MainLayout,
+        children: [
+          {
+            path: "/about",
+            Component: About,
+          },
+          {
+            path: "/author-guidelines",
+            Component: AuthorGuidelines,
+          },
+          {
+            path: "/manuscript-preparation",
+            Component: ManuscriptPreparation,
+          },
+          {
+            path: "/editorial-board",
+            Component: EditorialBoard,
+          },
+          {
+            path: "/deposition",
+            Component: Deposition,
+          },
+          {
+            path: "/submission-process",
+            Component: SubmissionProcess,
+          },
+          {
+            path: "/review-process",
+            Component: ReviewProcess,
+          },
+          {
+            path: "ajis/abstracting-indexing",
+            Component: AbstractingIndexing,
+          },
+          {
+            path: "ajis/submit-manuscript",
+            Component: SubmitManuscript,
+          },
+        ],
       },
       {
         path: "strategic-initiatives",

@@ -283,36 +283,17 @@ function Navigation() {
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger>News & Events</NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="w-[200px] gap-1">
-                    {newsEventsItems.map((item) => (
-                      <li key={item.title}>
-                        <NavigationMenuLink asChild>
-                          {item.href.startsWith("http") ? (
-                            <a
-                              href={item.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="block"
-                            >
-                              <div className="text-sm leading-none font-medium">
-                                {item.title}
-                              </div>
-                            </a>
-                          ) : (
-                            <Link href={item.href}>
-                              <div className="text-sm leading-none font-medium">
-                                {item.title}
-                              </div>
-                            </Link>
-                          )}
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
+             <NavigationMenuItem>
+                <Link
+                  to="/news-events"
+                  className={`py-2 px-2 text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-dark-green after:transition-all after:duration-300 hover:after:w-full ${
+                    location.pathname === "/news-events"
+                      ? "border-b-2 border-dark-green"
+                      : ""
+                  }`}
+                >
+                  News & Events
+                </Link>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>

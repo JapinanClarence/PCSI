@@ -15,6 +15,7 @@ import jhonnel from "@/assets/images/DrJhonnel.webp"
 import ricksterlie from "@/assets/images/DrRicksterlie.png"
 import markjhon from "@/assets/images/MarkJhon.png"
 import coleopterist from "@/assets/images/coleopterist.png"
+import tiger_beetle from "@/assets/images/tiger_beetle.png";
 
 export const images = {
     beatle_1,
@@ -33,5 +34,6 @@ export const images = {
     jhonnel,
     ricksterlie,
     markjhon,
-    coleopterist
+    coleopterist,
+    tiger_beetle
 }

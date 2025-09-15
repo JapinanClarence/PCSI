@@ -27,39 +27,39 @@ const routes = createBrowserRouter([
         Component: MainLayout,
         children: [
           {
-            path: "/about",
+            path: "about",
             Component: About,
           },
           {
-            path: "/author-guidelines",
+            path: "author-guidelines",
             Component: AuthorGuidelines,
           },
           {
-            path: "/manuscript-preparation",
+            path: "manuscript-preparation",
             Component: ManuscriptPreparation,
           },
           {
-            path: "/editorial-board",
+            path: "editorial-board",
             Component: EditorialBoard,
           },
           {
-            path: "/deposition",
+            path: "deposition",
             Component: Deposition,
           },
           {
-            path: "/submission-process",
+            path: "submission-process",
             Component: SubmissionProcess,
           },
           {
-            path: "/review-process",
+            path: "review-process",
             Component: ReviewProcess,
           },
           {
-            path: "ajis/abstracting-indexing",
+            path: "abstracting-indexing",
             Component: AbstractingIndexing,
           },
           {
-            path: "ajis/submit-manuscript",
+            path: "submit-manuscript",
             Component: SubmitManuscript,
           },
         ],

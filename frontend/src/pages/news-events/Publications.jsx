@@ -20,7 +20,7 @@ const Publications = () => {
           {Array.from({ length: 5 }).map((_, i) => (
             <div key={i} className="flex shadow-sm  overflow-clip mb-4">
               <div
-                className="w-96 overflow-clip"
+                className="w-[394px] h-[192px] overflow-clip"
                 style={{
                   backgroundImage: `url(${images[`beatle_${i + 1}`]})`,
                   backgroundSize: "cover",

@@ -2,11 +2,13 @@ import { Link, Outlet, useNavigate } from "react-router";
 import React from "react";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
+import MobileNav from "./MobileNav";
 
 function MainLayout() {
   return (
     <div>
       <Navigation />
+      <MobileNav/>
       <div className="pt-19">
         <Outlet />
       </div>

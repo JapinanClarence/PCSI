@@ -51,10 +51,9 @@ function OrganizationalStructure() {
   return (
     <Container
       className="py-20"
-     
     >
       <div className="mb-12">
-        <h1 className="font-serif text-center font-bold text-3xl w-1/2 mx-auto mb-2">
+        <h1 className="font-serif text-center font-bold text-3xl md:w-1/2 mx-auto mb-2">
           Meet the dedicated team leading the Philippine Coleopterological
           Society, Inc.
         </h1>

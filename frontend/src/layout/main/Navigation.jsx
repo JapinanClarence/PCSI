@@ -14,69 +14,7 @@ import { Link, useLocation } from "react-router";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { images } from "@/constants/images";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
 
-const servicesItems = [
-  {
-    title: "Beetle Species Identification",
-    href: "/services/beetle-identification",
-  },
-  {
-    title: "Training Workshop on Coleopterology",
-    href: "/services/training-workshop",
-    subItems: [
-      {
-        title: "Specimen collection protocols",
-        href: "/services/training/collection-protocols",
-      },
-      {
-        title: "Specimen high-definition imaging",
-        href: "/services/training/hd-imaging",
-      },
-      {
-        title:
-          "Specimen examination: gross morphology, genitalia (basic: gross male and female genitalia examination)",
-        href: "/services/training/gross-examination",
-      },
-      {
-        title:
-          "Specimen examination: genitalia (advanced: endophallus examination)",
-        href: "/services/training/endophallus-examination",
-      },
-      {
-        title: "Specimen Standard Measurements",
-        href: "/services/training/standard-measurements",
-      },
-    ],
-  },
-  {
-    title: "Basic Photoshop and QGIS",
-    href: "/services/training/photoshop-qgis",
-  },
-  {
-    title: "Individual and Institutional Partnerships",
-    href: "/services/training/inidividual-institutional-partnerships",
-  },
-];
-
-const strategicInitiativesItems = [
-  {
-    title: "Sponsorships",
-    href: "/strategic-initiatives/sponsorships",
-  },
-  {
-    title: "Endowment",
-    href: "/strategic-initiatives/endowment",
-  },
-  {
-    title: "Scholarships",
-    href: "/strategic-initiatives/scholarships",
-  },
-];
 
 const ajisItems = [
   {
@@ -136,30 +74,11 @@ const supportItems = [
   },
 ];
 
-const newsEventsItems = [
-  {
-    title: "Publications",
-    href: "/news-events/publications",
-  },
-  {
-    title: "Feature (Beetle of the Month)",
-    href: "/news-events/beetle-of-month",
-  },
-  {
-    title: "Announcements",
-    href: "/news-events/announcements",
-  },
-  {
-    title: "PCSI Facebook Page",
-    href: "https://web.facebook.com/philcolsoc",
-  },
-];
-
 function Navigation() {
   const location = useLocation();
 
   return (
-    <div className="relative">
+    <div className="relative hidden md:flex">
       <div className="fixed top-0 w-full bg-white backdrop-blur-md shadow-md z-[50] ">
         <Container className="py-1 flex items-center justify-between">
           <Link to={"/"}>
@@ -199,7 +118,7 @@ function Navigation() {
 
               <NavigationMenuItem>
                 <NavigationMenuTrigger>
-                  Membership & Affiliates
+                  Membership
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="w-[200px] gap-1">

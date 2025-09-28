@@ -13,8 +13,8 @@ import { images } from "@/constants/images";
 function About() {
   return (
     <>
-      <Container className="py-20 flex flex-nowrap  items-center gap-20">
-        <div className="space-y-3 w-2/3">
+      <Container className="py-10 md:py-20 flex flex-nowrap flex-col md:flex-row  md:items-center gap-10 md:gap-20">
+        <div className="space-y-3 md:w-2/3">
           <h1 className="  font-serif relative  text-5xl font-bold  ">
             About PCSI
           </h1>
@@ -31,24 +31,9 @@ function About() {
           </p>
         </div>
        
-        <div className="w-[60%] max-w-[50rem]">
+        <div className="md:w-[60%] max-w-[50rem]">
           <img src={images.beatle_1} alt="" />
         </div>
-
-        {/* <Card className={""}>
-        <CardHeader className="">
-          <CardTitle className="font-serif text-2xl font-bold">Vision</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="leading-relaxed text-md">
-            We envisioned ourselves to be the leading institution dealing with
-            the research and conservation of Philippine beetles. We also
-            envisioned for Philippines as a megadiverse country to be a haven
-            for the beetle species survival.
-          </p>
-        </CardContent>
-      </Card> */}
-        {/* <Separator /> */}
       </Container>
       <Container className={"space-y-10 mb-20"}>
          <div className="space-y-3">

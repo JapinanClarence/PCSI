@@ -18,6 +18,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import path from "path";
 
 const MENU = [
   {
@@ -55,12 +56,7 @@ const MENU = [
   },
   {
     label: "Support",
-    children: [
-      { name: "Become a member", path: "/support/become-member" },
-      { name: "Volunteer", path: "/support/volunteer" },
-      { name: "Donate", path: "/support/donate" },
-      { name: "Merchandise", path: "/support/merchandise" },
-    ],
+    path:"/support"
   },
   {
     label: "Contests",

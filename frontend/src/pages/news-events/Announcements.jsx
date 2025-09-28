@@ -14,7 +14,7 @@ const Announcements = () => {
           <h1 className="font-serif relative inline-block text-3xl font-bold ">
             Announcements
           </h1>
-          <Button className={"max-w-fit bg-lighter-green rounded-none"} size={"lg"}>
+          <Button className={"max-w-fit bg-lighter-green rounded-sm"} size={"lg"}>
             View All <ArrowRight />
           </Button>
         </div>

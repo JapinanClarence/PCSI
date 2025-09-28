@@ -13,6 +13,7 @@ import SubmitManuscript from "./pages/ajis/SubmitManuscript";
 import StrategicInitiatives from "./pages/strategic-initiatives";
 import Services from "./pages/services";
 import NewsAndEvents from "./pages/news-events";
+import Support from "./pages/support";
 
 const routes = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ const routes = createBrowserRouter([
       { index: true, Component: Home },
       { path: "/services", Component: Services },
       { path: "/news-events", Component: NewsAndEvents },
+      {path:"/support", Component: Support},
       {
         path: "/ajis",
         Component: MainLayout,

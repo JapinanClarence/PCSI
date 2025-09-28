@@ -15,7 +15,6 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { images } from "@/constants/images";
 
-
 const ajisItems = [
   {
     title: "About the Journal",
@@ -114,12 +113,9 @@ function Navigation() {
                   Services
                 </Link>
               </NavigationMenuItem>
-              
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger>
-                  Membership
-                </NavigationMenuTrigger>
+                <NavigationMenuTrigger>Membership</NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="w-[200px] gap-1">
                     <li>
@@ -158,9 +154,7 @@ function Navigation() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger>
-                  AJIS
-                </NavigationMenuTrigger>
+                <NavigationMenuTrigger>AJIS</NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="w-[200px] gap-1">
                     {ajisItems.map((item) => (
@@ -179,24 +173,18 @@ function Navigation() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger>Support</NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="w-[200px] gap-1">
-                    {supportItems.map((item) => (
-                      <li key={item.title}>
-                        <NavigationMenuLink asChild>
-                          <Link to={item.href}>
-                            <div className="text-sm leading-none font-medium">
-                              {item.title}
-                            </div>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
+                <Link
+                  to="/support"
+                  className={`py-2 px-2 text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-dark-green after:transition-all after:duration-300 hover:after:w-full ${
+                    location.pathname === "/support"
+                      ? "border-b-2 border-dark-green"
+                      : ""
+                  }`}
+                >
+                  Support
+                </Link>
               </NavigationMenuItem>
-             <NavigationMenuItem>
+              <NavigationMenuItem>
                 <Link
                   to="/news-events"
                   className={`py-2 px-2 text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-dark-green after:transition-all after:duration-300 hover:after:w-full ${

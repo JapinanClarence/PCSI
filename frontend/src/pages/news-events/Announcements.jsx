@@ -10,11 +10,11 @@ const Announcements = () => {
   return (
     <div>
       <Container className={"py-20 space-y-5 "}>
-        <div className="flex justify-between ">
+        <div className="flex flex-col md:flex-row justify-between space-y-5">
           <h1 className="font-serif relative inline-block text-3xl font-bold ">
             Announcements
           </h1>
-          <Button className={"bg-lighter-green rounded-none"} size={"lg"}>
+          <Button className={"max-w-fit bg-lighter-green rounded-none"} size={"lg"}>
             View All <ArrowRight />
           </Button>
         </div>

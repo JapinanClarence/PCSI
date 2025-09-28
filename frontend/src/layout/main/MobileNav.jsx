@@ -66,6 +66,10 @@ const MENU = [
     label: "Contests",
     path: "/contests", // no children
   },
+  {
+    label: "News & Events",
+    path: "/news-events", // no children
+  },
 ];
 
 export default function MobileNav() {
@@ -102,7 +106,7 @@ export default function MobileNav() {
                 <MenuIcon className="size-7" />
               </Button>
             </SheetTrigger>
-            <SheetContent className="w-[400px]">
+            <SheetContent className="max-w-[400px]">
               <div className="flex flex-col h-full">
                 <div className="h-14"></div>
                 <nav className="flex-1 overflow-y-auto px-2 pb-8">

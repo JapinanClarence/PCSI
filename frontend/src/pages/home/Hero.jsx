@@ -79,7 +79,7 @@ function Hero() {
   };
 
   return (
-    <section className="relative h-[calc(100vh-600px)] md:h-[calc(100vh-200px)] w-full overflow-hidden border-b-2 border-dark-green">
+    <section className="relative h-[calc(100vh-300px)] md:h-[calc(100vh-200px)] w-full overflow-hidden border-b-2 border-dark-green">
       {/* Slideshow background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         {renderSlide(heroSlides[currentIndex], zoomKeys[0], !isFading)}

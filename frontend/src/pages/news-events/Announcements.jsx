@@ -8,10 +8,10 @@ import { ArrowRight } from "lucide-react";
 const Announcements = () => {
   return (
     <div>
-      <Container className={"py-10 space-y-5 "}>
+      <Container className={"py-20 space-y-5 "}>
         <div className="flex justify-between ">
           <h1 className="font-serif relative inline-block text-3xl font-bold ">
-            Latest Announcements
+            Announcements
           </h1>
           <Button className={"bg-lighter-green rounded-none"} size={"lg"}>View All <ArrowRight/></Button>
         </div>

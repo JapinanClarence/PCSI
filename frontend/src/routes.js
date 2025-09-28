@@ -10,7 +10,7 @@ import SubmissionProcess from "./pages/ajis/SubmissionProcess";
 import ReviewProcess from "./pages/ajis/ReviewProcess";
 import AbstractingIndexing from "./pages/ajis/AbstractingIndexing";
 import SubmitManuscript from "./pages/ajis/SubmitManuscript";
-import StrategicInitiatives from "./pages/strategic/StrategicInitiatives";
+import StrategicInitiatives from "./pages/strategic-initiatives";
 import Services from "./pages/services";
 import NewsAndEvents from "./pages/news-events";
 

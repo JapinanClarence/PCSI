@@ -1,5 +1,5 @@
 import React from 'react'
-import Hero from './Hero';
+import Hero from '@/components/common/SubPageHero';
 import Feature from './Feature';
 import { Separator } from '@/components/ui/separator';
 import Publications from './Publications';

@@ -15,7 +15,7 @@ const Feature = () => {
     >
       <Container className={"py-20 space-y-5 "}>
         <h1 className="font-serif relative inline-block text-4xl font-bold  ">
-          Featuring Beetle of the Month!
+          Featured Beetle of the Month!
         </h1>
         {/* <p>Beetle of the month!</p> */}
 

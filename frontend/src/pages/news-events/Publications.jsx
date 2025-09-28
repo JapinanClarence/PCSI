@@ -8,7 +8,7 @@ import { ArrowRight } from "lucide-react";
 const Publications = () => {
   return (
     <div>
-      <Container className={"py-10 space-y-5 "}>
+      <Container className={"py-20 space-y-5 "}>
         <div className="flex justify-between ">
           <h1 className="font-serif relative inline-block text-3xl font-bold ">
             Latest Publications

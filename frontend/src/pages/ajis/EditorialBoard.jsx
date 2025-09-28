@@ -212,7 +212,7 @@ function EditorialBoard() {
             <h3 className="font-serif text-1xl md:text-1xl">Email:</h3>
           </div>
 
-          <div className="mt-4">
+          {/* <div className="mt-4">
             <h3 className="font-serif text-1xl md:text-1xl">
               <b>Dr. Enrico Ruzzier</b>
             </h3>
@@ -224,7 +224,7 @@ function EditorialBoard() {
               Roma Tre University, Rome, Italy
             </h3>
             <h3 className="font-serif text-1xl md:text-1xl">Email:</h3>
-          </div>
+          </div> */}
 
           <div className="mt-4">
             <h3 className="font-serif text-1xl md:text-1xl">
@@ -266,7 +266,7 @@ function EditorialBoard() {
             <h3 className="font-serif text-1xl md:text-1xl">Email:</h3>
           </div>
 
-          <div className="mt-4">
+          {/* <div className="mt-4">
             <h3 className="font-serif text-1xl md:text-1xl">
               <b>Dr. Jade Aster T. Badon</b>
             </h3>
@@ -277,7 +277,7 @@ function EditorialBoard() {
               Order Lepidoptera
             </h3>
             <h3 className="font-serif text-1xl md:text-1xl">Email:</h3>
-          </div>
+          </div> */}
 
           <div className="mt-4">
             <h3 className="font-serif text-1xl md:text-1xl">

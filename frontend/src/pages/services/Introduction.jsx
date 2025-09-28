@@ -9,7 +9,7 @@ const Introduction = () => {
   return (
 
       <Container className="py-20 flex flex-nowrap  items-center gap-20">
-        <div className="space-y-3 w-2/3">
+        <div className="space-y-3 lg:w-2/3">
           <h1 className="  font-serif relative  text-5xl font-bold  ">
             Our Services
           </h1>

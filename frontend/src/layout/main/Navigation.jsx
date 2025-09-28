@@ -158,13 +158,7 @@ function Navigation() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger
-                  className={`${
-                    location.pathname.startsWith("/ajis")
-                      ? "border-b-2 border-dark-green rounded-none px-3 py-1.5 text-sm font-medium after:hidden"
-                      : ""
-                  }`}
-                >
+                <NavigationMenuTrigger>
                   AJIS
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>

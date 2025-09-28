@@ -6,7 +6,7 @@ export default function Card({ image, title, date, description }) {
   return (
     <div className="flex flex-col md:flex-row shadow-sm  overflow-clip mb-4">
       <div
-        className="w-[394px] h-[192px] overflow-clip"
+        className="md:w-[394px] h-[192px] md:h-auto overflow-clip"
         style={{
           backgroundImage: `url(${image})`,
           backgroundSize: "cover",

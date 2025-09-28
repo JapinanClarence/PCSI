@@ -19,7 +19,7 @@ const Feature = () => {
         </h1>
         {/* <p>Beetle of the month!</p> */}
 
-        <div className=" flex flex-col md:flex-row p-4  gap-5">
+        <div className="flex flex-col md:flex-row lg:p-4  gap-5">
           <div className="max-w-[50rem] overflow-clip">
             <img src={images.tiger_beetle} alt="" className="w-full " />
           </div>

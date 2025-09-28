@@ -17,7 +17,7 @@ function Initiatives() {
             coleopterology.
           </p>
 
-          <div className="grid md:grid-cols-3 gap-6 mt-8">
+          <div className="grid lg:grid-cols-3 gap-6 mt-8">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h2 className="text-xl font-semibold mb-3">Sponsorships</h2>
               <p className="text-md leading-relaxed">

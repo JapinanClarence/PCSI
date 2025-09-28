@@ -90,7 +90,7 @@ export default function MobileNav() {
   };
 
   return (
-    <div className="relative md:hidden ">
+    <div className="relative lg:hidden ">
       <div className="fixed top-0 w-full bg-background backdrop-blur-md shadow-md z-[50]">
         <Container className="py-5 md:py-1 flex items-center justify-between">
           <Link to={"/"}>

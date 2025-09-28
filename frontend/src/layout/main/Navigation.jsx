@@ -78,7 +78,7 @@ function Navigation() {
   const location = useLocation();
 
   return (
-    <div className="relative hidden md:flex">
+    <div className="relative hidden lg:flex">
       <div className="fixed top-0 w-full bg-white backdrop-blur-md shadow-md z-[50] ">
         <Container className="py-1 flex items-center justify-between">
           <Link to={"/"}>

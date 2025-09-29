@@ -59,10 +59,6 @@ const MENU = [
     path:"/support"
   },
   {
-    label: "Contests",
-    path: "/contests", // no children
-  },
-  {
     label: "News & Events",
     path: "/news-events", // no children
   },

@@ -14,6 +14,8 @@ import StrategicInitiatives from "./pages/strategic-initiatives";
 import Services from "./pages/services";
 import NewsAndEvents from "./pages/news-events";
 import Support from "./pages/support";
+import AdminDashboard from "./pages/admin";
+import AdminLayout from "./layout/admin";
 
 const routes = createBrowserRouter([
   {
@@ -23,7 +25,7 @@ const routes = createBrowserRouter([
       { index: true, Component: Home },
       { path: "/services", Component: Services },
       { path: "/news-events", Component: NewsAndEvents },
-      {path:"/support", Component: Support},
+      { path: "/support", Component: Support },
       {
         path: "/ajis",
         Component: MainLayout,
@@ -71,6 +73,11 @@ const routes = createBrowserRouter([
         Component: StrategicInitiatives,
       },
     ],
+  },
+  {
+    path: "/admin",
+    Component: AdminLayout,
+    children: [{ index: true, Component: AdminDashboard }],
   },
 ]);
 export default routes;

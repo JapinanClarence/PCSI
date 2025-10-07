@@ -15,7 +15,7 @@ const AdminLayout = () => {
         <header className="flex px-2 justify-between border-b bg-secondary/30 backdrop-blur-lg h-12 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
           <SidebarTrigger />
         </header>
-        <main className="md:p-4 ">
+        <main className="p-4 md:p-6">
           <Outlet />
         </main>
       </SidebarInset>

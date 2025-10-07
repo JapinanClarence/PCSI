@@ -16,6 +16,7 @@ import NewsAndEvents from "./pages/news-events";
 import Support from "./pages/support";
 import AdminDashboard from "./pages/admin";
 import AdminLayout from "./layout/admin";
+import Publications from "./pages/admin/publications";
 
 const routes = createBrowserRouter([
   {
@@ -77,7 +78,13 @@ const routes = createBrowserRouter([
   {
     path: "/admin",
     Component: AdminLayout,
-    children: [{ index: true, Component: AdminDashboard }],
+    children: [
+      { index: true, Component: AdminDashboard },
+      {
+        path: "publications",
+        Component: Publications,
+      },
+    ],
   },
 ]);
 export default routes;

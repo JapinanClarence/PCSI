@@ -23,7 +23,7 @@ const items = [
   },
   {
     title: "Publications",
-    url: "#",
+    url: "/admin/publications",
     icon: Newspaper,
   },
   {

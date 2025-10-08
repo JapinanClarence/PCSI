@@ -4,16 +4,19 @@ import {
   CircleAlert,
   CopyMinus,
   Edit,
+  EllipsisVerticalIcon,
   Plus,
   Trash,
 } from "lucide-react";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export const vehicleColumns = (onEdit, onUpdateStatus, submitting) => [
@@ -40,7 +43,9 @@ export const vehicleColumns = (onEdit, onUpdateStatus, submitting) => [
   {
     accessorKey: "description",
     header: "Description",
-    cell: ({ row }) => <div className="w-52 truncate">{row.getValue("description")}</div>,
+    cell: ({ row }) => (
+      <div className="w-52 truncate">{row.getValue("description")}</div>
+    ),
   },
   {
     accessorKey: "date",
@@ -65,54 +70,63 @@ export const vehicleColumns = (onEdit, onUpdateStatus, submitting) => [
       };
 
       return (
-        <Select
-          value={status}
-          onValueChange={handleStatusChange}
-          disabled={submitting}
-        >
-          <SelectTrigger className="justify-start gap-2 h-8 w-28 px-2 [&_svg]:size-4 rounded-sm">
-            {status === "Active" ? (
-              <CheckCircle2Icon className="" />
-            ) : (
-              <CircleAlert className="" />
-            )}
-            {status}
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="Active">Active</SelectItem>
-            <SelectItem value="Inactive">Inactive</SelectItem>
-          </SelectContent>
-        </Select>
+        <div>
+          {status === "Active" ? (
+            <span className="flex border text-sm border-green-600 bg-green-100 text-green-600 rounded-sm py-1 px-2 items-center gap-2 w-min">
+              {" "}
+              <CheckCircle2Icon size={15} /> Active{" "}
+            </span>
+          ) : (
+            <span className="flex border text-sm border-red-500 text-red-500 bg-red-100 rounded-sm py-1 px-2 items-center gap-2 w-min">
+              {" "}
+              <CircleAlert size={15} /> Inactive
+            </span>
+          )}
+        </div>
       );
     },
   },
-  //   {
-  //     id: "actions",
-  //     enableHiding: false,
-  //     cell: ({ row }) => {
-  //       const vehicle = row.original;
-  //       const handleEdit = (e) => {
-  //         e.stopPropagation();
-  //         onEdit(vehicle._id);
-  //       };
-  //       return (
-  //         <DropdownMenu>
-  //           <DropdownMenuTrigger asChild>
-  //             <Button variant="ghost" className="h-5 w-5 p-0">
-  //               <span className="sr-only">Open menu</span>
-  //               <DotsHorizontalIcon className="h-4 w-4" />
-  //             </Button>
-  //           </DropdownMenuTrigger>
-  //           <DropdownMenuContent align="end">
-  //             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-  //             <DropdownMenuSeparator />
-  //             <DropdownMenuItem onClick={handleEdit}>
-  //               Edit
-  //               <Edit />
-  //             </DropdownMenuItem>
-  //           </DropdownMenuContent>
-  //         </DropdownMenu>
-  //       );
-  //     },
-  //   },
+  {
+    id: "actions",
+    enableHiding: false,
+    cell: ({ row }) => {
+      const [status, setStatus] = useState(row.original.status);
+      const vehicle = row.original;
+      const handleEdit = (e) => {
+        e.stopPropagation();
+        onEdit(vehicle._id);
+      };
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-5 w-5 p-0">
+              <span className="sr-only">Open menu</span>
+              <EllipsisVerticalIcon />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={handleEdit}>
+              Edit
+              <Edit />
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={handleEdit}>
+              {status === "Active" ? (
+                <>
+                  Deactivate
+                  <CircleAlert className="" />
+                </>
+              ) : (
+                <>
+                  Activate
+                  <CheckCircle2Icon />
+                </>
+              )}
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
+    },
+  },
 ];

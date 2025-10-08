@@ -28,12 +28,12 @@ const items = [
   },
   {
     title: "Announcements",
-    url: "#",
+    url: "/admin/announcements",
     icon: Bell,
   },
   {
     title: "Merchandise",
-    url: "#",
+    url: "/admin/merchandise",
     icon: ShoppingBag,
   },
 ];
@@ -45,7 +45,7 @@ export function AppSidebar() {
       <SidebarHeader className={"flex-row items-center font-bold font-serif"}>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton>
+            <SidebarMenuButton size="lg">
               <div className="flex aspect-square size-8 items-center justify-center rounded-lg text-sidebar-primary-foreground">
                 <img src={images.logo_square} className="" />
               </div>
@@ -67,7 +67,7 @@ export function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild isActive={location.pathname === item.url}>
+                  <SidebarMenuButton size="lg" asChild isActive={location.pathname === item.url}>
                     <a href={item.url} className="font-medium">
                       <item.icon />
                       <span>{item.title}</span>

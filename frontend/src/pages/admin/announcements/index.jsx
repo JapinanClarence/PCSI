@@ -50,14 +50,13 @@ export const sampleData = [
   }
 ];
 
-const Publications = () => {
+const Announcements = () => {
   return (
     <div className=''>
-     <Header>Publications</Header>
+     <Header>Announcements</Header>
      <div>
         <DataTable
             data={sampleData}
-            // title="Publications"
             onAdd={() => {}}
             onEdit={(data) => {}}
             onUpdateStatus={({ vehicleId, newStatus }) => {}}
@@ -71,4 +70,4 @@ const Publications = () => {
   )
 }
 
-export default Publications
+export default Announcements

@@ -17,6 +17,8 @@ import Support from "./pages/support";
 import AdminDashboard from "./pages/admin";
 import AdminLayout from "./layout/admin";
 import Publications from "./pages/admin/publications";
+import Announcements from "./pages/admin/announcements";
+import Merchandise from "./pages/admin/merchandise";
 
 const routes = createBrowserRouter([
   {
@@ -83,6 +85,14 @@ const routes = createBrowserRouter([
       {
         path: "publications",
         Component: Publications,
+      },
+      {
+        path: "announcements",
+        Component: Announcements,
+      },
+      {
+        path: "merchandise",
+        Component: Merchandise,
       },
     ],
   },

@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  CheckCircle2Icon,
-  CircleAlert,
-  CopyMinus,
-  Edit,
-  Plus,
-  Trash,
-} from "lucide-react";
+import { CheckCircle2Icon, CircleAlert } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -40,7 +33,9 @@ export const vehicleColumns = (onEdit, onUpdateStatus, submitting) => [
   {
     accessorKey: "description",
     header: "Description",
-    cell: ({ row }) => <div className="w-52 truncate">{row.getValue("description")}</div>,
+    cell: ({ row }) => (
+      <div className="w-52 truncate">{row.getValue("description")}</div>
+    ),
   },
   {
     accessorKey: "date",

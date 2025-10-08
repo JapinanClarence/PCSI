@@ -16,6 +16,7 @@ import ricksterlie from "@/assets/images/DrRicksterlie.png"
 import markjhon from "@/assets/images/MarkJhon.png"
 import coleopterist from "@/assets/images/coleopterist.png"
 import tiger_beetle from "@/assets/images/tiger_beetle.png";
+import beatle_8 from "@/assets/images/beatle_8.jpg";
 
 export const images = {
     beatle_1,
@@ -25,6 +26,7 @@ export const images = {
     beatle_5,
     beatle_6,
     beatle_7,
+    beatle_8,
     logo_portrait,
     logo_landscape,
     logo_square,

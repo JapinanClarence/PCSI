@@ -10,7 +10,17 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Bell, Calendar, Home, Inbox, Newspaper, Search, Settings, ShoppingBag } from "lucide-react";
+import {
+  Bell,
+  Calendar,
+  Home,
+  Inbox,
+  Megaphone,
+  Newspaper,
+  Search,
+  Settings,
+  ShoppingBag,
+} from "lucide-react";
 import { images } from "@/constants/images";
 import { NavUser } from "./NavUser";
 import { useLocation } from "react-router";
@@ -32,6 +42,11 @@ const items = [
     icon: Bell,
   },
   {
+    title: "Feature",
+    url: "/admin/feature",
+    icon: Megaphone,
+  },
+  {
     title: "Merchandise",
     url: "/admin/merchandise",
     icon: ShoppingBag,
@@ -39,7 +54,7 @@ const items = [
 ];
 
 export function AppSidebar() {
-    const location = useLocation();
+  const location = useLocation();
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className={"flex-row items-center font-bold font-serif"}>
@@ -53,9 +68,7 @@ export function AppSidebar() {
                 <span className="truncate font-semibold">
                   {"Phlippine Coleopterist "}
                 </span>
-                <span className="truncate font-semibold">
-                  {"Society Inc."}
-                </span>
+                <span className="truncate font-semibold">{"Society Inc."}</span>
               </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -67,7 +80,11 @@ export function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton  variant="outline" asChild isActive={location.pathname === item.url}>
+                  <SidebarMenuButton
+                    variant="outline"
+                    asChild
+                    isActive={location.pathname === item.url}
+                  >
                     <a href={item.url} className="font-medium">
                       <item.icon />
                       <span>{item.title}</span>

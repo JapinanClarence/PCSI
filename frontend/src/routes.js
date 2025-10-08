@@ -19,6 +19,7 @@ import AdminLayout from "./layout/admin";
 import Publications from "./pages/admin/publications";
 import Announcements from "./pages/admin/announcements";
 import Merchandise from "./pages/admin/merchandise";
+import Feature from "./pages/admin/feature";
 
 const routes = createBrowserRouter([
   {
@@ -93,6 +94,10 @@ const routes = createBrowserRouter([
       {
         path: "merchandise",
         Component: Merchandise,
+      },
+      {
+        path: "feature",
+        Component: Feature,
       },
     ],
   },

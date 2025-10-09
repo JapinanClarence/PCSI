@@ -20,7 +20,15 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Camera, File, X } from "lucide-react";
-
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import TextEditor from "@/components/common/TextEditor";
 export default function PublicationForm({
   open,
   onOpenChange,
@@ -28,6 +36,7 @@ export default function PublicationForm({
   data,
   submitting,
   title,
+  form,
 }) {
   const [image, setImage] = useState(null);
 
@@ -44,75 +53,127 @@ export default function PublicationForm({
   const removeImage = () => {
     setImage(null);
   };
+
+  const handleFormSubmit = (formData) => {
+    onSubmit(formData);
+  };
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className={"max-h-[90%]"} showCloseButton={false}>
+      <DialogContent className={""} showCloseButton={false}>
         <DialogHeader>
           <DialogTitle className={"text-start"}>{title}</DialogTitle>
           <DialogDescription className={"text-start"}>
             Please fill in all required fields and click submit to save.
           </DialogDescription>
         </DialogHeader>
-        <div className="overflow-y-auto max-h-[calc(90vh-120px)] ">
-          <form>
-            <FieldGroup>
-              <FieldSet>
-                <Field>
-                  <div className="relative min-h-40  bg-muted rounded-lg flex items-center justify-center overflow-hidden">
-                    {image ? (
-                      <>
-                        <img
-                          src={image.preview}
-                          alt="Uploaded banner"
-                          className="w-full h-full object-cover"
-                        />
-                        <button
-                          type="button"
-                          onClick={removeImage}
-                          className="absolute top-2 right-2 bg-black/60 text-white rounded-full p-1 hover:bg-black/80"
+        <div className="overflow-y-auto max-h-[calc(95vh-120px)] ">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(handleFormSubmit)}>
+              <FieldGroup>
+                <FieldSet>
+                  <Field>
+                    <div className="relative min-h-40 bg-muted rounded-lg flex items-center justify-center overflow-hidden">
+                      {image ? (
+                        <>
+                          <img
+                            src={image.preview}
+                            alt="Uploaded banner"
+                            className="w-full h-full object-cover"
+                          />
+                          <button
+                            type="button"
+                            onClick={removeImage}
+                            className="absolute top-2 right-2 bg-black/60 text-white rounded-full p-1 hover:bg-black/80"
+                          >
+                            <X size={16} />
+                          </button>
+                        </>
+                      ) : (
+                        <label
+                          htmlFor="banner-upload"
+                          className="h-full w-full flex flex-col items-center justify-center font-semibold text-muted-foreground cursor-pointer"
                         >
-                          <X size={16} />
-                        </button>
-                      </>
-                    ) : (
-                      <label
-                        htmlFor="banner-upload"
-                        className="h-full w-full flex flex-col items-center justify-center font-semibold text-muted-foreground cursor-pointer"
-                      >
-                        <File size={30} />
-                        <span>Upload Banner</span>
-                        <input
-                          id="banner-upload"
-                          type="file"
-                          accept="image/*"
-                          onChange={handleImageChange}
-                          className="hidden"
-                        />
-                      </label>
+                          <File size={30} />
+                          <span>Upload Banner</span>
+                          <input
+                            id="banner-upload"
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageChange}
+                            className="hidden"
+                          />
+                        </label>
+                      )}
+                    </div>
+                  </Field>
+
+                  <FormField
+                    control={form.control}
+                    name="title"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Title</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Enter publication title"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
                     )}
-                  </div>
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="date"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Date Published</FormLabel>
+                        <FormControl>
+                          <Input type="date" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="description"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Description</FormLabel>
+                        <FormControl>
+                          <TextEditor
+                            content={field.value}
+                            onChange={field.onChange}
+                            placeholder="Enter publication description..."
+                            className="min-h-[150px]"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </FieldSet>
+
+                <Field orientation="horizontal">
+                  <Button type="submit" disabled={submitting}>
+                    {submitting ? "Submitting..." : "Submit"}
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => onOpenChange(false)}
+                    disabled={submitting}
+                  >
+                    Cancel
+                  </Button>
                 </Field>
-                <Field>
-                  <FieldLabel htmlFor="title">Title</FieldLabel>
-                  <Input id="title" type="text" placeholder="" />
-                </Field>
-                <Field>
-                  <FieldLabel htmlFor="feedback">Description</FieldLabel>
-                  <Textarea id="description" rows={4} className={"resize-y overflow-y-auto min-h-[100px]"} />
-                </Field>
-              </FieldSet>
-              <Field orientation="horizontal">
-                <Button type="submit">Submit</Button>
-                <Button
-                  type="button"
-                  variant={"outline"}
-                  onClick={() => onOpenChange(false)}
-                >
-                  Cancel
-                </Button>
-              </Field>
-            </FieldGroup>
-          </form>
+              </FieldGroup>
+            </form>
+          </Form>
         </div>
       </DialogContent>
     </Dialog>

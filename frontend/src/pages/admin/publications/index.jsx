@@ -66,20 +66,64 @@ const Publications = () => {
   const [currentData, setCurrentData] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  const form = useForm([{
-    resolver: zodResolver(PublicationSchema)
-  }])
+  const form = useForm({
+    resolver: zodResolver(PublicationSchema),
+    defaultValues: {
+      title: "",
+      description: "",
+      date: "",
+      status: "1"
+    }
+  })
 
 
   const handleEdit = (data) => {
     setShowForm(true);
     setFormTitle("Edit Publication")
     setCurrentData(data);
+    // Populate form with existing data
+    form.reset({
+      title: data.title || "",
+      description: data.description || "",
+      date: data.date || "",
+      status: data.status === "Active" ? "1" : "0"
+    });
   };
 
-  const handleAdd = () =>{
+  const handleAdd = () => {
     setShowForm(true)
     setFormTitle("Add Publication")
+    setCurrentData(null);
+    // Reset form to default values
+    form.reset({
+      title: "",
+      description: "",
+      date: "",
+      status: "1"
+    });
+  }
+
+  const handleSubmit = async (data) => {
+    setSubmitting(true);
+    try {
+      // Here you would typically make an API call
+      console.log("Form data:", data);
+      
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Close form and reset
+      setShowForm(false);
+      form.reset();
+      
+      // You might want to refresh the data here
+      // fetchPublications();
+      
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -111,6 +155,8 @@ const Publications = () => {
         data={currentData}
         submitting={submitting}
         title={formTitle}
+        form={form}
+        onSubmit={handleSubmit}
       />
     </div>
   );

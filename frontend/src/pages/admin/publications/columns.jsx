@@ -48,11 +48,6 @@ export const vehicleColumns = (onEdit, onUpdateStatus, submitting) => [
     ),
   },
   {
-    accessorKey: "date",
-    header: "Date",
-    cell: ({ row }) => <div className="">{row.getValue("date")}</div>,
-  },
-  {
     accessorKey: "createdAt",
     header: "Created At",
     cell: ({ row }) => <div className="">{row.getValue("createdAt")}</div>,

@@ -126,20 +126,6 @@ export default function PublicationForm({
 
                   <FormField
                     control={form.control}
-                    name="date"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Date Published</FormLabel>
-                        <FormControl>
-                          <Input type="date" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
                     name="description"
                     render={({ field }) => (
                       <FormItem>

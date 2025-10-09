@@ -71,7 +71,6 @@ const Publications = () => {
     defaultValues: {
       title: "",
       description: "",
-      date: "",
       status: "1"
     }
   })
@@ -85,7 +84,6 @@ const Publications = () => {
     form.reset({
       title: data.title || "",
       description: data.description || "",
-      date: data.date || "",
       status: data.status === "Active" ? "1" : "0"
     });
   };
@@ -142,7 +140,6 @@ const Publications = () => {
             "id",
             "title",
             "description",
-            "date",
             "createdAt",
             "status",
           ]}

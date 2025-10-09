@@ -9,7 +9,7 @@ const Services = () => {
   return (
     <div>
       <Hero/>
-      <Introduction/>
+      {/* <Introduction/> */}
       <ServicesList/>
     </div>
   );

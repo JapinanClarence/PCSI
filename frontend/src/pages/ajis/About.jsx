@@ -72,7 +72,7 @@ function About() {
           </h3>
           <Separator />
           <p className="text-lg leading-relaxed">
-            <i>Asian Journal of Insect Science</i> follows the Double-Blind peer
+            <i>Asian Journal of Insect Science</i> follows the Single-Blind peer
             review process, where both the referee and the author remain
             anonymous throughout the review process.
           </p>

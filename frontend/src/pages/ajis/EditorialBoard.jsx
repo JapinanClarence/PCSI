@@ -92,7 +92,7 @@ function EditorialBoard() {
             <h3 className="font-serif text-1xl md:text-1xl">
               Order Coleoptera (Curculionidae)
             </h3>
-            <h3 className="font-serif text-1xl md:text-1xl">Email:</h3>
+            
           </div>
 
           <div className="mt-4">
@@ -105,7 +105,7 @@ function EditorialBoard() {
             <h3 className="font-serif text-1xl md:text-1xl">
               Order Coleoptera (Cerambycidae)
             </h3>
-            <h3 className="font-serif text-1xl md:text-1xl">Email:</h3>
+            
           </div>
 
           <div className="mt-4">
@@ -119,7 +119,7 @@ function EditorialBoard() {
             <h3 className="font-serif text-1xl md:text-1xl">
               Order Thysanoptera
             </h3>
-            <h3 className="font-serif text-1xl md:text-1xl">Email:</h3>
+            
           </div>
 
           <div className="mt-4">
@@ -130,7 +130,7 @@ function EditorialBoard() {
               Southern Philippines Medical Center, Davao City Philippines
             </h3>
             <h3 className="font-serif text-1xl md:text-1xl">Order Odonata</h3>
-            <h3 className="font-serif text-1xl md:text-1xl">Email:</h3>
+            
           </div>
 
           <div className="mt-4">
@@ -143,7 +143,7 @@ function EditorialBoard() {
             <h3 className="font-serif text-1xl md:text-1xl">
               Order Coleoptera (Scarabidae, Chrysomelidae, Insect Pests)
             </h3>
-            <h3 className="font-serif text-1xl md:text-1xl">Email:</h3>
+            
           </div>
 
           <div className="mt-4">
@@ -157,7 +157,7 @@ function EditorialBoard() {
             <h3 className="font-serif text-1xl md:text-1xl">
               Order Coleoptera (Cerambycidae)
             </h3>
-            <h3 className="font-serif text-1xl md:text-1xl">Email:</h3>
+            
           </div>
 
           <div className="mt-4">
@@ -170,7 +170,7 @@ function EditorialBoard() {
             <h3 className="font-serif text-1xl md:text-1xl">
               Order Coleoptera (Cerambycidae)
             </h3>
-            <h3 className="font-serif text-1xl md:text-1xl">Email:</h3>
+            
           </div>
 
           <div className="mt-4">
@@ -183,7 +183,7 @@ function EditorialBoard() {
             <h3 className="font-serif text-1xl md:text-1xl">
               Order Coleoptera (Carabidae)
             </h3>
-            <h3 className="font-serif text-1xl md:text-1xl">Email:</h3>
+            
           </div>
 
           <div className="mt-4">
@@ -196,7 +196,7 @@ function EditorialBoard() {
             <h3 className="font-serif text-1xl md:text-1xl">
               Molecular genetics, bioinformatics, xxxxxxxxxx
             </h3>
-            <h3 className="font-serif text-1xl md:text-1xl">Email:</h3>
+            
           </div>
 
           <div className="mt-4">
@@ -209,7 +209,7 @@ function EditorialBoard() {
             <h3 className="font-serif text-1xl md:text-1xl">
               Molecular genetics, bioinformatics, xxxxxxxxxx
             </h3>
-            <h3 className="font-serif text-1xl md:text-1xl">Email:</h3>
+            
           </div>
 
           {/* <div className="mt-4">
@@ -223,7 +223,7 @@ function EditorialBoard() {
             <h3 className="font-serif text-1xl md:text-1xl">
               Roma Tre University, Rome, Italy
             </h3>
-            <h3 className="font-serif text-1xl md:text-1xl">Email:</h3>
+            
           </div> */}
 
           <div className="mt-4">
@@ -237,7 +237,7 @@ function EditorialBoard() {
               Order Coleoptera (Curculionidae in Indo-Australian and Malayan
               Regions)
             </h3>
-            <h3 className="font-serif text-1xl md:text-1xl">Email:</h3>
+            
           </div>
 
           <div className="mt-4">
@@ -250,7 +250,7 @@ function EditorialBoard() {
             <h3 className="font-serif text-1xl md:text-1xl">
               Order Coleoptera (Cerambycidae)
             </h3>
-            <h3 className="font-serif text-1xl md:text-1xl">Email:</h3>
+            
           </div>
 
           <div className="mt-4">
@@ -263,7 +263,7 @@ function EditorialBoard() {
             <h3 className="font-serif text-1xl md:text-1xl">
               Order Hemiptera (Cercopoidea)
             </h3>
-            <h3 className="font-serif text-1xl md:text-1xl">Email:</h3>
+            
           </div>
 
           {/* <div className="mt-4">
@@ -276,7 +276,7 @@ function EditorialBoard() {
             <h3 className="font-serif text-1xl md:text-1xl">
               Order Lepidoptera
             </h3>
-            <h3 className="font-serif text-1xl md:text-1xl">Email:</h3>
+            
           </div> */}
 
           <div className="mt-4">
@@ -289,7 +289,7 @@ function EditorialBoard() {
             <h3 className="font-serif text-1xl md:text-1xl">
               Order Hymenoptera (Ants)
             </h3>
-            <h3 className="font-serif text-1xl md:text-1xl">Email:</h3>
+            
           </div>
 
           <div className="mt-4">
@@ -302,21 +302,9 @@ function EditorialBoard() {
             <h3 className="font-serif text-1xl md:text-1xl">
               Order: Neuroptera (Ascalaphinae)
             </h3>
-            <h3 className="font-serif text-1xl md:text-1xl">Email:</h3>
+            
           </div>
 
-          <div className="mt-4">
-            <h3 className="font-serif text-1xl md:text-1xl">
-              <b>Dr. Shawan Chowdhury</b>
-            </h3>
-            <h3 className="font-serif text-1xl md:text-1xl">
-              Monash University, Melbourne, Victoria Australia
-            </h3>
-            <h3 className="font-serif text-1xl md:text-1xl">
-              Insect Ecology and Conservation
-            </h3>
-            <h3 className="font-serif text-1xl md:text-1xl">Email:</h3>
-          </div>
         </div>
       </Container>
     </div>

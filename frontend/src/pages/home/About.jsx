@@ -66,7 +66,7 @@ function About() {
           </h1>
           <Separator />
           <p className="leading-relaxed text-lg">
-            The primary goal of PCSI is to train more beetle workers from its
+            The primary goal of PCSI is to train more scientific workers from its
             partner academic institutions, Local Government Units (LGUs),
             Non-government Organizations (NGOs), and the public in the field of
             coleopterology, particularly from within megadiverse countries. We

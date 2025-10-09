@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Popover } from "@/components/common/Popover";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
@@ -32,7 +32,6 @@ const TextEditor = ({
   className = "",
   editable = true,
 }) => {
-  const [linkPopoverOpen, setLinkPopoverOpen] = React.useState(false);
   const [linkText, setLinkText] = React.useState("");
   const [linkUrl, setLinkUrl] = React.useState("");
   const editor = useEditor({
@@ -60,17 +59,17 @@ const TextEditor = ({
     editorProps: {
       attributes: {
         class: cn(
-          "prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none min-h-[100px] p-3",
-          "prose-headings:font-semibold prose-headings:text-foreground",
-          "prose-p:text-foreground prose-p:leading-relaxed",
+          "prose prose-sm mx-auto focus:outline-none min-h-[100px] p-3 text-sm",
+          "prose-headings:font-semibold prose-headings:text-foreground prose-headings:text-base",
+          "prose-p:text-foreground prose-p:leading-relaxed prose-p:text-sm",
           "prose-strong:text-foreground prose-strong:font-semibold",
           "prose-em:text-foreground prose-em:italic",
-          "prose-ul:text-foreground prose-ol:text-foreground",
-          "prose-li:text-foreground",
-          "prose-blockquote:text-muted-foreground prose-blockquote:border-l-4 prose-blockquote:border-muted-foreground",
-          "prose-code:text-foreground prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded",
-          "prose-pre:bg-muted prose-pre:text-foreground",
-          "prose-a:text-blue-500 prose-a:no-underline hover:prose-a:underline",
+          "prose-ul:text-foreground prose-ol:text-foreground prose-ul:text-sm prose-ol:text-sm",
+          "prose-li:text-foreground prose-li:text-sm",
+          "prose-blockquote:text-muted-foreground prose-blockquote:border-l-4 prose-blockquote:border-muted-foreground prose-blockquote:text-sm",
+          "prose-code:text-foreground prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-sm",
+          "prose-pre:bg-muted prose-pre:text-foreground prose-pre:text-sm",
+          "prose-a:text-blue-500 prose-a:no-underline hover:prose-a:underline prose-a:text-sm",
           className
         ),
         placeholder,
@@ -91,7 +90,6 @@ const TextEditor = ({
     
     setLinkText(selectedText || "");
     setLinkUrl(previousUrl || "");
-    setLinkPopoverOpen(true);
   };
 
   const handleLinkSubmit = () => {
@@ -102,22 +100,27 @@ const TextEditor = ({
       } else {
         // If no text is selected, insert the link text with the URL
         const textToInsert = linkText || linkUrl;
-        editor.chain().focus().insertContent(textToInsert).run();
-        // Move cursor back to the beginning of the inserted text and apply link
         const currentPos = editor.state.selection.from;
-        const startPos = currentPos - textToInsert.length;
-        editor.chain().focus().setTextSelection({ from: startPos, to: currentPos }).setLink({ href: linkUrl }).run();
+        
+        // Insert the text and apply link formatting
+        editor.chain().focus().insertContent(textToInsert).run();
+        
+        // Move cursor back to the beginning of the inserted text and apply link
+        const startPos = currentPos;
+        const endPos = currentPos + textToInsert.length;
+        editor.chain().focus().setTextSelection({ from: startPos, to: endPos }).setLink({ href: linkUrl }).run();
+        
+        // Move cursor to the end of the link (after the link) so next text is normal
+        editor.chain().focus().setTextSelection({ from: endPos, to: endPos }).run();
       }
     } else {
       editor.chain().focus().extendMarkRange("link").unsetLink().run();
     }
-    setLinkPopoverOpen(false);
     setLinkText("");
     setLinkUrl("");
   };
 
   const handleLinkCancel = () => {
-    setLinkPopoverOpen(false);
     setLinkText("");
     setLinkUrl("");
   };
@@ -125,6 +128,7 @@ const TextEditor = ({
   const handleUnlink = () => {
     editor.chain().focus().unsetLink().run();
   };
+
 
   return (
     <div className="border border-input rounded-md bg-background">
@@ -217,9 +221,10 @@ const TextEditor = ({
         <div className="w-px h-6 bg-border mx-1" />
 
         {/* Link */}
-        <Popover open={linkPopoverOpen} onOpenChange={setLinkPopoverOpen}>
-          <PopoverTrigger asChild>
+        <Popover
+          trigger={
             <Button
+              type="button"
               variant="outline"
               size="sm"
               onClick={handleLinkClick}
@@ -228,51 +233,52 @@ const TextEditor = ({
             >
               <LinkIcon className="h-4 w-4" />
             </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-80 p-4" align="start">
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="link-text" className="text-sm font-medium">
-                  Text
-                </Label>
-                <Input
-                  id="link-text"
-                  placeholder="Enter link text"
-                  value={linkText}
-                  onChange={(e) => setLinkText(e.target.value)}
-                  className="w-full"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="link-url" className="text-sm font-medium">
-                  URL
-                </Label>
-                <Input
-                  id="link-url"
-                  placeholder="https://example.com"
-                  value={linkUrl}
-                  onChange={(e) => setLinkUrl(e.target.value)}
-                  className="w-full"
-                />
-              </div>
-              <div className="flex justify-end gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handleLinkCancel}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  size="sm"
-                  onClick={handleLinkSubmit}
-                  disabled={!linkUrl.trim()}
-                >
-                  Apply
-                </Button>
-              </div>
+           
+          }
+
+        >
+          <div className="w-64 space-y-4 p-4">
+            <div className="flex gap-2">
+              <Label htmlFor="link-text" className="text-sm font-medium">
+                Text
+              </Label>
+              <Input
+                id="link-text"
+                placeholder="Enter link text"
+                value={linkText}
+                onChange={(e) => setLinkText(e.target.value)}
+                className="w-full"
+              />
             </div>
-          </PopoverContent>
+            <div className="flex gap-2">
+              <Label htmlFor="link-url" className="text-sm font-medium">
+                URL
+              </Label>
+              <Input
+                id="link-url"
+                placeholder="https://example.com"
+                value={linkUrl}
+                onChange={(e) => setLinkUrl(e.target.value)}
+                className="w-full"
+              />
+            </div>
+            <div className="flex justify-end gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleLinkCancel}
+              >
+                Cancel
+              </Button>
+              <Button
+                size="sm"
+                onClick={handleLinkSubmit}
+                disabled={!linkUrl.trim()}
+              >
+                Apply
+              </Button>
+            </div>
+          </div>
         </Popover>
         {editor.isActive("link") && (
           <Button

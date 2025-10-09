@@ -12,6 +12,7 @@ const ServiceList = () => {
       </div>
       <ol className="list-decimal list-inside lg:list-outside space-y-3 text-lg marker:font-semibold marker:text-dark-green marker:text-3xl">
         <li>Beetle species identification</li>
+        {/* list must be alphabetical */}
         <li>Training Workshop on Coleopterology
           <ol className="list-decimal list-inside lg:list-outside space-y-1 mt-2 ml-6 marker:font-bold marker:text-dark-green marker:text-xl">
             <li>Specimen collection protocols</li>
@@ -21,6 +22,7 @@ const ServiceList = () => {
           </ol>
 
         </li>
+
         <li>Basic Photoshop and QGIS</li>
         <li>Individual and Institutional Partnership</li>
       </ol>

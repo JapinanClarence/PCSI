@@ -20,8 +20,8 @@ const publicationSchema = new mongoose.Schema({
   // Publication status (active, inactive)
   status: {
     type: String,
-    enum: ['active', 'inactive'],
-    default: 'active'
+    enum: ['1', '0'],
+    default: '1'
   }
 }, {
   timestamps: true // This adds createdAt and updatedAt fields automatically

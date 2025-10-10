@@ -53,19 +53,6 @@ const publicationService = {
     }
   },
 
-  // Delete publication
-  deletePublication: async (id) => {
-    try {
-      const response = await api.delete(`/publications/${id}`);
-      return { success: true, data: response.data };
-    } catch (error) {
-      return { 
-        success: false, 
-        error: error.response?.data?.message || 'Failed to delete publication' 
-      };
-    }
-  },
-
   // Toggle publication status (active/inactive)
   togglePublicationStatus: async (id, status) => {
     try {

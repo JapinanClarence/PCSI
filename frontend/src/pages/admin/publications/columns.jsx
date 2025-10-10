@@ -21,11 +21,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export const vehicleColumns = (onEdit, onUpdateStatus, submitting) => [
   {
-    accessorKey: "id",
-    header: "Id.",
-    cell: ({ row }) => <div className="">{row.getValue("id")}</div>,
-  },
-  {
     accessorKey: "banner",
     header: "",
     cell: ({ row }) => (
@@ -85,11 +80,15 @@ export const vehicleColumns = (onEdit, onUpdateStatus, submitting) => [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const [status, setStatus] = useState(row.original.status);
+      const status = row.original.status;
       const vehicle = row.original;
       const handleEdit = (e) => {
         e.stopPropagation();
         onEdit(vehicle._id);
+      };
+      const handleStatusChange = (e) => {
+        e.stopPropagation();
+        onUpdateStatus({ vehicleId: vehicle._id, newStatus: status === "Active" ? "0" : "1" });
       };
       return (
         <DropdownMenu>
@@ -106,7 +105,7 @@ export const vehicleColumns = (onEdit, onUpdateStatus, submitting) => [
               Edit
               <Edit />
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={handleEdit}>
+            <DropdownMenuItem onClick={handleStatusChange}>
               {status === "Active" ? (
                 <>
                   Deactivate

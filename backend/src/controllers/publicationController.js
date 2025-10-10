@@ -12,6 +12,39 @@ const publicationController = {
       data: publication
     });
   }),
+  getPublications: asyncHandler(async (req, res) => {
+    const publications = await publicationService.getPublications();
+    res.status(STATUS_CODES.OK).json({
+      success: true,
+      message: 'Publications fetched successfully',
+      data: publications
+    });
+  }),
+  getPublication: asyncHandler(async (req, res) => {
+    const publication = await publicationService.getPublication(req.params.id);
+    res.status(STATUS_CODES.OK).json({
+      success: true,
+      message: 'Publication fetched successfully',
+      data: publication
+    });
+  }),
+  updatePublication: asyncHandler(async (req, res) => {
+    const publication = await publicationService.updatePublication(req.params.id, req.body);
+    res.status(STATUS_CODES.OK).json({
+      success: true,
+      message: 'Publication updated successfully',
+      data: publication
+    });
+  }),
+  togglePublicationStatus: asyncHandler(async (req, res) => {
+    const { status } = req.body;
+    const publication = await publicationService.togglePublicationStatus(req.params.id, status);
+    res.status(STATUS_CODES.OK).json({
+      success: true,
+      message: 'Publication status updated successfully',
+      data: publication
+    });
+  }),
 };
 
 export default publicationController;   

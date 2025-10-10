@@ -29,21 +29,32 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
-// import { useAuth } from "@/context/AuthContext";
-
-const userData = {
-  username: "Admin",
-  email: "admin@gmail.com",
-    avatar: "https://i.pravatar.cc/150?img=3",
-}
+import { useAuth } from "@/contexts/AuthContext";
+import { useState } from "react";
 
 export function NavUser() {
   const { isMobile } = useSidebar()
-//   const { logout, userData } = useAuth();
+  const { logout, user } = useAuth();
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
-  const handleLogout = ()=>{
-    console.log("logout");
-    // logout();
+  const handleLogout = async () => {
+    try {
+      setIsLoggingOut(true);
+      await logout();
+    } catch (error) {
+      console.error('Logout error:', error);
+      // Even if logout fails, we can still redirect to login
+      // The AuthContext will handle clearing the state
+    } finally {
+      setIsLoggingOut(false);
+    }
+  }
+
+  // Use real user data from AuthContext, fallback to default if not available
+  const userData = {
+    username: user?.firstName ? `${user.firstName} ${user.lastName}` : "Admin",
+    email: user?.email || "admin@gmail.com",
+    avatar: "https://i.pravatar.cc/150?img=3",
   }
   return (
     <SidebarMenu>
@@ -52,7 +63,7 @@ export function NavUser() {
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              className="font-poppins data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg">
                 <AvatarImage src={userData.avatar} alt={userData.username} />
@@ -66,7 +77,7 @@ export function NavUser() {
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg font-poppins"
             side={isMobile ? "bottom" : "right"}
             align="end"
             sideOffset={4}
@@ -91,9 +102,9 @@ export function NavUser() {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onSelect={handleLogout}>
+            <DropdownMenuItem onSelect={handleLogout} disabled={isLoggingOut}>
               <LogOut />
-              Log out
+              {isLoggingOut ? "Logging out..." : "Log out"}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

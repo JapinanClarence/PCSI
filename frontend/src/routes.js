@@ -14,12 +14,18 @@ import StrategicInitiatives from "./pages/strategic-initiatives";
 import Services from "./pages/services";
 import NewsAndEvents from "./pages/news-events";
 import Support from "./pages/support";
-import AdminDashboard from "./pages/admin";
+
+// Admin routes
 import AdminLayout from "./layout/admin";
+import AdminDashboard from "./pages/admin";
 import Publications from "./pages/admin/publications";
 import Announcements from "./pages/admin/announcements";
 import Merchandise from "./pages/admin/merchandise";
 import Feature from "./pages/admin/feature";
+
+//auth routes
+import AuthLayout from "./layout/auth";
+import Login from "./pages/admin/auth/login";
 
 const routes = createBrowserRouter([
   {
@@ -99,6 +105,13 @@ const routes = createBrowserRouter([
         path: "feature",
         Component: Feature,
       },
+    ],
+  },
+  {
+    path: "/auth",
+    Component: AuthLayout,
+    children: [
+      { path: "login", Component: Login },
     ],
   },
 ]);

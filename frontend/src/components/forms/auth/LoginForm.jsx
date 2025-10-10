@@ -17,23 +17,38 @@ import { Input } from "@/components/ui/input"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { loginSchema } from "./schema"
+import authService from "@/services/authService"
+import { useNavigate } from "react-router-dom"
+import { useState } from "react"
 
 export default function LoginForm({ className, ...props }) {
+  const navigate = useNavigate();
+  const [loginError, setLoginError] = useState("");
+  
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    setError,
   } = useForm({
     resolver: zodResolver(loginSchema),
   });
 
   const onSubmit = async (data) => {
     try {
-      console.log("Login data:", data);
-      // TODO: Implement login logic here
-      // await login(data.email, data.password);
+      setLoginError("");
+      const result = await authService.login(data);
+      
+      if (result.success) {
+        // Login successful, redirect to admin dashboard
+        navigate('/admin');
+      } else {
+        // Login failed, show error
+        setLoginError(result.error);
+      }
     } catch (error) {
       console.error("Login error:", error);
+      setLoginError("An unexpected error occurred. Please try again.");
     }
   };
 
@@ -49,6 +64,11 @@ export default function LoginForm({ className, ...props }) {
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)}>
             <FieldGroup>
+              {loginError && (
+                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm">
+                  {loginError}
+                </div>
+              )}
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input

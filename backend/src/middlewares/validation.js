@@ -99,6 +99,16 @@ const validateRefreshToken = [
   handleValidationErrors
 ];
 
+const validatePublication = [
+  body('title')
+    .notEmpty()
+    .withMessage('Title is required'),
+  body('description')
+    .notEmpty()
+    .withMessage('Description is required'),
+  handleValidationErrors
+];
+
 export {
   validateRegister,
   validateLogin,
@@ -106,5 +116,6 @@ export {
   validatePasswordReset,
   validateProfileUpdate,
   validateRefreshToken,
+  validatePublication,
   handleValidationErrors
 };

@@ -6,10 +6,11 @@ import { images } from "@/constants/images";
 const Login = () => {
   return (
     <div className="bg-muted flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
-        <div className="">
-            <img src={images.logo_landscape} className="max-h-14 md:max-h-16" />
+
+        <div className="w-full max-w-sm md:max-w-4xl">
+        <LoginForm />
         </div>
-      <LoginForm />
+    
     </div>
   );
 };

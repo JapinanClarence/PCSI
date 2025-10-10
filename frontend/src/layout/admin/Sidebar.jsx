@@ -85,7 +85,7 @@ export function AppSidebar() {
                     asChild
                     isActive={location.pathname === item.url}
                   >
-                    <a href={item.url} className="font-medium">
+                    <a href={item.url} className="font-medium font-poppins">
                       <item.icon />
                       <span>{item.title}</span>
                     </a>

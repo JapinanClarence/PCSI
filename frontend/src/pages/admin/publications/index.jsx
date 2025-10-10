@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { PublicationSchema } from "@/components/forms/publication/schema";
 import publicationService from "@/services/publicationService";
 import { toast } from "sonner";
+import { formatDate } from "@/util/formatDate";
 
 const statusMap = {
   1: "Active",
@@ -40,6 +41,7 @@ const Publications = () => {
         const data = result?.data?.data?.map((publication) => ({
           ...publication,
           status: statusMap[publication.status],
+          createdAt: formatDate(publication.createdAt)
         }));
 
         setPublications(data || []);

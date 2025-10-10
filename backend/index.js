@@ -4,7 +4,7 @@ import cors from 'cors';
 import connectDB from './src/config/database.js';
 import { errorHandler, notFound } from './src/middlewares/errorHandler.js';
 import { validateApiKey } from './src/middlewares/apiKeyMiddleware.js';
-import { testEmailConfiguration } from './src/services/emailService.js';
+import emailService from './src/services/emailService.js';
 
 // Import routes
 import authRoutes from './src/routes/authRoutes.js';
@@ -27,7 +27,7 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Test email configuration on startup
-testEmailConfiguration();
+emailService.testEmailConfiguration();
 
 // Health check endpoint (no API key required)
 app.get('/api/health', (req, res) => {

@@ -1,5 +1,5 @@
 import express from 'express';
-import UserController from '../controllers/userController.js';
+import userController from '../controllers/userController.js';
 import { verifyToken, requireAdmin, requireVerified } from '../middlewares/authMiddleware.js';
 import { validateProfileUpdate } from '../middlewares/validation.js';
 
@@ -9,13 +9,13 @@ const router = express.Router();
 router.use(verifyToken);
 
 // User profile routes (authenticated users)
-router.get('/profile', UserController.getProfile);
-router.put('/profile', validateProfileUpdate, UserController.updateProfile);
+router.get('/profile', userController.getProfile);
+router.put('/profile', validateProfileUpdate, userController.updateProfile);
 
 // Admin routes (admin users only)
-router.get('/admin/users', requireAdmin, UserController.getAllUsers);
-router.get('/admin/users/:userId', requireAdmin, UserController.getUserById);
-router.put('/admin/users/:userId/role', requireAdmin, UserController.updateUserRole);
-router.delete('/admin/users/:userId', requireAdmin, UserController.deleteUser);
+router.get('/admin/users', requireAdmin, userController.getAllUsers);
+router.get('/admin/users/:userId', requireAdmin, userController.getUserById);
+router.put('/admin/users/:userId/role', requireAdmin, userController.updateUserRole);
+router.delete('/admin/users/:userId', requireAdmin, userController.deleteUser);
 
 export default router;

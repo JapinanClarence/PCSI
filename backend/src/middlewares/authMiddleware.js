@@ -1,4 +1,4 @@
-import { verifyAccessToken } from '../services/tokenService.js';
+import tokenService from '../services/tokenService.js';
 import User from '../models/User.js';
 import { MESSAGES, STATUS_CODES } from '../utils/constants.js';
 
@@ -18,7 +18,7 @@ const verifyToken = async (req, res, next) => {
     const token = authHeader.substring(7); // Remove 'Bearer ' prefix
     
     // Verify token
-    const decoded = verifyAccessToken(token);
+    const decoded = tokenService.verifyAccessToken(token);
     
     // Get user from database
     const user = await User.findById(decoded.userId);
@@ -102,7 +102,7 @@ const optionalAuth = async (req, res, next) => {
     }
 
     const token = authHeader.substring(7);
-    const decoded = verifyAccessToken(token);
+    const decoded = tokenService.verifyAccessToken(token);
     
     const user = await User.findById(decoded.userId);
     if (user) {

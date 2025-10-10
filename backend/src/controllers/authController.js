@@ -1,13 +1,13 @@
-import { register, login, logout, refreshAccessToken, verifyEmail, requestPasswordReset, resetPassword, getUserProfile } from '../services/authService.js';
+import authService from '../services/authService.js';
 import { asyncHandler } from '../middlewares/errorHandler.js';
 import { STATUS_CODES } from '../utils/constants.js';
 
-class AuthController {
+const authController = {
   // Register new user
-  static register = asyncHandler(async (req, res) => {
+  register: asyncHandler(async (req, res) => {
     const { email, password, firstName, lastName } = req.body;
 
-    const result = await register({
+    const result = await authService.register({
       email,
       password,
       firstName,
@@ -21,13 +21,13 @@ class AuthController {
         user: result.user
       }
     });
-  });
+  }),
 
   // Login user
-  static login = asyncHandler(async (req, res) => {
+  login: asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 
-    const result = await login(email, password);
+    const result = await authService.login(email, password);
 
     res.status(STATUS_CODES.OK).json({
       success: true,
@@ -38,25 +38,25 @@ class AuthController {
         refreshToken: result.refreshToken
       }
     });
-  });
+  }),
 
   // Logout user
-  static logout = asyncHandler(async (req, res) => {
+  logout: asyncHandler(async (req, res) => {
     const { refreshToken } = req.body;
 
-    const result = await logout(refreshToken);
+    const result = await authService.logout(refreshToken);
 
     res.status(STATUS_CODES.OK).json({
       success: true,
       message: result.message
     });
-  });
+  }),
 
   // Refresh access token
-  static refreshToken = asyncHandler(async (req, res) => {
+  refreshToken: asyncHandler(async (req, res) => {
     const { refreshToken } = req.body;
 
-    const result = await refreshAccessToken(refreshToken);
+    const result = await authService.refreshAccessToken(refreshToken);
 
     res.status(STATUS_CODES.OK).json({
       success: true,
@@ -65,13 +65,13 @@ class AuthController {
         user: result.user
       }
     });
-  });
+  }),
 
   // Verify email
-  static verifyEmail = asyncHandler(async (req, res) => {
+  verifyEmail: asyncHandler(async (req, res) => {
     const { token } = req.params;
 
-    const result = await verifyEmail(token);
+    const result = await authService.verifyEmail(token);
 
     res.status(STATUS_CODES.OK).json({
       success: true,
@@ -80,26 +80,26 @@ class AuthController {
         user: result.user
       }
     });
-  });
+  }),
 
   // Request password reset
-  static requestPasswordReset = asyncHandler(async (req, res) => {
+  requestPasswordReset: asyncHandler(async (req, res) => {
     const { email } = req.body;
 
-    const result = await requestPasswordReset(email);
+    const result = await authService.requestPasswordReset(email);
 
     res.status(STATUS_CODES.OK).json({
       success: true,
       message: result.message
     });
-  });
+  }),
 
   // Reset password
-  static resetPassword = asyncHandler(async (req, res) => {
+  resetPassword: asyncHandler(async (req, res) => {
     const { token } = req.params;
     const { password } = req.body;
 
-    const result = await resetPassword(token, password);
+    const result = await authService.resetPassword(token, password);
 
     res.status(STATUS_CODES.OK).json({
       success: true,
@@ -108,17 +108,17 @@ class AuthController {
         user: result.user
       }
     });
-  });
+  }),
 
   // Get current user info (for token verification)
-  static getMe = asyncHandler(async (req, res) => {
+  getMe: asyncHandler(async (req, res) => {
     res.status(STATUS_CODES.OK).json({
       success: true,
       data: {
         user: req.user
       }
     });
-  });
-}
+  })
+};
 
-export default AuthController;
+export default authController;

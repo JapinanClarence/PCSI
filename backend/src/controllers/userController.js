@@ -1,13 +1,13 @@
-import { getUserProfile, updateUserProfile } from '../services/authService.js';
+import authService from '../services/authService.js';
 import { asyncHandler } from '../middlewares/errorHandler.js';
 import { STATUS_CODES } from '../utils/constants.js';
 
-class UserController {
+const userController = {
   // Get user profile
-  static getProfile = asyncHandler(async (req, res) => {
+  getProfile: asyncHandler(async (req, res) => {
     const userId = req.user._id;
 
-    const user = await getUserProfile(userId);
+    const user = await authService.getUserProfile(userId);
 
     res.status(STATUS_CODES.OK).json({
       success: true,
@@ -15,14 +15,14 @@ class UserController {
         user
       }
     });
-  });
+  }),
 
   // Update user profile
-  static updateProfile = asyncHandler(async (req, res) => {
+  updateProfile: asyncHandler(async (req, res) => {
     const userId = req.user._id;
     const updateData = req.body;
 
-    const user = await updateUserProfile(userId, updateData);
+    const user = await authService.updateUserProfile(userId, updateData);
 
     res.status(STATUS_CODES.OK).json({
       success: true,
@@ -31,10 +31,10 @@ class UserController {
         user
       }
     });
-  });
+  }),
 
   // Get all users (admin only)
-  static getAllUsers = asyncHandler(async (req, res) => {
+  getAllUsers: asyncHandler(async (req, res) => {
     const User = (await import('../models/User.js')).default;
     
     const users = await User.find({}, '-password -verificationToken -resetPasswordToken -resetPasswordExpires')
@@ -47,10 +47,10 @@ class UserController {
         users
       }
     });
-  });
+  }),
 
   // Get user by ID (admin only)
-  static getUserById = asyncHandler(async (req, res) => {
+  getUserById: asyncHandler(async (req, res) => {
     const User = (await import('../models/User.js')).default;
     const { userId } = req.params;
 
@@ -69,10 +69,10 @@ class UserController {
         user
       }
     });
-  });
+  }),
 
   // Update user role (admin only)
-  static updateUserRole = asyncHandler(async (req, res) => {
+  updateUserRole: asyncHandler(async (req, res) => {
     const User = (await import('../models/User.js')).default;
     const { userId } = req.params;
     const { role } = req.body;
@@ -104,10 +104,10 @@ class UserController {
         user
       }
     });
-  });
+  }),
 
   // Delete user (admin only)
-  static deleteUser = asyncHandler(async (req, res) => {
+  deleteUser: asyncHandler(async (req, res) => {
     const User = (await import('../models/User.js')).default;
     const RefreshToken = (await import('../models/RefreshToken.js')).default;
     const { userId } = req.params;
@@ -136,7 +136,7 @@ class UserController {
       success: true,
       message: 'User deleted successfully'
     });
-  });
-}
+  })
+};
 
-export default UserController;
+export default userController;

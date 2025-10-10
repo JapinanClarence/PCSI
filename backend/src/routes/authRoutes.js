@@ -1,5 +1,5 @@
 import express from 'express';
-import AuthController from '../controllers/authController.js';
+import authController from '../controllers/authController.js';
 import { verifyToken } from '../middlewares/authMiddleware.js';
 import {
   validateRegister,
@@ -12,15 +12,15 @@ import {
 const router = express.Router();
 
 // Public routes (no authentication required)
-router.post('/register', validateRegister, AuthController.register);
-router.post('/login', validateLogin, AuthController.login);
-router.post('/logout', validateRefreshToken, AuthController.logout);
-router.post('/refresh', validateRefreshToken, AuthController.refreshToken);
-router.get('/verify-email/:token', AuthController.verifyEmail);
-router.post('/forgot-password', validatePasswordResetRequest, AuthController.requestPasswordReset);
-router.post('/reset-password/:token', validatePasswordReset, AuthController.resetPassword);
+router.post('/register', validateRegister, authController.register);
+router.post('/login', validateLogin, authController.login);
+router.post('/logout', validateRefreshToken, authController.logout);
+router.post('/refresh', validateRefreshToken, authController.refreshToken);
+router.get('/verify-email/:token', authController.verifyEmail);
+router.post('/forgot-password', validatePasswordResetRequest, authController.requestPasswordReset);
+router.post('/reset-password/:token', validatePasswordReset, authController.resetPassword);
 
 // Protected routes (authentication required)
-router.get('/me', verifyToken, AuthController.getMe);
+router.get('/me', verifyToken, authController.getMe);
 
 export default router;

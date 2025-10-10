@@ -29,21 +29,32 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
-// import { useAuth } from "@/context/AuthContext";
-
-const userData = {
-  username: "Admin",
-  email: "admin@gmail.com",
-    avatar: "https://i.pravatar.cc/150?img=3",
-}
+import { useAuth } from "@/contexts/AuthContext";
+import { useState } from "react";
 
 export function NavUser() {
   const { isMobile } = useSidebar()
-//   const { logout, userData } = useAuth();
+  const { logout, user } = useAuth();
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
-  const handleLogout = ()=>{
-    console.log("logout");
-    // logout();
+  const handleLogout = async () => {
+    try {
+      setIsLoggingOut(true);
+      await logout();
+    } catch (error) {
+      console.error('Logout error:', error);
+      // Even if logout fails, we can still redirect to login
+      // The AuthContext will handle clearing the state
+    } finally {
+      setIsLoggingOut(false);
+    }
+  }
+
+  // Use real user data from AuthContext, fallback to default if not available
+  const userData = {
+    username: user?.firstName ? `${user.firstName} ${user.lastName}` : "Admin",
+    email: user?.email || "admin@gmail.com",
+    avatar: "https://i.pravatar.cc/150?img=3",
   }
   return (
     <SidebarMenu>
@@ -91,9 +102,9 @@ export function NavUser() {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onSelect={handleLogout}>
+            <DropdownMenuItem onSelect={handleLogout} disabled={isLoggingOut}>
               <LogOut />
-              Log out
+              {isLoggingOut ? "Logging out..." : "Log out"}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

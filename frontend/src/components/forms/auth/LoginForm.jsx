@@ -17,19 +17,17 @@ import { Input } from "@/components/ui/input"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { loginSchema } from "./schema"
-import authService from "@/services/authService"
-import { useNavigate } from "react-router-dom"
+import { useAuth } from "@/contexts/AuthContext"
 import { useState } from "react"
 
 export default function LoginForm({ className, ...props }) {
-  const navigate = useNavigate();
+  const { login } = useAuth();
   const [loginError, setLoginError] = useState("");
   
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    setError,
   } = useForm({
     resolver: zodResolver(loginSchema),
   });
@@ -37,15 +35,13 @@ export default function LoginForm({ className, ...props }) {
   const onSubmit = async (data) => {
     try {
       setLoginError("");
-      const result = await authService.login(data);
+      const result = await login(data);
       
-      if (result.success) {
-        // Login successful, redirect to admin dashboard
-        navigate('/admin');
-      } else {
+      if (!result.success) {
         // Login failed, show error
         setLoginError(result.error);
       }
+      // If successful, AuthContext will handle the redirect
     } catch (error) {
       console.error("Login error:", error);
       setLoginError("An unexpected error occurred. Please try again.");

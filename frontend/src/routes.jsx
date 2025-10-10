@@ -27,6 +27,10 @@ import Feature from "./pages/admin/feature";
 import AuthLayout from "./layout/auth";
 import Login from "./pages/admin/auth/login";
 
+// Auth components
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+import PublicRoute from "./components/auth/PublicRoute";
+
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -86,7 +90,11 @@ const routes = createBrowserRouter([
   },
   {
     path: "/admin",
-    Component: AdminLayout,
+    element: (
+      <ProtectedRoute>
+        <AdminLayout />
+      </ProtectedRoute>
+    ),
     children: [
       { index: true, Component: AdminDashboard },
       {
@@ -108,8 +116,12 @@ const routes = createBrowserRouter([
     ],
   },
   {
-    path: "/auth",
-    Component: AuthLayout,
+    path: "/admin/auth",
+    element: (
+      <PublicRoute>
+        <AuthLayout />
+      </PublicRoute>
+    ),
     children: [
       { path: "login", Component: Login },
     ],

@@ -1,5 +1,5 @@
 import User from '../models/User.js';
-import { generateVerificationToken, generateTokenPair, verifyRefreshToken, findRefreshToken, deleteRefreshToken, deleteAllRefreshTokens, createTokenPayload, generateAccessToken } from './tokenService.js';
+import { generateVerificationToken, generatePasswordResetToken, generateTokenPair, verifyRefreshToken, findRefreshToken, deleteRefreshToken, deleteAllRefreshTokens, createTokenPayload, generateAccessToken } from './tokenService.js';
 import { sendVerificationEmail, sendPasswordResetEmail } from './emailService.js';
 import { MESSAGES } from '../utils/constants.js';
 

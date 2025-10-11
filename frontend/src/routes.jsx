@@ -27,6 +27,10 @@ import Feature from "./pages/admin/feature";
 import AuthLayout from "./layout/auth";
 import Login from "./pages/admin/auth/login";
 
+// Error pages
+import NotFound from "./pages/errors/NotFound";
+import ErrorPage from "./pages/errors/ErrorPage";
+
 // Auth components
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import PublicRoute from "./components/auth/PublicRoute";
@@ -125,6 +129,15 @@ const routes = createBrowserRouter([
     children: [
       { path: "login", Component: Login },
     ],
+  },
+  // Error routes
+  {
+    path: "/error",
+    Component: ErrorPage,
+  },
+  {
+    path: "*",
+    Component: NotFound,
   },
 ]);
 export default routes;

@@ -22,7 +22,6 @@ const Announcements = () => {
   const [submitting, setSubmitting] = useState(false);
   const [announcements, setAnnouncements] = useState("");
   const [loading, setLoading] = useState(false);
-  const [updatingStatus, setUpdatingStatus] = useState({});
 
   const form = useForm({
     resolver: zodResolver(AnnouncementSchema),

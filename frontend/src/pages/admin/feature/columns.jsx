@@ -80,11 +80,15 @@ export const featureColumns = (onEdit, onUpdateStatus, submitting) => [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const [status, setStatus] = useState(row.original.status);
+      const status = row.original.status;
       const vehicle = row.original;
       const handleEdit = (e) => {
         e.stopPropagation();
         onEdit(vehicle._id);
+      };
+      const handleStatusChange = (e) => {
+        e.stopPropagation();
+        onUpdateStatus({ vehicleId: vehicle._id, newStatus: status === "Active" ? "0" : "1" });
       };
       return (
         <DropdownMenu>
@@ -101,7 +105,7 @@ export const featureColumns = (onEdit, onUpdateStatus, submitting) => [
               Edit
               <Edit />
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={handleEdit}>
+            <DropdownMenuItem onClick={handleStatusChange}>
               {status === "Active" ? (
                 <>
                   Deactivate

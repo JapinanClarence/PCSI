@@ -6,7 +6,7 @@ const announcementService = {
     return announcement;
   },
   getAnnouncements: async () => {
-    const announcements = await Announcement.find();
+    const announcements = await Announcement.find().sort({ createdAt: -1 });
     return announcements;
   },
   getAnnouncement: async (id) => {

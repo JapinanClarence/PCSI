@@ -19,12 +19,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-export const vehicleColumns = (onEdit, onUpdateStatus, submitting) => [
-  {
-    accessorKey: "id",
-    header: "Id.",
-    cell: ({ row }) => <div className="">{row.getValue("id")}</div>,
-  },
+export const featureColumns = (onEdit, onUpdateStatus, submitting) => [
   {
     accessorKey: "banner",
     header: "",
@@ -36,9 +31,9 @@ export const vehicleColumns = (onEdit, onUpdateStatus, submitting) => [
     ),
   },
   {
-    accessorKey: "title",
-    header: "Title",
-    cell: ({ row }) => <div className="">{row.getValue("title")}</div>,
+    accessorKey: "name",
+    header: "Name",
+    cell: ({ row }) => <div className="">{row.getValue("name")}</div>,
   },
   {
     accessorKey: "description",
@@ -46,11 +41,6 @@ export const vehicleColumns = (onEdit, onUpdateStatus, submitting) => [
     cell: ({ row }) => (
       <div className="w-52 truncate">{row.getValue("description")}</div>
     ),
-  },
-  {
-    accessorKey: "date",
-    header: "Date",
-    cell: ({ row }) => <div className="">{row.getValue("date")}</div>,
   },
   {
     accessorKey: "createdAt",

@@ -1,5 +1,4 @@
 import Publication from '../models/Publication.js';
-import { MESSAGES } from '../utils/constants.js';
 
 const publicationService = {
   createPublication: async (title, description, image) => {

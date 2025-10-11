@@ -18,7 +18,6 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { Camera, File, X } from "lucide-react";
 import {
   Form,
@@ -29,6 +28,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import TextEditor from "@/components/common/TextEditor";
+import { Spinner } from "@/components/ui/spinner";
+
 export default function PublicationForm({
   open,
   onOpenChange,
@@ -146,7 +147,13 @@ export default function PublicationForm({
 
                 <Field orientation="horizontal">
                   <Button type="submit" disabled={submitting}>
-                    {submitting ? "Submitting..." : "Submit"}
+                    {submitting ? (
+                      <>
+                        <Spinner /> Submitting...
+                      </>
+                    ) : (
+                      "Submit"
+                    )}
                   </Button>
                   <Button
                     type="button"

@@ -56,7 +56,7 @@ const MENU = [
   },
   {
     label: "Support",
-    path:"/support"
+    path: "/support",
   },
   {
     label: "News & Events",
@@ -99,6 +99,10 @@ export default function MobileNav() {
               </Button>
             </SheetTrigger>
             <SheetContent className="max-w-[400px]">
+              <SheetHeader className={"hidden"}>
+                <SheetTitle></SheetTitle>
+                <SheetDescription></SheetDescription>
+              </SheetHeader>
               <div className="flex flex-col h-full">
                 <div className="h-14"></div>
                 <nav className="flex-1 overflow-y-auto px-2 pb-8">
@@ -113,6 +117,7 @@ export default function MobileNav() {
                         {hasChildren ? (
                           <>
                             <button
+                              asChild
                               className={`w-full flex items-center justify-between px-4 py-3 text-lg font-medium rounded transition hover:bg-gray-100 ${
                                 openSections[item.label] ? "bg-gray-50" : ""
                               }`}
@@ -169,6 +174,7 @@ export default function MobileNav() {
                   <div className="ml-3 w-fit bg-dark-green text-primary-foreground rounded-full text-lg font-semibold pl-3 pr-1 flex items-center gap-1 py-1">
                     Contact Us{" "}
                     <Button
+                      asChild
                       size={"sm"}
                       className={
                         "bg-white rounded-full text-black  hover:bg-white/80"

@@ -1,6 +1,5 @@
 import Container from "@/components/common/Container";
 import { Separator } from "@/components/ui/separator";
-import { images } from "@/constants/images";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
@@ -11,10 +10,12 @@ import { useState, useEffect } from "react";
 import { formatDate } from "@/util/formatDate";
 import CardSkeleton from "@/components/news-events/CardSkeleton";
 import { NoData } from "@/components/common/NoData";
+import { useNavigate } from "react-router";
 
 const Publications = () => {
   const [publications, setPublications] = useState([]);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const fetchPublications = async () => {
     setLoading(true);
@@ -48,7 +49,7 @@ const Publications = () => {
           <h1 className="font-serif relative inline-block text-3xl font-bold ">
             Latest Publications
           </h1>
-          <Button className={"max-w-fit bg-lighter-green rounded-sm"} size={"lg"}>
+          <Button onClick={() => navigate("/publications")} className={"max-w-fit bg-lighter-green rounded-sm"} size={"lg"}>
             View All <ArrowRight />
           </Button>
         </div>

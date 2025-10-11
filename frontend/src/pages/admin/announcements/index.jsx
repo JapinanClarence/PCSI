@@ -5,7 +5,7 @@ import { announcementColumns } from "./columns";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnnouncementSchema } from "@/components/forms/announcement/schema";
-import announcementService from "@/services/annuoncementService";
+import announcementService from "@/services/announcementService";
 import { toast } from "sonner";
 import { formatDate } from "@/util/formatDate";
 import AnnouncementForm from "@/components/forms/announcement/AnnouncementForm";

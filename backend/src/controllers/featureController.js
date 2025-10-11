@@ -13,11 +13,27 @@ const featureController = {
         });
     }),
     getFeatures: asyncHandler(async (req, res) => {
-        const features = await featureService.getFeatures();
+        const { limit, status, ...otherFilters } = req.query;
+        
+        // Build filters object
+        const filters = {};
+        if (status) filters.status = status;
+        
+        // Add other filters dynamically
+        Object.keys(otherFilters).forEach(key => {
+            if (otherFilters[key] !== undefined && otherFilters[key] !== '') {
+                filters[key] = otherFilters[key];
+            }
+        });
+        
+        const features = await featureService.getFeatures(limit, filters);
         res.status(STATUS_CODES.OK).json({
             success: true,
             message: "Features fetched successfully",
-            data: features
+            data: features,
+            count: features.length,
+            limit: limit ? parseInt(limit) : null,
+            filters: filters
         });
     }),
     getFeature: asyncHandler(async (req, res) => {

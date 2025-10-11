@@ -5,8 +5,14 @@ const featureService = {
         const feature = await Feature.create({ name, description, image });
         return feature;
     },
-    getFeatures: async () => {
-        const features = await Feature.find().sort({ createdAt: -1 });
+    getFeatures: async (limit = null, filters = {}) => {
+        let query = Feature.find(filters).sort({ createdAt: -1 });
+        
+        if (limit && limit > 0) {
+            query = query.limit(parseInt(limit));
+        }
+        
+        const features = await query;
         return features;
     },
     getFeature: async (id) => {

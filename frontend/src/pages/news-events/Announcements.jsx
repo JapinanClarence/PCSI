@@ -19,7 +19,7 @@ const Announcements = () => {
   const fetchAnnouncements = async () => {
     setLoading(true);
     try {
-      const result = await announcementService.getAnnouncements();
+      const result = await announcementService.getAnnouncements(15);
 
       const data = result?.data?.data?.map((announcement) => ({
         ...announcement,
@@ -30,7 +30,7 @@ const Announcements = () => {
         (announcement) => announcement.status === "1"
       );
 
-      setAnnouncements(filteredData.slice(0, 8) || []);
+      setAnnouncements(filteredData || []);
     } catch (error) {
       console.error("Error fetching announcements:", error);
       toast.error("Failed to fetch announcements");

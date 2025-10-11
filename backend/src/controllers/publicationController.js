@@ -13,11 +13,27 @@ const publicationController = {
     });
   }),
   getPublications: asyncHandler(async (req, res) => {
-    const publications = await publicationService.getPublications();
+    const { limit, status, ...otherFilters } = req.query;
+    
+    // Build filters object
+    const filters = {};
+    if (status) filters.status = status;
+    
+    // Add other filters dynamically
+    Object.keys(otherFilters).forEach(key => {
+      if (otherFilters[key] !== undefined && otherFilters[key] !== '') {
+        filters[key] = otherFilters[key];
+      }
+    });
+    
+    const publications = await publicationService.getPublications(limit, filters);
     res.status(STATUS_CODES.OK).json({
       success: true,
       message: 'Publications fetched successfully',
-      data: publications
+      data: publications,
+      count: publications.length,
+      limit: limit ? parseInt(limit) : null,
+      filters: filters
     });
   }),
   getPublication: asyncHandler(async (req, res) => {

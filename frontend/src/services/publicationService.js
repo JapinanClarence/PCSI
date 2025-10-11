@@ -2,8 +2,11 @@ import api from '@/lib/api';
 
 const publicationService = {
   // Get all publications
-  getPublications: async (params = {}) => {
+  getPublications: async (limit = null, filters = {}) => {
     try {
+      const params = { ...filters };
+      if (limit) params.limit = limit;
+      
       const response = await api.get('/publications', { params });
       return { success: true, data: response.data };
     } catch (error) {

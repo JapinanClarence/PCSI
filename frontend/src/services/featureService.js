@@ -1,8 +1,11 @@
 import api from "@/lib/api";
 
 const featureService = {
-  getFeatures: async (params = {}) => {
+  getFeatures: async (limit = null, filters = {}) => {
     try {
+      const params = { ...filters };
+      if (limit) params.limit = limit;
+      
       const response = await api.get("/features", { params });
       return { success: true, data: response.data };
     } catch (error) {

@@ -11,13 +11,10 @@ const Feature = () => {
   const fetchFeature = async () => {
     setLoading(true);
     try {
-      const result = await featureService.getFeatures();
-      const filteredData = result.data.data.filter(
-        (feature) => feature.status === "1"
-      );
-      console.log(filteredData[0]);
+      const result = await featureService.getFeatures(1, { status: "1" });
+      console.log(result.data.data[0]);
       // Get only the first (most recent) active feature
-      setFeature(filteredData[0] || null);
+      setFeature(result.data.data[0] || null);
     } catch (error) {
       console.error("Error fetching feature:", error);
       toast.error("Failed to fetch feature");

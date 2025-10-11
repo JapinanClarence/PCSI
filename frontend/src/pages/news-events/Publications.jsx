@@ -20,16 +20,14 @@ const Publications = () => {
   const fetchPublications = async () => {
     setLoading(true);
     try {
-      const result = await publicationService.getPublications();
+      const result = await publicationService.getPublications(15, { status: "1" });
 
       const data = result?.data?.data?.map((publication) => ({
         ...publication,
         createdAt: formatDate(publication.createdAt)
       }));
 
-      const filteredData = data.filter((publication) => publication.status === "1");
-
-      setPublications(filteredData.slice(0, 8) || []);
+      setPublications(data || []);
     }catch(error){
       console.error("Error fetching publications:", error);
       toast.error("Failed to fetch publications");

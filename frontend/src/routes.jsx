@@ -14,6 +14,8 @@ import StrategicInitiatives from "./pages/strategic-initiatives";
 import Services from "./pages/services";
 import NewsAndEvents from "./pages/news-events";
 import Support from "./pages/support";
+import PublicationsPage from "./pages/publications";
+import AnnouncementsPage from "./pages/announcements";
 
 // Admin routes
 import AdminLayout from "./layout/admin";
@@ -89,6 +91,14 @@ const routes = createBrowserRouter([
       {
         path: "strategic-initiatives",
         Component: StrategicInitiatives,
+      },
+      {
+        path: "/publications",
+        Component: PublicationsPage,
+      },  
+      {
+        path: "/announcements",
+        Component: AnnouncementsPage,
       },
     ],
   },

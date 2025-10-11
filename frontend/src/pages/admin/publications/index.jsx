@@ -1,7 +1,7 @@
 import Header from "@/components/common/Header";
 import React, { useState, useEffect } from "react";
 import DataTable from "./table";
-import { vehicleColumns } from "./columns";
+import { publicationColumns } from "./columns";
 import PublicationForm from "@/components/forms/publication/PublicationForm";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -166,14 +166,13 @@ const Publications = () => {
       <div>
         <DataTable
           data={publications}
-          // title="Publications"
           onAdd={() => handleAdd()}
           onEdit={(data) => handleEdit(data)}
           onUpdateStatus={handleUpdateStatus}
           submitting={submitting}
           loading={loading}
           filters={["title", "description", "createdAt", "status"]}
-          tableColumn={vehicleColumns}
+          tableColumn={publicationColumns}
         />
       </div>
       <PublicationForm

@@ -1,14 +1,13 @@
 import React from "react";
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import {images} from "@/constants/images";
 
 export default function Card({ image, title, description }) {
   return (
     <div className="flex flex-col shadow-sm    overflow-clip mb-4">
       <div
-        className="h-[192px]  overflow-clip bg-muted"
+        className="h-[250px]  overflow-clip bg-muted"
         style={{
-          backgroundImage: `url(${image})`,
+          backgroundImage: `url(${image || images.beatle_1})`,
           backgroundSize: "cover",
         }}
       ></div>

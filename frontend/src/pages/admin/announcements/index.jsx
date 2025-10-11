@@ -1,73 +1,192 @@
-import Header from '@/components/common/Header';
-import React from 'react'
-import DataTable from './table';
-import { vehicleColumns } from './columns';
-export const sampleData = [
-  {
-    id: 1,
-    title: "Beetle Awareness Campaign",
-    description: "A community outreach to promote beetle conservation awareness among students.",
-    date: "2025-09-15",
-    createdAt: "2025-08-01",
-    status: "Active",
-    _id: "veh-001"
-  },
-  {
-    id: 2,
-    title: "Coleopterist Field Training",
-    description: "Hands-on fieldwork for identifying and collecting beetle specimens in Luzon.",
-    date: "2025-10-05",
-    createdAt: "2025-09-12",
-    status: "Inactive",
-    _id: "veh-002"
-  },
-  {
-    id: 3,
-    title: "Invertebrate Research Workshop",
-    description: "A two-day workshop at TROGENIR Laboratory focusing on specimen preparation and imaging.",
-    date: "2025-11-10",
-    createdAt: "2025-09-25",
-    status: "Active",
-    _id: "veh-003"
-  },
-  {
-    id: 4,
-    title: "Annual PCS Conference",
-    description: "National gathering of coleopterists to present research findings and conservation initiatives.",
-    date: "2025-12-01",
-    createdAt: "2025-10-01",
-    status: "Active",
-    _id: "veh-004"
-  },
-  {
-    id: 5,
-    title: "Bug Art Exhibit",
-    description: "A creative exhibit showcasing macro photography and illustrations of Philippine beetles.",
-    date: "2026-01-15",
-    createdAt: "2025-09-30",
-    status: "Inactive",
-    _id: "veh-005"
-  }
-];
+import Header from "@/components/common/Header";
+import React, { useState, useEffect } from "react";
+import DataTable from "./table";
+import { announcementColumns } from "./columns";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AnnouncementSchema } from "@/components/forms/announcement/schema";
+import announcementService from "@/services/annuoncementService";
+import { toast } from "sonner";
+import { formatDate } from "@/util/formatDate";
+import AnnouncementForm from "@/components/forms/announcement/AnnouncementForm";
+
+const statusMap = {
+  1: "Active",
+  0: "Inactive",
+};
 
 const Announcements = () => {
-  return (
-    <div className=''>
-     <Header>Announcements</Header>
-     <div>
-        <DataTable
-            data={sampleData}
-            onAdd={() => {}}
-            onEdit={(data) => {}}
-            onUpdateStatus={({ vehicleId, newStatus }) => {}}
-            submitting={false}
-            loading={false}
-            filters={["id", "title", "description", "date", "createdAt", "status"]}
-            tableColumn={vehicleColumns}
-        />
-     </div>
-    </div>
-  )
-}
+  const [showForm, setShowForm] = useState(false);
+  const [formTitle, setFormTitle] = useState("");
+  const [currentData, setCurrentData] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [announcements, setAnnouncements] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [updatingStatus, setUpdatingStatus] = useState({});
 
-export default Announcements
+  const form = useForm({
+    resolver: zodResolver(AnnouncementSchema),
+    defaultValues: {
+      title: "",
+      description: "",
+      status: "1",
+    },
+  });
+
+  const fetchAnnouncements = async () => {
+    setLoading(true);
+    try {
+      const result = await announcementService.getAnnouncements();
+      if (result.success) {
+          const data = result?.data?.data?.map((announcement) => ({
+          ...announcement,
+          status: statusMap[announcement.status],
+          createdAt: formatDate(announcement.createdAt),
+        }));
+
+        setAnnouncements(data || []);
+      } else {
+        toast.error(result.error || "Failed to fetch announcements");
+      }
+    } catch (error) {
+      console.error("Error fetching announcements:", error);
+      toast.error("Failed to fetch announcements");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Fetch publications on component mount
+  useEffect(() => {
+    fetchAnnouncements();
+  }, []);
+
+  const handleUpdateStatus = async ({ vehicleId, newStatus }) => {
+    const promise = async () => {
+      setSubmitting(true);
+      try {
+        const result = await announcementService.toggleAnnouncementStatus(
+          vehicleId,
+          newStatus
+        );
+        await fetchAnnouncements();
+        return result;
+      } catch (error) {
+        console.log(error);
+        throw error;
+      } finally {
+        setSubmitting(false);
+      }
+    };
+
+    toast.promise(promise(), {
+      loading: "Updating Status...",
+      success: `Announcement status updated`,
+      error: (error) => error.message || "Failed to update announcement status",
+    });
+  };
+
+  const handleEdit = (vehicleId) => {
+    // Find the publication data by ID
+    const announcement = announcements.find((announcement) => announcement._id === vehicleId);
+    if (!announcement) return;
+
+    setShowForm(true);
+    setFormTitle("Edit Announcement");
+    setCurrentData(announcement);
+    // Populate form with existing data
+    form.reset({
+      title: announcement.title || "",
+      description: announcement.description || "",
+      status: announcement.status === "Active" ? "1" : "0",
+    });
+  };
+
+  const handleAdd = () => {
+    setShowForm(true);
+    setFormTitle("Add Announcement");
+    setCurrentData(null);
+    // Reset form to default values
+    form.reset({
+      title: "",
+      description: "",
+      date: "",
+      status: "1",
+    });
+  };
+
+  const handleSubmit = async (data) => {
+    setSubmitting(true);
+    try {
+      let result;
+
+      if (currentData) {
+        // Update existing announcement
+        result = await announcementService.updateAnnouncement(currentData._id, {
+          title: data.title,
+          description: data.description,
+          status: data.status === "1" ? "active" : "inactive",
+        });
+      } else {
+        // Create new announcement
+        result = await announcementService.createAnnouncement({
+          title: data.title,
+          description: data.description,
+          status: data.status === "1" ? "active" : "inactive",
+        });
+      }
+
+      if (result.success) {
+        toast.success(
+          currentData
+            ? "Announcement updated successfully!"
+            : "Announcement created successfully!"
+        );
+
+        // Close form and reset
+        setShowForm(false);
+        form.reset();
+
+        // Refresh the data
+        fetchAnnouncements();
+      } else {
+        toast.error(result.error || "Failed to save announcement");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("An unexpected error occurred. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="">
+      <Header>Announcements</Header>
+      <div>
+        <DataTable
+          data={announcements}
+          onAdd={() => handleAdd()}
+          onEdit={(data) => handleEdit(data)}
+          onUpdateStatus={handleUpdateStatus}
+          submitting={submitting}
+          loading={loading}
+          filters={["title", "description", "createdAt", "status"]}
+          tableColumn={announcementColumns}
+        />
+      </div>
+      <AnnouncementForm
+        open={showForm}
+        onOpenChange={setShowForm}
+        data={currentData}
+        submitting={submitting}
+        title={formTitle}
+        form={form}
+        onUpdateStatus={handleUpdateStatus}
+        onSubmit={handleSubmit}
+      />
+    </div>
+  );
+};
+
+export default Announcements;

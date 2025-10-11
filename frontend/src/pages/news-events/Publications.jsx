@@ -58,7 +58,7 @@ const Publications = () => {
           {loading &&(
             <CardSkeleton totalCard={4}/>
           )}
-          {!loading && publications.length > 0 && publications.map((data, i) => (
+          {!loading && publications.map((data, i) => (
             <Card
               key={i}
               image={data.banner || ""}

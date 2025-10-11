@@ -11,6 +11,7 @@ import { formatDate } from "@/util/formatDate";
 import CardSkeleton from "@/components/news-events/CardSkeleton";
 import { NoData } from "@/components/common/NoData";
 import { useNavigate } from "react-router";
+import { DATA_LIMIT, STATUS } from "@/constants/dataFilter";
 
 const Publications = () => {
   const [publications, setPublications] = useState([]);
@@ -20,7 +21,7 @@ const Publications = () => {
   const fetchPublications = async () => {
     setLoading(true);
     try {
-      const result = await publicationService.getPublications(15, { status: "1" });
+      const result = await publicationService.getPublications(DATA_LIMIT.PUBLICATIONS, { status: STATUS.ACTIVE });
 
       const data = result?.data?.data?.map((publication) => ({
         ...publication,

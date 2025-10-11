@@ -10,6 +10,7 @@ import { formatDate } from "@/util/formatDate";
 import { NoData } from "@/components/common/NoData";
 import CardSkeleton from "@/components/news-events/CardSkeleton";
 import { useNavigate } from "react-router";
+import { DATA_LIMIT, STATUS } from "@/constants/dataFilter";
 
 const Announcements = () => {
   const [announcements, setAnnouncements] = useState([]);
@@ -19,18 +20,14 @@ const Announcements = () => {
   const fetchAnnouncements = async () => {
     setLoading(true);
     try {
-      const result = await announcementService.getAnnouncements(15);
+      const result = await announcementService.getAnnouncements(DATA_LIMIT.ANNOUNCEMENTS, { status: STATUS.ACTIVE });
 
       const data = result?.data?.data?.map((announcement) => ({
         ...announcement,
         createdAt: formatDate(announcement.createdAt),
       }));
 
-      const filteredData = data.filter(
-        (announcement) => announcement.status === "1"
-      );
-
-      setAnnouncements(filteredData || []);
+      setAnnouncements(data || []);
     } catch (error) {
       console.error("Error fetching announcements:", error);
       toast.error("Failed to fetch announcements");

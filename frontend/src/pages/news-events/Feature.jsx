@@ -4,6 +4,7 @@ import { images } from "@/constants/images";
 import featureService from "@/services/featureService";
 import { toast } from "sonner";
 import { NoData } from "@/components/common/NoData";
+import { DATA_LIMIT, STATUS } from "@/constants/dataFilter";
 
 const Feature = () => {
   const [feature, setFeature] = useState(null);
@@ -11,9 +12,8 @@ const Feature = () => {
   const fetchFeature = async () => {
     setLoading(true);
     try {
-      const result = await featureService.getFeatures(1, { status: "1" });
-      console.log(result.data.data[0]);
-      // Get only the first (most recent) active feature
+      const result = await featureService.getFeatures(DATA_LIMIT.FEATURES, { status: STATUS.ACTIVE });
+      
       setFeature(result.data.data[0] || null);
     } catch (error) {
       console.error("Error fetching feature:", error);
@@ -39,9 +39,9 @@ const Feature = () => {
         ) : feature ? (
           <div className="flex flex-col md:flex-row lg:p-4 gap-5">
             <div className="aspect-square flex-shrink-0 overflow-hidden w-full bg-muted md:w-1/3">
-              {feature.banner ? (
+              {feature.banner || images.beatle_2 ? (
                 <img
-                  src={feature.banner}
+                  src={feature.banner || images.beatle_2}
                   alt={feature.name}
                   className="w-full h-full object-cover"
                 />

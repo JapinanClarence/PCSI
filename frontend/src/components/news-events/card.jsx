@@ -3,7 +3,7 @@ import {images} from "@/constants/images";
 
 export default function Card({ image, title, description }) {
   return (
-    <div className="flex flex-col shadow-sm    overflow-clip mb-4">
+    <div className="flex flex-col shadow-sm h-full   overflow-clip mb-4">
       <div
         className="h-[250px]  overflow-clip bg-muted"
         style={{

@@ -1,4 +1,4 @@
-import Feature from "../models/Feature";
+import Feature from "../models/Feature.js";
 
 const featureService = {
     createFeature: async (name, description, image) => {

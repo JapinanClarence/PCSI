@@ -1,7 +1,7 @@
 import { Router } from "express";
-import featureController from "../controllers/featureController";
-import { verifyToken } from "../middlewares/authMiddleware";
-import { validateFeature } from "../middlewares/validation";
+import featureController from "../controllers/featureController.js";
+import { verifyToken } from "../middlewares/authMiddleware.js";
+import { validateFeature } from "../middlewares/validation.js";
 
 const router = Router();
 

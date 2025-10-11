@@ -1,6 +1,6 @@
-import featureService from "../services/featureService";
-import { asyncHandler } from "../middlewares/errorHandler";
-import { STATUS_CODES } from "../utils/constants";
+import featureService from "../services/featureService.js";
+import { asyncHandler } from "../middlewares/errorHandler.js";
+import { STATUS_CODES } from "../utils/constants.js";
 
 const featureController = {
     createFeature: asyncHandler(async (req, res) => {
@@ -45,3 +45,5 @@ const featureController = {
         });
     }),
 }
+
+export default featureController;

@@ -6,7 +6,7 @@ const publicationService = {
     return publication;
   },
   getPublications: async () => {
-    const publications = await Publication.find();
+    const publications = await Publication.find().sort({ createdAt: -1 });
     return publications;
   },
   getPublication: async (id) => {

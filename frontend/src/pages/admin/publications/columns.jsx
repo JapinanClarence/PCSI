@@ -19,7 +19,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-export const vehicleColumns = (onEdit, onUpdateStatus, submitting) => [
+export const publicationColumns = (onEdit, onUpdateStatus, submitting) => [
   {
     accessorKey: "banner",
     header: "",

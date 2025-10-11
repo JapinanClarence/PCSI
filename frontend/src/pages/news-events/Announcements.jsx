@@ -1,19 +1,20 @@
 import Container from "@/components/common/Container";
 import { Separator } from "@/components/ui/separator";
-import { images } from "@/constants/images";
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Card from "@/components/news-events/card";
-import announcementService from "@/services/annuoncementService";
+import announcementService from "@/services/announcementService";
 import { toast } from "sonner";
 import { formatDate } from "@/util/formatDate";
 import { NoData } from "@/components/common/NoData";
 import CardSkeleton from "@/components/news-events/CardSkeleton";
+import { useNavigate } from "react-router";
 
 const Announcements = () => {
   const [announcements, setAnnouncements] = useState([]);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const fetchAnnouncements = async () => {
     setLoading(true);
@@ -50,6 +51,7 @@ const Announcements = () => {
             Announcements
           </h1>
           <Button
+            onClick={() => navigate("/announcements")}
             className={"max-w-fit bg-lighter-green rounded-sm"}
             size={"lg"}
           >

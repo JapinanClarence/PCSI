@@ -10,6 +10,7 @@ import emailService from './src/services/emailService.js';
 import authRoutes from './src/routes/authRoutes.js';
 import userRoutes from './src/routes/userRoutes.js';
 import publicationRoutes from './src/routes/publicationRoutes.js';
+import announcementRoutes from './src/routes/announcementRoutes.js';
 
 dotenv.config();
 
@@ -47,6 +48,7 @@ app.use('/api', validateApiKey);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/publications', publicationRoutes);
+app.use('/api/announcements', announcementRoutes);
 // Handle 404 for undefined routes
 app.use(notFound);
 

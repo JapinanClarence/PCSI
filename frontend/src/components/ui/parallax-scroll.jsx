@@ -79,7 +79,7 @@ export const ParallaxGrid = ({ children, className = "" }) => {
 
   return (
     <div ref={containerRef} className={`relative ${className}`}>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {children.map((child, index) => {
           // 1st and 3rd columns (index 0, 2, 4...) move UP, 2nd column (index 1, 3, 5...) moves DOWN
           const isSecondColumn = index % 3 === 1; // Only the 2nd column in each row (index 1, 4, 7...)
@@ -153,7 +153,7 @@ export const SmoothParallaxGrid = ({ children, className = "" }) => {
 
   return (
     <div ref={containerRef} className={`relative ${className}`}>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {children.map((child, index) => {
           // 1st and 3rd columns (index 0, 2, 4...) move UP, 2nd column (index 1, 3, 5...) moves DOWN
           const isSecondColumn = index % 3 === 1; // Only the 2nd column in each row (index 1, 4, 7...)

@@ -42,7 +42,7 @@ const Feature = () => {
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
           </div>
         ) : (
-          <div className="flex flex-col md:flex-row lg:p-4 gap-5">
+          <div className="flex flex-col md:flex-row lg:p-4 gap-15">
             <div className="aspect-square flex-shrink-0 overflow-hidden w-full bg-muted md:w-1/3">
               {feature.banner || images.beatle_8 ? (
                 <img

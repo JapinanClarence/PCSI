@@ -4,7 +4,7 @@ import { images } from "@/constants/images";
 import Container from "@/components/common/Container";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-
+import { NoData } from "@/components/common/NoData";
 const SkeletonOne = () => {
   return (
     <div>
@@ -102,18 +102,19 @@ export default function Merchandise() {
           <h1 className="font-serif text-4xl font-bold ">
             Merchandise
           </h1>
-          <Button
+          {/* <Button
             className={"max-w-fit rounded-sm"}
             size={"lg"}
             variant={"outline"}
           >
             View All <ArrowRight />
-          </Button>
+          </Button> */}
         </div>
       </Container>
 
-      <Container className={"h-screen w-full"}>
-        <LayoutGrid cards={cards} />
+      <Container className={" w-full"}>
+        <NoData title="Coming Soon" description=" Check back soon for updates on our latest merchandise." />
+        {/* <LayoutGrid cards={cards} /> */}
       </Container>
     </div>
   );

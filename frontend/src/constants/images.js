@@ -16,7 +16,7 @@ import ricksterlie from "@/assets/images/DrRicksterlie.png"
 import markjhon from "@/assets/images/MarkJhon.png"
 import coleopterist from "@/assets/images/coleopterist.png"
 import tiger_beetle from "@/assets/images/tiger_beetle.png";
-import beatle_8 from "@/assets/images/beatle_8.jpg";
+import beatle_8 from "@/assets/images/beatle_8.png";
 
 export const images = {
     beatle_1,

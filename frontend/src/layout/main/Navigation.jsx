@@ -8,6 +8,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   NavigationMenuViewport,
+  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import Container from "@/components/common/Container";
 import { Link, useLocation } from "react-router";
@@ -54,25 +55,6 @@ const ajisItems = [
   },
 ];
 
-const supportItems = [
-  {
-    title: "Become a member",
-    href: "/support/become-member",
-  },
-  {
-    title: "Volunteer",
-    href: "/support/volunteer",
-  },
-  {
-    title: "Donate",
-    href: "/support/donate",
-  },
-  {
-    title: "Merchandise",
-    href: "/support/merchandise",
-  },
-];
-
 function Navigation() {
   const location = useLocation();
 
@@ -90,28 +72,22 @@ function Navigation() {
           <NavigationMenu viewport={false} className={"z-50"}>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <Link
-                  to="/"
-                  className={`py-2 px-2 text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-dark-green after:transition-all after:duration-300 hover:after:w-full ${
-                    location.pathname === "/"
-                      ? "border-b-2 border-dark-green"
-                      : ""
-                  }`}
+                <NavigationMenuLink
+                  asChild
+                  active={location.pathname === "/"}
+                  className={navigationMenuTriggerStyle()}
                 >
-                  Home
-                </Link>
+                  <Link to="/">Home</Link>
+                </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link
-                  to="/services"
-                  className={`py-2 px-2 text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-dark-green after:transition-all after:duration-300 hover:after:w-full ${
-                    location.pathname === "/services"
-                      ? "border-b-2 border-dark-green"
-                      : ""
-                  }`}
+                <NavigationMenuLink
+                  asChild
+                  active={location.pathname === "/services"}
+                  className={navigationMenuTriggerStyle()}
                 >
-                  Services
-                </Link>
+                  <Link to="/services">Services</Link>
+                </NavigationMenuLink>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
@@ -141,16 +117,13 @@ function Navigation() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <Link
-                  to="/strategic-initiatives"
-                  className={`px-3 py-2 text-sm font-medium whitespace-nowrap relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-dark-green after:transition-all after:duration-300 hover:after:w-full ${
-                    location.pathname === "/strategic-initiatives"
-                      ? "border-b-2 border-dark-green"
-                      : ""
-                  }`}
+                <NavigationMenuLink
+                  asChild
+                  active={location.pathname === "/strategic-initiatives"}
+                  className={navigationMenuTriggerStyle()}
                 >
-                  Strategic Initiatives
-                </Link>
+                  <Link to="/strategic-initiatives">Strategic Initiatives</Link>
+                </NavigationMenuLink>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
@@ -173,46 +146,37 @@ function Navigation() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <Link
-                  to="/support"
-                  className={`py-2 px-2 text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-dark-green after:transition-all after:duration-300 hover:after:w-full ${
-                    location.pathname === "/support"
-                      ? "border-b-2 border-dark-green"
-                      : ""
-                  }`}
+                <NavigationMenuLink
+                  asChild
+                  active={location.pathname === "/support"}
+                  className={navigationMenuTriggerStyle()}
                 >
-                  Support
-                </Link>
+                  <Link to="/support">Support</Link>
+                </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link
-                  to="/news-events"
-                  className={`py-2 px-2 text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-dark-green after:transition-all after:duration-300 hover:after:w-full ${
-                    location.pathname === "/news-events"
-                      ? "border-b-2 border-dark-green"
-                      : ""
-                  }`}
+                <NavigationMenuLink
+                  asChild
+                  active={location.pathname === "/news-events"}
+                  className={navigationMenuTriggerStyle()}
                 >
-                  News & Events
-                </Link>
+                  <Link to="/news-events">News & Events</Link>
+                </NavigationMenuLink>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
           <div>
-            <div className="bg-dark-green text-primary-foreground rounded-full text-xs font-medium pl-2 pr-0.5 flex items-center gap-1 py-0.5">
+            <div className="bg-dark-green text-primary-foreground rounded-full text-sm font-medium gap-2 pl-2 pr-1 flex items-center py-1">
               Contact Us{" "}
               <Button
-                size={"sm"}
+                // size={"icon"}
                 className={
-                  "bg-white rounded-full text-black  hover:bg-white/80"
+                  "bg-white rounded-full text-black size-7 hover:bg-white/80"
                 }
               >
                 <ArrowRight />
               </Button>
             </div>
-            {/* <Button className={"bg-lighter-green rounded-full hover:bg-lighter-green/90"}>
-              Contact Us <ArrowRight className="rounded-full bg-black p-1"/>
-            </Button> */}
           </div>
         </Container>
       </div>

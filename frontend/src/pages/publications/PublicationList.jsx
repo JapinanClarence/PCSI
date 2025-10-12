@@ -44,7 +44,7 @@ const PublicationList = () => {
     <Container className={"py-20 space-y-5 "}>
       <div className="flex flex-col md:flex-row space-y-5 justify-between ">
         <h1 className="font-serif relative inline-block text-3xl font-bold ">
-          Latest Publications
+          Publications
         </h1>
       </div>
       <Separator className={"mb-10"}/>

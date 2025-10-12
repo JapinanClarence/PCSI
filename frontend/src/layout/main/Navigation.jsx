@@ -171,15 +171,12 @@ function Navigation() {
               <Button
                 // size={"icon"}
                 className={
-                  "bg-white rounded-full text-black size-8 hover:bg-white/80"
+                  "bg-white rounded-full text-black size-7 hover:bg-white/80"
                 }
               >
                 <ArrowRight />
               </Button>
             </div>
-            {/* <Button className={"bg-lighter-green rounded-full hover:bg-lighter-green/90"}>
-              Contact Us <ArrowRight className="rounded-full bg-black p-1"/>
-            </Button> */}
           </div>
         </Container>
       </div>

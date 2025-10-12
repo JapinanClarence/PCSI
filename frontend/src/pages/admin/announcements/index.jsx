@@ -60,12 +60,12 @@ const Announcements = () => {
     fetchAnnouncements();
   }, []);
 
-  const handleUpdateStatus = async ({ vehicleId, newStatus }) => {
+  const handleUpdateStatus = async ({ announcementId, newStatus }) => {
     const promise = async () => {
       setSubmitting(true);
       try {
         const result = await announcementService.toggleAnnouncementStatus(
-          vehicleId,
+          announcementId,
           newStatus
         );
         await fetchAnnouncements();
@@ -85,14 +85,15 @@ const Announcements = () => {
     });
   };
 
-  const handleEdit = (vehicleId) => {
+  const handleEdit = (announcementId) => {
     // Find the publication data by ID
-    const announcement = announcements.find((announcement) => announcement._id === vehicleId);
+    const announcement = announcements.find((announcement) => announcement._id === announcementId);
     if (!announcement) return;
 
     setShowForm(true);
     setFormTitle("Edit Announcement");
     setCurrentData(announcement);
+  
     // Populate form with existing data
     form.reset({
       title: announcement.title || "",
@@ -124,14 +125,14 @@ const Announcements = () => {
         result = await announcementService.updateAnnouncement(currentData._id, {
           title: data.title,
           description: data.description,
-          status: data.status === "1" ? "active" : "inactive",
+          status: data.status,
         });
       } else {
         // Create new announcement
         result = await announcementService.createAnnouncement({
           title: data.title,
           description: data.description,
-          status: data.status === "1" ? "active" : "inactive",
+          status: data.status,
         });
       }
 

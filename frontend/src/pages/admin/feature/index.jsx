@@ -128,14 +128,14 @@ const Feature = () => {
         result = await featureService.updateFeature(currentData._id, {
           name: data.name,
           description: data.description,
-          status: data.status === "1" ? "active" : "inactive",
+          status: data.status,
         });
       } else {
         // Create new announcement
           result = await featureService.createFeature({
           name: data.name,
           description: data.description,
-          status: data.status === "1" ? "active" : "inactive",
+          status: data.status,
         });
       }
 

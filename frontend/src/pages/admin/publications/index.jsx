@@ -61,12 +61,12 @@ const Publications = () => {
     fetchPublications();
   }, []);
 
-  const handleUpdateStatus = async ({ vehicleId, newStatus }) => {
+  const handleUpdateStatus = async ({ publicationId, newStatus }) => {
     const promise = async () => {
       setSubmitting(true);
       try {
         const result = await publicationService.togglePublicationStatus(
-          vehicleId,
+          publicationId,
           newStatus
         );
         await fetchPublications();
@@ -86,9 +86,9 @@ const Publications = () => {
     });
   };
 
-  const handleEdit = (vehicleId) => {
+  const handleEdit = (publicationId) => {
     // Find the publication data by ID
-    const publication = publications.find((pub) => pub._id === vehicleId);
+    const publication = publications.find((pub) => pub._id === publicationId);
     if (!publication) return;
 
     setShowForm(true);
@@ -122,17 +122,18 @@ const Publications = () => {
 
       if (currentData) {
         // Update existing publication
+
         result = await publicationService.updatePublication(currentData._id, {
           title: data.title,
           description: data.description,
-          status: data.status === "1" ? "active" : "inactive",
+          status: data.status,
         });
       } else {
         // Create new publication
         result = await publicationService.createPublication({
           title: data.title,
           description: data.description,
-          status: data.status === "1" ? "active" : "inactive",
+          status: data.status,
         });
       }
 

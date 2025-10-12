@@ -44,9 +44,9 @@ const Feature = () => {
         ) : (
           <div className="flex flex-col md:flex-row lg:p-4 gap-5">
             <div className="aspect-square flex-shrink-0 overflow-hidden w-full bg-muted md:w-1/3">
-              {feature.banner || images.beatle_2 ? (
+              {feature.banner || images.beatle_8 ? (
                 <img
-                  src={feature.banner || images.beatle_2}
+                  src={feature.banner || images.beatle_8}
                   alt={feature.name}
                   className="w-full h-full object-cover"
                 />
@@ -58,12 +58,13 @@ const Feature = () => {
                 </div>
               )}
             </div>
-            <div className="space-y-4">
-              <h1 className="font-serif italic text-2xl font-bold">
+            <div className="space-y-4 flex-1 min-w-0 max-w-full">
+              <h1 className="font-serif italic text-2xl font-bold break-words">
                 {feature.name}
               </h1>
               <div 
-                className="text-sm prose prose-sm max-w-none"
+                className="text-sm prose prose-sm max-w-full wrap-break-word"
+                style={{ wordBreak: 'break-normal', overflowWrap: 'anywhere' }}
                 dangerouslySetInnerHTML={{ __html: feature.description }}
               />
             </div>

@@ -1,16 +1,22 @@
 import React from "react";
 import LoginForm from "@/components/forms/auth/LoginForm";
 import { images } from "@/constants/images";
-
+import Container from "@/components/common/Container";
 
 const Login = () => {
   return (
-    <div className="bg-muted flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
+    <div className="flex  min-h-svh w-full items-center justify-center p-6 md:p-10">
+      <Container className="absolute top-0 left-0 py-5 flex">
+        <img
+          src={images.logo_landscape}
+          alt="logo"
+          className="w-[100px] md:w-[130px] mb-2 "
+        />
 
-        <div className="w-full max-w-sm md:max-w-4xl">
+      </Container>
+      <div className="w-full max-w-sm">
         <LoginForm />
-        </div>
-    
+      </div>
     </div>
   );
 };

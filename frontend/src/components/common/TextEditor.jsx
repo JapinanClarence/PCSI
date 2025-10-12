@@ -24,6 +24,7 @@ import { Popover } from "@/components/common/Popover";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { HardBreak } from "@tiptap/extension-hard-break";
 
 const TextEditor = ({
   content = "",
@@ -49,6 +50,13 @@ const TextEditor = ({
           class: "text-blue-500 underline cursor-pointer",
         },
       }),
+      HardBreak.extend({
+        addKeyboardShortcuts () {
+          return {
+            Enter: () => this.editor.commands.setHardBreak()
+          }
+        }
+      })
     ],
     content,
     editable,
@@ -59,19 +67,26 @@ const TextEditor = ({
     editorProps: {
       attributes: {
         class: cn(
-          "prose prose-sm mx-auto focus:outline-none min-h-[100px] p-3 text-sm",
+          "prose prose-sm mx-auto focus:outline-none min-h-[100px] p-3 text-sm w-full",
           "prose-headings:font-semibold prose-headings:text-foreground prose-headings:text-base",
-          "prose-p:text-foreground prose-p:leading-relaxed prose-p:text-sm",
+          "prose-p:text-foreground prose-p:leading-relaxed prose-p:text-sm prose-p:break-all prose-p:overflow-wrap-anywhere",
           "prose-strong:text-foreground prose-strong:font-semibold",
           "prose-em:text-foreground prose-em:italic",
           "prose-ul:text-foreground prose-ol:text-foreground prose-ul:text-sm prose-ol:text-sm",
-          "prose-li:text-foreground prose-li:text-sm",
+          "prose-li:text-foreground prose-li:text-sm prose-li:break-all prose-li:overflow-wrap-anywhere",
           "prose-blockquote:text-muted-foreground prose-blockquote:border-l-4 prose-blockquote:border-muted-foreground prose-blockquote:text-sm",
-          "prose-code:text-foreground prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-sm",
-          "prose-pre:bg-muted prose-pre:text-foreground prose-pre:text-sm",
-          "prose-a:text-blue-500 prose-a:no-underline hover:prose-a:underline prose-a:text-sm",
+          "prose-code:text-foreground prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:break-all",
+          "prose-pre:bg-muted prose-pre:text-foreground prose-pre:text-sm prose-pre:overflow-x-auto",
+          "prose-a:text-blue-500 prose-a:no-underline hover:prose-a:underline prose-a:text-sm prose-a:break-all",
           className
         ),
+        style: {
+          wordBreak: 'break-all',
+          overflowWrap: 'anywhere',
+          whiteSpace: 'normal',
+          maxWidth: '100%',
+          overflow: 'hidden'
+        },
         placeholder,
       },
     },
@@ -131,7 +146,7 @@ const TextEditor = ({
 
 
   return (
-    <div className="border border-input rounded-md bg-background">
+    <div className="border border-input rounded-md bg-background w-full max-w-full overflow-hidden">
       {/* Toolbar */}
       <div className="flex flex-wrap items-center gap-1 p-2 border-b border-border">
         {/* Text Formatting */}
@@ -286,6 +301,7 @@ const TextEditor = ({
             size="sm"
             onClick={handleUnlink}
             aria-label="Remove link"
+            type="button"
           >
             <Unlink className="h-4 w-4" />
           </Button>
@@ -293,7 +309,7 @@ const TextEditor = ({
       </div>
 
       {/* Editor Content */}
-      <div className="min-h-[100px] max-h-[300px] overflow-y-auto">
+      <div className="min-h-[100px] max-h-[300px] overflow-y-auto overflow-x-hidden">
         <EditorContent editor={editor} />
       </div>
     </div>

@@ -16,7 +16,7 @@ export default function Card({ image, title, description }) {
   const shouldShowToggle = plainTextDescription.length > 150; // Show toggle if description is longer than 150 characters
   
   return (
-    <div className="flex flex-col   h-full overflow-clip mb-4">
+    <div className="flex flex-col shadow-sm outline  outline-gray-200 rounded-lg h-full overflow-clip mb-4">
       <div
         className="h-[250px] overflow-clip bg-muted"
         style={{

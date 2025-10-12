@@ -117,6 +117,15 @@ const validateAnnouncement = [
     .withMessage('Description is required'),
   handleValidationErrors
 ];
+const validateFeature = [
+  body('name')
+    .notEmpty()
+    .withMessage('Title is required'),
+  body('description')
+    .notEmpty()
+    .withMessage('Description is required'),
+  handleValidationErrors
+];
 
 export {
   validateRegister,
@@ -127,5 +136,6 @@ export {
   validateRefreshToken,
   validatePublication,
   validateAnnouncement,
+  validateFeature,
   handleValidationErrors
 };

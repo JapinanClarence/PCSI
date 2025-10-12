@@ -13,11 +13,27 @@ const announcementController = {
     });
   }),
   getAnnouncements: asyncHandler(async (req, res) => {
-    const announcements = await announcementService.getAnnouncements();
+    const { limit, status, ...otherFilters } = req.query;
+    
+    // Build filters object
+    const filters = {};
+    if (status) filters.status = status;
+    
+    // Add other filters dynamically
+    Object.keys(otherFilters).forEach(key => {
+      if (otherFilters[key] !== undefined && otherFilters[key] !== '') {
+        filters[key] = otherFilters[key];
+      }
+    });
+    
+    const announcements = await announcementService.getAnnouncements(limit, filters);
     res.status(STATUS_CODES.OK).json({
       success: true,
       message: 'Announcements fetched successfully',
-      data: announcements
+      data: announcements,
+      count: announcements.length,
+      limit: limit ? parseInt(limit) : null,
+      filters: filters
     });
   }),
   getAnnouncement: asyncHandler(async (req, res) => {

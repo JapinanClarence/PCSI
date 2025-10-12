@@ -24,7 +24,7 @@ const publicationSchema = new mongoose.Schema({
     default: '1'
   }
 }, {
-  timestamps: true // This adds createdAt and updatedAt fields automatically
+  timestamps: true  
 });
 
 // Index for better performance

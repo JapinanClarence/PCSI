@@ -11,6 +11,7 @@ import authRoutes from './src/routes/authRoutes.js';
 import userRoutes from './src/routes/userRoutes.js';
 import publicationRoutes from './src/routes/publicationRoutes.js';
 import announcementRoutes from './src/routes/announcementRoutes.js';
+import featureRoutes from './src/routes/featureRoutes.js';
 
 dotenv.config();
 
@@ -49,6 +50,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/publications', publicationRoutes);
 app.use('/api/announcements', announcementRoutes);
+app.use('/api/features', featureRoutes);
 // Handle 404 for undefined routes
 app.use(notFound);
 

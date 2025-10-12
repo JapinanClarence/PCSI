@@ -10,6 +10,8 @@ import { formatDate } from "@/util/formatDate";
 import { NoData } from "@/components/common/NoData";
 import CardSkeleton from "@/components/news-events/CardSkeleton";
 import { useNavigate } from "react-router";
+import { DATA_LIMIT, STATUS } from "@/constants/dataFilter";
+import { SmoothParallaxGrid } from "@/components/ui/parallax-scroll";
 
 const Announcements = () => {
   const [announcements, setAnnouncements] = useState([]);
@@ -19,18 +21,14 @@ const Announcements = () => {
   const fetchAnnouncements = async () => {
     setLoading(true);
     try {
-      const result = await announcementService.getAnnouncements();
+      const result = await announcementService.getAnnouncements(DATA_LIMIT.ANNOUNCEMENTS, { status: STATUS.ACTIVE });
 
       const data = result?.data?.data?.map((announcement) => ({
         ...announcement,
         createdAt: formatDate(announcement.createdAt),
       }));
 
-      const filteredData = data.filter(
-        (announcement) => announcement.status === "1"
-      );
-
-      setAnnouncements(filteredData.slice(0, 8) || []);
+      setAnnouncements(data || []);
     } catch (error) {
       console.error("Error fetching announcements:", error);
       toast.error("Failed to fetch announcements");
@@ -58,25 +56,29 @@ const Announcements = () => {
             View All <ArrowRight />
           </Button>
         </div>
-        <Separator />
+        <Separator className={"mb-10"}/>
         {!loading && announcements.length === 0 && (
           <NoData
             title="No Announcements Available"
             description=" Check back soon for updates on our latest announcements."
           />
         )}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {loading && <CardSkeleton totalCard={4} />}
-          {!loading &&
-            announcements.map((data, i) => (
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <CardSkeleton totalCard={4}/>
+          </div>
+        ) : (
+          <SmoothParallaxGrid className="min-h-[800px]">
+            {announcements.map((data, i) => (
               <Card
                 key={i}
                 image={data.banner || ""}
                 title={data.title}
-                description={data.description}
+                description={data.description}             
               />
             ))}
-        </div>
+          </SmoothParallaxGrid>
+        )}
       </Container>
     </div>
   );

@@ -5,8 +5,14 @@ const publicationService = {
     const publication = await Publication.create({ title, description, image });
     return publication;
   },
-  getPublications: async () => {
-    const publications = await Publication.find().sort({ createdAt: -1 });
+  getPublications: async (limit = null, filters = {}) => {
+    let query = Publication.find(filters).sort({ createdAt: -1 });
+    
+    if (limit && limit > 0) {
+      query = query.limit(parseInt(limit));
+    }
+    
+    const publications = await query;
     return publications;
   },
   getPublication: async (id) => {

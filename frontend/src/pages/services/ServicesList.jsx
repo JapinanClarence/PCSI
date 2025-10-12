@@ -14,7 +14,7 @@ const ServiceList = () => {
         <li>Beetle species identification</li>
         {/* list must be alphabetical */}
         <li>Training Workshop on Coleopterology
-          <ol className="list-decimal list-inside lg:list-outside space-y-1 mt-2 ml-6 marker:font-bold marker:text-dark-green marker:text-xl">
+          <ol className="list-[lower-alpha] list-inside lg:list-outside space-y-1 mt-2 ml-6 marker:font-bold marker:text-dark-green marker:text-xl">
             <li>Specimen collection protocols</li>
             <li>Specimen high-definition imaging</li>
             <li>Specimen examination: gross morphology, genitalia &#40;basic: gross male and female genitalia examination &#41;, genitalia &#40;advance: endophallus examination&#41;</li>

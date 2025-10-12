@@ -2,8 +2,11 @@ import api from '@/lib/api';
 
 const announcementService = {
   // Get all announcements
-  getAnnouncements: async (params = {}) => {
+  getAnnouncements: async (limit = null, filters = {}) => {
     try {
+      const params = { ...filters };
+      if (limit) params.limit = limit;
+      
       const response = await api.get('/announcements', { params });
       return { success: true, data: response.data };
     } catch (error) {

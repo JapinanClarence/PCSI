@@ -25,7 +25,7 @@ import {
 import TextEditor from "@/components/common/TextEditor";
 import { Spinner } from "@/components/ui/spinner";
 
-export default function AnnouncementForm({
+export default function FeatureForm({
   open,
   onOpenChange,
   onSubmit,
@@ -104,13 +104,13 @@ export default function AnnouncementForm({
 
                   <FormField
                     control={form.control}
-                    name="title"
+                    name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Title</FormLabel>
+                        <FormLabel>Name</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="Enter announcement title"
+                            placeholder="Enter featured beetle name"
                             {...field}
                           />
                         </FormControl>
@@ -129,7 +129,7 @@ export default function AnnouncementForm({
                           <TextEditor
                             content={field.value}
                             onChange={field.onChange}
-                            placeholder="Enter announcement description..."
+                            placeholder="Enter description..."
                             className="min-h-[150px]"
                           />
                         </FormControl>

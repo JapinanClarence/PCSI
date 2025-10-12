@@ -5,8 +5,14 @@ const announcementService = {
     const announcement = await Announcement.create({ title, description, image });
     return announcement;
   },
-  getAnnouncements: async () => {
-    const announcements = await Announcement.find().sort({ createdAt: -1 });
+  getAnnouncements: async (limit = null, filters = {}) => {
+    let query = Announcement.find(filters).sort({ createdAt: -1 });
+    
+    if (limit && limit > 0) {
+      query = query.limit(parseInt(limit));
+    }
+    
+    const announcements = await query;
     return announcements;
   },
   getAnnouncement: async (id) => {

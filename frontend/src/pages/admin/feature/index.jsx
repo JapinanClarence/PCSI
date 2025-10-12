@@ -1,73 +1,194 @@
-import Header from '@/components/common/Header';
-import React from 'react'
-import DataTable from './table';
-import { vehicleColumns } from './columns';
-export const sampleData = [
-  {
-    id: 1,
-    title: "Beetle Awareness Campaign",
-    description: "A community outreach to promote beetle conservation awareness among students.",
-    date: "2025-09-15",
-    createdAt: "2025-08-01",
-    status: "Active",
-    _id: "veh-001"
-  },
-  {
-    id: 2,
-    title: "Coleopterist Field Training",
-    description: "Hands-on fieldwork for identifying and collecting beetle specimens in Luzon.",
-    date: "2025-10-05",
-    createdAt: "2025-09-12",
-    status: "Inactive",
-    _id: "veh-002"
-  },
-  {
-    id: 3,
-    title: "Invertebrate Research Workshop",
-    description: "A two-day workshop at TROGENIR Laboratory focusing on specimen preparation and imaging.",
-    date: "2025-11-10",
-    createdAt: "2025-09-25",
-    status: "Active",
-    _id: "veh-003"
-  },
-  {
-    id: 4,
-    title: "Annual PCS Conference",
-    description: "National gathering of coleopterists to present research findings and conservation initiatives.",
-    date: "2025-12-01",
-    createdAt: "2025-10-01",
-    status: "Active",
-    _id: "veh-004"
-  },
-  {
-    id: 5,
-    title: "Bug Art Exhibit",
-    description: "A creative exhibit showcasing macro photography and illustrations of Philippine beetles.",
-    date: "2026-01-15",
-    createdAt: "2025-09-30",
-    status: "Inactive",
-    _id: "veh-005"
-  }
-];
+import Header from "@/components/common/Header";
+import React, { useState } from "react";
+import { useEffect } from "react";
+import DataTable from "./table";
+import { featureColumns } from "./columns";
+import { FeatureSchema } from "@/components/forms/feature/schema";
+import featureService from "@/services/featureService";
+import { toast } from "sonner";
+import { formatDate } from "@/util/formatDate";
+import FeatureForm from "@/components/forms/feature/FeatureForm";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const statusMap = {
+  1: "Active",
+  0: "Inactive",
+};
 
 const Feature = () => {
-  return (
-    <div className=''>
-     <Header>Feature</Header>
-     <div>
-        <DataTable
-            data={sampleData}
-            onAdd={() => {}}
-            onEdit={(data) => {}}
-            onUpdateStatus={({ vehicleId, newStatus }) => {}}
-            submitting={false}
-            loading={false}
-            filters={["id", "title", "description", "date", "createdAt", "status"]}
-            tableColumn={vehicleColumns}
-        />
-     </div>
-    </div>
-  )
-}
+  const [showForm, setShowForm] = useState(false);
+  const [formTitle, setFormTitle] = useState("");
+  const [currentData, setCurrentData] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [features, setFeatures] = useState("");
+  const [loading, setLoading] = useState(false);
 
-export default Feature
+  const form = useForm({
+    resolver: zodResolver(FeatureSchema),
+    defaultValues: {
+      name: "",
+      description: "",
+      status: "1",
+    },
+  });
+
+  const fetchFeatures = async () => {
+    setLoading(true);
+    try {
+      const result = await featureService.getFeatures();
+      if (result.success) {
+        const data = result?.data?.data?.map((feature) => ({
+          ...feature,
+          status: statusMap[feature.status],
+          createdAt: formatDate(feature.createdAt),
+        }));
+        console.log(data);
+
+        setFeatures(data || []);
+      } else {
+          toast.error(result.error || "Failed to fetch features");
+      }
+    } catch (error) {
+      console.error("Error fetching features:", error);
+      toast.error("Failed to fetch features");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Fetch publications on component mount
+  useEffect(() => {
+    fetchFeatures();
+  }, []);
+
+  const handleUpdateStatus = async ({ vehicleId, newStatus }) => {
+    const promise = async () => {
+      setSubmitting(true);
+      try {
+        const result = await featureService.toggleFeatureStatus(
+          vehicleId,
+          newStatus
+        );
+        await fetchFeatures();
+        return result;
+      } catch (error) {
+        console.log(error);
+        throw error;
+      } finally {
+        setSubmitting(false);
+      }
+    };
+
+    toast.promise(promise(), {
+      loading: "Updating Status...",
+      success: `Feature status updated`,
+      error: (error) => error.message || "Failed to update feature status",
+    });
+  };
+
+  const handleEdit = (vehicleId) => {
+    // Find the publication data by ID
+    const feature = features.find(
+      (feature) => feature._id === vehicleId
+    );
+    if (!feature) return;
+
+    setShowForm(true);
+    setFormTitle("Edit Feature");
+    setCurrentData(feature);
+    // Populate form with existing data
+    form.reset({
+      name: feature.name || "",
+      description: feature.description || "",
+      status: feature.status === "Active" ? "1" : "0",
+    });
+  };
+
+  const handleAdd = () => {
+    setShowForm(true);
+    setFormTitle("Add Feature");
+    setCurrentData(null);
+    // Reset form to default values
+    form.reset({
+      name: "",
+      description: "",
+      banner: "",
+      status: "1",
+    });
+  };
+
+  const handleSubmit = async (data) => {
+    setSubmitting(true);
+    try {
+      let result;
+
+      if (currentData) {
+        // Update existing announcement
+        result = await featureService.updateFeature(currentData._id, {
+          name: data.name,
+          description: data.description,
+          status: data.status,
+        });
+      } else {
+        // Create new announcement
+          result = await featureService.createFeature({
+          name: data.name,
+          description: data.description,
+          status: data.status,
+        });
+      }
+
+      if (result.success) {
+        toast.success(
+          currentData
+            ? "Feature updated successfully!"
+            : "Feature created successfully!"
+        );
+
+        // Close form and reset
+        setShowForm(false);
+        form.reset();
+
+        // Refresh the data
+        fetchFeatures();
+      } else {
+        toast.error(result.error || "Failed to save feature");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("An unexpected error occurred. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+  return (
+    <div className="">
+      <Header>Feature</Header>
+      <div>
+      <DataTable
+          data={features}
+          onAdd={() => handleAdd()}
+          onEdit={(data) => handleEdit(data)}
+          onUpdateStatus={handleUpdateStatus}
+          submitting={submitting}
+          loading={loading}
+          filters={["name", "description", "createdAt", "status"]}
+          tableColumn={featureColumns}
+        />
+      </div>
+      <FeatureForm
+        open={showForm}
+        onOpenChange={setShowForm}
+        data={currentData}
+        submitting={submitting}
+        title={formTitle}
+        form={form}
+        onUpdateStatus={handleUpdateStatus}
+        onSubmit={handleSubmit}
+      />
+    </div>
+  );
+};
+
+export default Feature;

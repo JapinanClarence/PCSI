@@ -11,6 +11,7 @@ import { NoData } from "@/components/common/NoData";
 import CardSkeleton from "@/components/news-events/CardSkeleton";
 import { useNavigate } from "react-router";
 import { DATA_LIMIT, STATUS } from "@/constants/dataFilter";
+import { SmoothParallaxGrid } from "@/components/ui/parallax-scroll";
 
 const Announcements = () => {
   const [announcements, setAnnouncements] = useState([]);
@@ -55,25 +56,29 @@ const Announcements = () => {
             View All <ArrowRight />
           </Button>
         </div>
-        <Separator />
+        <Separator className={"mb-10"}/>
         {!loading && announcements.length === 0 && (
           <NoData
             title="No Announcements Available"
             description=" Check back soon for updates on our latest announcements."
           />
         )}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {loading && <CardSkeleton totalCard={4} />}
-          {!loading &&
-            announcements.map((data, i) => (
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <CardSkeleton totalCard={4}/>
+          </div>
+        ) : (
+          <SmoothParallaxGrid className="min-h-[800px]">
+            {announcements.map((data, i) => (
               <Card
                 key={i}
                 image={data.banner || ""}
                 title={data.title}
-                description={data.description}
+                description={data.description}             
               />
             ))}
-        </div>
+          </SmoothParallaxGrid>
+        )}
       </Container>
     </div>
   );

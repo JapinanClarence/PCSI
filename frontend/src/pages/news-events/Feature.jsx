@@ -25,6 +25,11 @@ const Feature = () => {
   useEffect(() => {
     fetchFeature();
   }, []);
+  // Don't render the section if there's no active featured beetle
+  if (!loading && !feature) {
+    return null;
+  }
+
   return (
     <div className="bg-accent">
       <Container className={"py-20 space-y-5 "}>
@@ -36,7 +41,7 @@ const Feature = () => {
           <div className="flex items-center justify-center py-10">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
           </div>
-        ) : feature ? (
+        ) : (
           <div className="flex flex-col md:flex-row lg:p-4 gap-5">
             <div className="aspect-square flex-shrink-0 overflow-hidden w-full bg-muted md:w-1/3">
               {feature.banner || images.beatle_2 ? (
@@ -63,11 +68,6 @@ const Feature = () => {
               />
             </div>
           </div>
-        ) : (
-          <NoData 
-            title="No Featured Beetle" 
-            description="We're currently working on featuring our next beetle of the month. Check back soon!" 
-          />
         )}
       </Container>
     </div>

@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { formatDate } from "@/util/formatDate";
 import CardSkeleton from "@/components/news-events/CardSkeleton";
 import { NoData } from "@/components/common/NoData";
+import { SmoothParallaxGrid } from "@/components/ui/parallax-scroll";
 
 const PublicationList = () => {
   const [publications, setPublications] = useState([]);
@@ -46,21 +47,24 @@ const PublicationList = () => {
           Latest Publications
         </h1>
       </div>
-      <Separator />
+      <Separator className={"mb-10"}/>
       {!loading && publications.length === 0 && <NoData title="No Publications Available" description=" Check back soon for updates on our latest publications." />}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {loading &&(
+      {loading ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <CardSkeleton totalCard={4}/>
-        )}
-        {!loading && publications.map((data, i) => (
-          <Card
-            key={i}
-            image={data.banner || ""}
-            title={data.title}
-            description={ data.description}             
-          />
-        ))}
-      </div>
+        </div>
+      ) : (
+        <SmoothParallaxGrid className="min-h-[800px]">
+          {publications.map((data, i) => (
+            <Card
+              key={i}
+              image={data.banner || ""}
+              title={data.title}
+              description={data.description}             
+            />
+          ))}
+        </SmoothParallaxGrid>
+      )}
     </Container>
   </div>
   )

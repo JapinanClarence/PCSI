@@ -77,6 +77,19 @@ const userService = {
         error: error.response?.data?.message || 'Failed to delete user' 
       };
     }
+  },
+
+  // Change password
+  changePassword: async (passwordData) => {
+    try {
+      const response = await api.put('/users/change-password', passwordData);
+      return { success: true, data: response.data };
+    } catch (error) {
+      return { 
+        success: false, 
+        error: error.response?.data?.message || 'Failed to change password' 
+      };
+    }
   }
 };
 

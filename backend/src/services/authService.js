@@ -188,8 +188,14 @@ const authService = {
       }
     });
 
-    // If email is being updated, generate new verification token
-    if (updates.email) {
+    // Get current user data to compare email
+    const currentUser = await User.findById(userId);
+    if (!currentUser) {
+      throw new Error(MESSAGES.USER_NOT_FOUND);
+    }
+
+    // If email is being updated and it's different from current email, generate new verification token
+    if (updates.email && updates.email !== currentUser.email) {
       updates.isVerified = false;
       updates.verificationToken = tokenService.generateVerificationToken();
       updates.verificationTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000);
@@ -205,12 +211,38 @@ const authService = {
       throw new Error(MESSAGES.USER_NOT_FOUND);
     }
 
-    // Send verification email if email was changed
-    if (updates.email && updates.verificationToken) {
+    // Send verification email if email was actually changed
+    if (updates.email && updates.email !== currentUser.email && updates.verificationToken) {
       await emailService.sendVerificationEmail(user.email, user.firstName, updates.verificationToken);
     }
 
     return user.toJSON();
+  },
+
+  // Change password
+  changePassword: async (userId, oldPassword, newPassword) => {
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new Error(MESSAGES.USER_NOT_FOUND);
+    }
+
+    // Verify old password
+    const isOldPasswordValid = await user.comparePassword(oldPassword);
+    if (!isOldPasswordValid) {
+      throw new Error('Current password is incorrect');
+    }
+
+    // Update password (will be hashed by the pre-save middleware)
+    user.password = newPassword;
+    await user.save();
+
+    // Delete all refresh tokens for security
+    await tokenService.deleteAllRefreshTokens(userId);
+
+    return {
+      message: 'Password changed successfully',
+      user: user.toJSON()
+    };
   }
 };
 

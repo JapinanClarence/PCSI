@@ -24,6 +24,7 @@ import Publications from "./pages/admin/publications";
 import Announcements from "./pages/admin/announcements";
 import Merchandise from "./pages/admin/merchandise";
 import Feature from "./pages/admin/feature";
+import UserProfile from "./pages/admin/user";
 
 //auth routes
 import AuthLayout from "./layout/auth";
@@ -126,6 +127,10 @@ const routes = createBrowserRouter([
       {
         path: "feature",
         Component: Feature,
+      },
+      {
+        path: "user-profile",
+        Component: UserProfile,
       },
     ],
   },

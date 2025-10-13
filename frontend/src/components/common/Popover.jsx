@@ -44,7 +44,7 @@ export function Popover({
       {open && (
         <div
           className={clsx(
-            "absolute z-50 border bg-white shadow-lg rounded-lg",
+            "absolute z-[100] border bg-white shadow-lg rounded-lg",
             orientationClass
           )}
         >

@@ -49,11 +49,11 @@ export default function LoginForm({ className, ...props }) {
 
       // If successful, AuthContext will handle the redirect
     } catch (error) {
-      console.error("Login error:", error);
+  
       setLoginError("An unexpected error occurred. Please try again.");
     }
   };
-  console.log("Login error:", loginError);
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
 

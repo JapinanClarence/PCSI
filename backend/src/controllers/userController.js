@@ -136,6 +136,20 @@ const userController = {
       success: true,
       message: 'User deleted successfully'
     });
+  }),
+
+  // Change password
+  changePassword: asyncHandler(async (req, res) => {
+    const userId = req.user._id;
+    const { oldPassword, newPassword } = req.body;
+
+    const result = await authService.changePassword(userId, oldPassword, newPassword);
+
+    res.status(STATUS_CODES.OK).json({
+      success: true,
+      message: 'Password changed successfully',
+      data: result
+    });
   })
 };
 

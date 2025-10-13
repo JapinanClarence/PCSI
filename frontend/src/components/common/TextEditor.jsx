@@ -51,12 +51,12 @@ const TextEditor = ({
         },
       }),
       HardBreak.extend({
-        addKeyboardShortcuts () {
+        addKeyboardShortcuts() {
           return {
-            Enter: () => this.editor.commands.setHardBreak()
-          }
-        }
-      })
+            Enter: () => this.editor.commands.setHardBreak(),
+          };
+        },
+      }),
     ],
     content,
     editable,
@@ -81,11 +81,11 @@ const TextEditor = ({
           className
         ),
         style: {
-          wordBreak: 'break-all',
-          overflowWrap: 'anywhere',
-          whiteSpace: 'normal',
-          maxWidth: '100%',
-          overflow: 'hidden'
+          wordBreak: "break-all",
+          overflowWrap: "anywhere",
+          whiteSpace: "normal",
+          maxWidth: "100%",
+          overflow: "hidden",
         },
         placeholder,
       },
@@ -102,7 +102,7 @@ const TextEditor = ({
       editor.state.selection.from,
       editor.state.selection.to
     );
-    
+
     setLinkText(selectedText || "");
     setLinkUrl(previousUrl || "");
   };
@@ -116,17 +116,26 @@ const TextEditor = ({
         // If no text is selected, insert the link text with the URL
         const textToInsert = linkText || linkUrl;
         const currentPos = editor.state.selection.from;
-        
+
         // Insert the text and apply link formatting
         editor.chain().focus().insertContent(textToInsert).run();
-        
+
         // Move cursor back to the beginning of the inserted text and apply link
         const startPos = currentPos;
         const endPos = currentPos + textToInsert.length;
-        editor.chain().focus().setTextSelection({ from: startPos, to: endPos }).setLink({ href: linkUrl }).run();
-        
+        editor
+          .chain()
+          .focus()
+          .setTextSelection({ from: startPos, to: endPos })
+          .setLink({ href: linkUrl })
+          .run();
+
         // Move cursor to the end of the link (after the link) so next text is normal
-        editor.chain().focus().setTextSelection({ from: endPos, to: endPos }).run();
+        editor
+          .chain()
+          .focus()
+          .setTextSelection({ from: endPos, to: endPos })
+          .run();
       }
     } else {
       editor.chain().focus().extendMarkRange("link").unsetLink().run();
@@ -135,18 +144,18 @@ const TextEditor = ({
     setLinkUrl("");
   };
 
-  const handleLinkCancel = () => {
+  const handleLinkCancel = (close) => {
     setLinkText("");
     setLinkUrl("");
+    close?.(); // Close the popover if close function is provided
   };
 
   const handleUnlink = () => {
     editor.chain().focus().unsetLink().run();
   };
 
-
   return (
-    <div className="border border-input rounded-md bg-background w-full max-w-full overflow-hidden">
+    <div className="border border-input rounded-md bg-background w-full max-w-full md:max-w-[622px] overflow-hidden md:overflow-elipsis">
       {/* Toolbar */}
       <div className="flex flex-wrap items-center gap-1 p-2 border-b border-border">
         {/* Text Formatting */}
@@ -237,6 +246,10 @@ const TextEditor = ({
 
         {/* Link */}
         <Popover
+          responsiveOrientation={{
+            small: "left",
+            medium: "bottom"
+          }}
           trigger={
             <Button
               type="button"
@@ -248,52 +261,48 @@ const TextEditor = ({
             >
               <LinkIcon className="h-4 w-4" />
             </Button>
-           
           }
-
         >
-          <div className="w-64 space-y-4 p-4">
-            <div className="flex gap-2">
-              <Label htmlFor="link-text" className="text-sm font-medium">
-                Text
-              </Label>
-              <Input
-                id="link-text"
-                placeholder="Enter link text"
-                value={linkText}
-                onChange={(e) => setLinkText(e.target.value)}
-                className="w-full"
-              />
+          {({ close }) => (
+            <div className="w-64 space-y-4 p-4">
+              <div className="flex  gap-2">
+                <Label htmlFor="link-text" className="text-sm font-medium">
+                  Text
+                </Label>
+                <Input
+                  id="link-text"
+                  placeholder="Enter link text"
+                  value={linkText}
+                  onChange={(e) => setLinkText(e.target.value)}
+                  className="w-full text-sm "
+                />
+              </div>
+              <div className="flex  gap-2">
+                <Label htmlFor="link-url" className="text-sm font-medium">
+                  URL
+                </Label>
+                <Input
+                  id="link-url"
+                  placeholder="https://example.com"
+                  value={linkUrl}
+                  onChange={(e) => setLinkUrl(e.target.value)}
+                  className="w-full text-sm"
+                />
+              </div>
+              <div className="flex justify-end gap-2">
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    handleLinkSubmit();
+                    close();
+                  }}
+                  disabled={!linkUrl.trim()}
+                >
+                  Apply
+                </Button>
+              </div>
             </div>
-            <div className="flex gap-2">
-              <Label htmlFor="link-url" className="text-sm font-medium">
-                URL
-              </Label>
-              <Input
-                id="link-url"
-                placeholder="https://example.com"
-                value={linkUrl}
-                onChange={(e) => setLinkUrl(e.target.value)}
-                className="w-full"
-              />
-            </div>
-            <div className="flex justify-end gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleLinkCancel}
-              >
-                Cancel
-              </Button>
-              <Button
-                size="sm"
-                onClick={handleLinkSubmit}
-                disabled={!linkUrl.trim()}
-              >
-                Apply
-              </Button>
-            </div>
-          </div>
+          )}
         </Popover>
         {editor.isActive("link") && (
           <Button
@@ -309,7 +318,7 @@ const TextEditor = ({
       </div>
 
       {/* Editor Content */}
-      <div className="min-h-[100px] max-h-[300px] overflow-y-auto overflow-x-hidden">
+      <div className="h-[200px] overflow-y-visible overflow-x-hidden">
         <EditorContent editor={editor} />
       </div>
     </div>

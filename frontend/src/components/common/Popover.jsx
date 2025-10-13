@@ -5,8 +5,10 @@ export function Popover({
   trigger,
   children,
   orientation = "bottom",
+  responsiveOrientation,
   className,
   triggerable = false,
+  onCancel,
 }) {
   const [open, setOpen] = useState(false);
   const popoverRef = useRef(null);
@@ -30,12 +32,35 @@ export function Popover({
     };
   }, [triggerable]);
 
-  const orientationClass = {
-    top: "bottom-full mb-2",
-    bottom: "top-full mt-2",
-    left: "right-full mr-2",
-    right: "left-full ml-2",
-  }[orientation];
+  const getOrientationClass = (orientation) => {
+    const classes = {
+      top: "bottom-full mb-2",
+      bottom: "top-full mt-2",
+      left: "right-full mr-2",
+      right: "left-full ml-2",
+    };
+    return classes[orientation] || classes.bottom;
+  };
+
+  // Handle responsive orientation
+  const getResponsiveOrientationClass = () => {
+    if (responsiveOrientation) {
+      const { small, medium } = responsiveOrientation;
+      const smallClass = getOrientationClass(small);
+      const mediumClass = getOrientationClass(medium);
+      
+      // Use Tailwind responsive classes
+      return `${smallClass} md:${mediumClass}`;
+    }
+    return getOrientationClass(orientation);
+  };
+
+  const orientationClass = getResponsiveOrientationClass();
+
+  const handleClose = () => {
+    setOpen(false);
+    onCancel?.();
+  };
 
   return (
     <div ref={popoverRef} className={clsx("relative inline-block", className)}>
@@ -44,11 +69,11 @@ export function Popover({
       {open && (
         <div
           className={clsx(
-            "absolute z-50 border bg-white shadow-lg rounded-lg",
+            "absolute border bg-white shadow-lg rounded-lg",
             orientationClass
           )}
         >
-          {children}
+          {typeof children === 'function' ? children({ close: handleClose }) : children}
         </div>
       )}
     </div>

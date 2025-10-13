@@ -23,6 +23,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { images } from "@/constants/images";
+import { toast } from "sonner";
 
 export default function LoginForm({ className, ...props }) {
   const { login } = useAuth();
@@ -41,20 +42,21 @@ export default function LoginForm({ className, ...props }) {
     try {
       setLoginError("");
       const result = await login(data);
-
       if (!result.success) {
-        // Login failed, show error
-        setLoginError(result.error);
+   
+        toast.error(result.error);
       }
+
       // If successful, AuthContext will handle the redirect
     } catch (error) {
-      console.error("Login error:", error);
+  
       setLoginError("An unexpected error occurred. Please try again.");
     }
   };
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
+
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <FieldGroup>
@@ -104,6 +106,7 @@ export default function LoginForm({ className, ...props }) {
                         placeholder=""
                         {...field}
                         className="pr-10"
+                        autoComplete="off"
                       />
                       <button
                         type="button"

@@ -17,6 +17,12 @@ import markjhon from "@/assets/images/MarkJhon.png"
 import coleopterist from "@/assets/images/coleopterist.png"
 import tiger_beetle from "@/assets/images/tiger_beetle.png";
 import beatle_8 from "@/assets/images/beatle_8.png";
+import service_1 from "@/assets/images/service_1.JPG";
+import service_2 from "@/assets/images/service_2.JPG";
+import service_3 from "@/assets/images/service_3.JPG";
+import service_4 from "@/assets/images/service_4.JPG";
+import service_5 from "@/assets/images/service_5.JPG";
+import service_6 from "@/assets/images/service_6.JPG";
 
 export const images = {
     beatle_1,
@@ -37,5 +43,11 @@ export const images = {
     ricksterlie,
     markjhon,
     coleopterist,
-    tiger_beetle
+    tiger_beetle,
+    service_1,
+    service_2,
+    service_3,
+    service_4,
+    service_5,
+    service_6
 }

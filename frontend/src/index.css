@@ -376,3 +376,223 @@ body {
 body[data-scroll-locked] {
   pointer-events: auto !important;
 }
+
+/* Service Card Base Styles */
+.service-card {
+  position: absolute;
+  transition: all 0.1s ease-out;
+  transform-origin: center;
+  cursor: pointer;
+}
+
+.service-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.service-card .card-content {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+/* Service Card Rotations */
+.service-card-1 {
+  transform: rotate(-1deg);
+}
+
+.service-card-2 {
+  transform: rotate(-8deg);
+  z-index: 50;
+}
+
+.service-card-3 {
+  transform: rotate(2deg);
+}
+
+/* Service Card Hover Effects */
+.service-card:hover {
+  transform: scale(1.05) translateY(-8px) rotate(0deg) !important;
+  z-index: 100;
+}
+
+/* Service Card Sizes */
+.service-card-small {
+  width: 300px;
+  height: 220px;
+}
+
+.service-card-medium {
+  width: 320px;
+  height: 240px;
+}
+
+.service-card-large {
+  width: 350px;
+  height: 250px;
+}
+
+/* Responsive Card Sizes */
+@media (max-width: 1200px) {
+  .service-card-small {
+    width: 250px;
+    height: 180px;
+  }
+  
+  .service-card-medium {
+    width: 270px;
+    height: 200px;
+  }
+  
+  .service-card-large {
+    width: 300px;
+    height: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .service-card-small {
+    width: 280px;
+    height: 200px;
+  }
+  
+  .service-card-medium {
+    width: 300px;
+    height: 220px;
+  }
+  
+  .service-card-large {
+    width: 320px;
+    height: 240px;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-card-small {
+    width: 250px;
+    height: 180px;
+  }
+  
+  .service-card-medium {
+    width: 270px;
+    height: 200px;
+  }
+  
+  .service-card-large {
+    width: 290px;
+    height: 220px;
+  }
+}
+
+/* Service Card Positions */
+.service-card-top-left {
+  left: 50px;
+  top: 60px;
+}
+
+.service-card-bottom-left {
+  left: 40px;
+  bottom: 70px;
+}
+
+.service-card-center {
+  left: 30%;
+  top: 30%;
+  /* transform: translate(-50%, -50%); */
+}
+
+/* Responsive Card Positions */
+@media (max-width: 1200px) {
+  .service-card-top-left {
+    left: 30px;
+    top: 40px;
+  }
+  
+  .service-card-bottom-left {
+    left: 30px;
+    bottom: 40px;
+  }
+  
+  .service-card-center {
+    left: 20%;
+    top: 20%;
+
+  }
+}
+
+@media (max-width: 768px) {
+  .service-card-top-left {
+    left: 20px;
+    top: 30px;
+  }
+  
+  .service-card-bottom-left {
+    left: 20px;
+    bottom: 30px;
+  }
+  
+  .service-card-center {
+    left: 30%;
+    top: 30%;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-card-top-left {
+    left: 10px;
+    top: 20px;
+  }
+  
+  .service-card-bottom-left {
+    left: 10px;
+    bottom: 20px;
+  }
+  
+  .service-card-center {
+    left: 13%;
+    top: 20%;
+  }
+}
+
+/* Special border for front card */
+.service-card .card-content {
+  border: 3px solid var(--muted);
+}
+
+/* Responsive Container Heights */
+@media (max-width: 1200px) {
+  .services-container {
+    height: 500px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-container {
+    height: 500px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-container {
+    height: 450px !important;
+  }
+}
+
+/* Prevent card overflow on small screens */
+@media (max-width: 768px) {
+  .service-card {
+    max-width: calc(100vw - 60px);
+    max-height: calc(100vh - 250px);
+  }
+}
+
+@media (max-width: 480px) {
+  .service-card {
+    max-width: calc(100vw - 40px);
+    max-height: calc(100vh - 200px);
+  }
+}

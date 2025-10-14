@@ -1,16 +1,15 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
-import { toast } from "sonner";
-import ServicesList from "./ServicesList";
 import Hero from '@/components/common/SubPageHero';
-import Introduction from "./Introduction";
-
+import ServicesList from "./ServicesList";
+import ServicesList2 from "./ServicesList-2";
 const Services = () => {
   return (
     <div>
       <Hero/>
       {/* <Introduction/> */}
-      <ServicesList/>
+      {/* <ServicesList/> */}
+      <ServicesList2/>
     </div>
   );
 };

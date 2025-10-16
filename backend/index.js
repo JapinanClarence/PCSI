@@ -1,4 +1,6 @@
 import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
 import cors from 'cors';
 import connectDB from './src/config/database.js';
@@ -13,17 +15,36 @@ import publicationRoutes from './src/routes/publicationRoutes.js';
 import announcementRoutes from './src/routes/announcementRoutes.js';
 import featureRoutes from './src/routes/featureRoutes.js';
 
-dotenv.config();
-
 const app = express();
 
 // Connect to database
 connectDB();
 
 // Middleware
+// CORS configuration to support multiple origins
+const allowedOrigins = process.env.CLIENT_URLS 
+  ? process.env.CLIENT_URLS.split(',').map(url => url.trim())
+  : [
+      process.env.CLIENT_URL || 'http://localhost:5173',
+      'http://localhost:3000',
+      'http://localhost:5173'
+    ];
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
-  credentials: true
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    
+    const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+    return callback(new Error(msg), false);
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-api-key']
 }));
 
 app.use(express.json({ limit: '10mb' }));

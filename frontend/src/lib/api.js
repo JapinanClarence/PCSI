@@ -1,7 +1,8 @@
 // API Configuration
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 const API_KEY = import.meta.env.VITE_API_KEY ;
-
+console.log("API_KEY", API_KEY);
+console.log("API_BASE_URL", API_BASE_URL);
 // Default headers for all requests
 const defaultHeaders = {
   'Content-Type': 'application/json',

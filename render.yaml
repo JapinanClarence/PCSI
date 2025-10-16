@@ -32,9 +32,9 @@ services:
       - key: EMAIL_PASS
         sync: false
       - key: CLIENT_URL
-        sync: false
+        value: https://your-frontend-domain.com
       - key: CLIENT_URLS
-        sync: false
+        value: https://your-frontend-domain.com,https://your-render-app.onrender.com
     regions:
       - oregon
     branch: main

@@ -20,7 +20,7 @@ const app = express();
 // Connect to database
 connectDB();
 
-const allowedOrigins = ["http://localhost:5173", "http://localhost:3000"];
+const allowedOrigins = ["http://localhost:5173", "https://pcsi.vercel.app"];
 
 app.use(
   cors({

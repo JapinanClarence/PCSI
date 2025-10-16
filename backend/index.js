@@ -3,16 +3,6 @@ import dotenv from "dotenv";
 // Load environment variables first
 dotenv.config();
 
-// Validate required environment variables
-const requiredEnvVars = ['API_KEY', 'MONGO_URI', 'JWT_ACCESS_SECRET', 'JWT_REFRESH_SECRET'];
-const missingEnvVars = requiredEnvVars.filter(envVar => !process.env[envVar]);
-
-if (missingEnvVars.length > 0) {
-  console.error('Missing required environment variables:', missingEnvVars.join(', '));
-  console.error('Please check your .env file or environment configuration');
-  process.exit(1);
-}
-
 import express from "express";
 import cors from "cors";
 import connectDB from "./src/config/database.js";
@@ -36,10 +26,9 @@ connectDB();
 const allowedOrigins = process.env.CLIENT_URLS 
   ? process.env.CLIENT_URLS.split(',').map(url => url.trim())
   : [
-      process.env.CLIENT_URL || 'http://localhost:5173',
+      process.env.CLIENT_URL,
       'http://localhost:3000',
       'http://localhost:5173',
-      'https://pcsi.vercel.app'
     ];
 
 app.use(

@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer';
 import { getVerificationEmailTemplate, getPasswordResetEmailTemplate } from '../utils/email.js';
-
+import dotenv from "dotenv";
+dotenv.config();
 const emailService = {
   // Create email transporter
   createTransporter: () => {

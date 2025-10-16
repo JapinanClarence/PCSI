@@ -11,7 +11,11 @@ function Footer() {
       <div className="bg-dark-green">
         <Container className={" "}>
           <div className="py-8 flex flex-col lg:flex-row h-fit gap-6">
-            <img src={images.logo_white} className="md:max-h-48 md:max-w-fit lg:max-w-full" />
+            <img
+              src={images.logo_white2}
+              className="md:max-h-48 md:max-w-fit lg:max-w-full"
+            />
+
             <div className="flex flex-col md:flex-row gap-4 text-sm text-primary-foreground font-medium">
               <div className="p-2 flex-col justify-between flex-none">
                 <h1 className="text-lg mb-2 font-serif">QUICK LINKS</h1>
@@ -58,12 +62,8 @@ function Footer() {
               <div className="p-2 ">
                 <div className="space-y-2">
                   <h1 className="text-lg font-serif">GET IN TOUCH</h1>
-                  <p>
-                    pcsi@gmail.com
-                  </p>
-                  <p>
-                   +639 11 234 5678
-                  </p>
+                  <p>pcsi@gmail.com</p>
+                  <p>+639 11 234 5678</p>
                   <p>
                     <a
                       href="https://www.facebook.com/philcolsoc"
@@ -78,8 +78,7 @@ function Footer() {
                 <div>
                   <h1 className="text-lg mb-2 mt-2 font-serif">LOCATION</h1>
                   <p>
-                     Guang-Guang, Dahican,
-                    City of Mati, Davao Oriental, 8200
+                    Guang-Guang, Dahican, City of Mati, Davao Oriental, 8200
                   </p>
                 </div>
               </div>
@@ -106,16 +105,6 @@ function Footer() {
           </div>
         </Container>
       </div>
-      {/* <Separator /> 
-      <div className="bg-gray-900">
-        <Container>
-          <p className="text-center text-white py-3 text-sm">
-            Copyright © 2025. Philippine Coleopterists Society Inc. All Rights
-            Reserved.
-          </p>
-        </Container>
-      </div> 
-      */}
     </div>
   );
 }

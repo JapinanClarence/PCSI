@@ -1,5 +1,6 @@
 import React from "react";
 import Container from "@/components/common/Container";
+import SubPageHero from "@/components/common/SubPageHero";
 import { images } from "@/constants/images";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -9,17 +10,18 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-function Deposition() {
+function Issues() {
   return (
-    <div className="min-h-screen bg-white py-10">
-      <Container>
+    <div className="min-h-screen bg-white">
+      <SubPageHero />
+      <Container className="py-10">
         {/* Main Heading */}
         <div className="mb-12">
           <h1 className="font-serif text-4xl md:text-4xl font-bold mb-2">
             Asian Journal of Insect Science (AJIS)
           </h1>
           <h2 className="font-serif text-1xl md:text-2xl text-gray-600 font-semibold">
-            Deposition
+            Issues
           </h2>
         </div>
       </Container>
@@ -27,4 +29,4 @@ function Deposition() {
   );
 }
 
-export default Deposition;
+export default Issues;

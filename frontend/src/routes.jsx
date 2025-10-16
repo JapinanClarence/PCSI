@@ -5,7 +5,7 @@ import About from "./pages/ajis/About";
 import AuthorGuidelines from "./pages/ajis/AuthorGuidelines";
 import ManuscriptPreparation from "./pages/ajis/ManuscriptPreparation";
 import EditorialBoard from "./pages/ajis/EditorialBoard";
-import Deposition from "./pages/ajis/Deposition";
+import Issues from "./pages/ajis/Issues";
 import SubmissionProcess from "./pages/ajis/SubmissionProcess";
 import ReviewProcess from "./pages/ajis/ReviewProcess";
 import AbstractingIndexing from "./pages/ajis/AbstractingIndexing";
@@ -49,7 +49,6 @@ const routes = createBrowserRouter([
       { path: "/support", Component: Support },
       {
         path: "/ajis",
-        Component: MainLayout,
         children: [
           {
             path: "about",
@@ -68,8 +67,8 @@ const routes = createBrowserRouter([
             Component: EditorialBoard,
           },
           {
-            path: "deposition",
-            Component: Deposition,
+            path: "issues",
+            Component: Issues,
           },
           {
             path: "submission-process",
@@ -96,7 +95,7 @@ const routes = createBrowserRouter([
       {
         path: "/publications",
         Component: PublicationsPage,
-      },  
+      },
       {
         path: "/announcements",
         Component: AnnouncementsPage,
@@ -141,9 +140,7 @@ const routes = createBrowserRouter([
         <AuthLayout />
       </PublicRoute>
     ),
-    children: [
-      { path: "login", Component: Login },
-    ],
+    children: [{ path: "login", Component: Login }],
   },
   // Error routes
   {

@@ -60,7 +60,7 @@ function Navigation() {
 
   return (
     <div className="relative hidden lg:flex">
-      <div className="fixed top-0 w-full bg-white backdrop-blur-md shadow-md z-[50] ">
+      <div className="fixed top-0 w-full bg-white backdrop-blur-md shadow-md z-[9999] ">
         <Container className="py-1 flex items-center justify-between">
           <Link to={"/"}>
             <img
@@ -69,7 +69,7 @@ function Navigation() {
               className="max-h-14 md:max-h-20"
             />
           </Link>
-          <NavigationMenu viewport={false} className={"z-50"}>
+          <NavigationMenu viewport={false} className={"z-[9999]"}>
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuLink

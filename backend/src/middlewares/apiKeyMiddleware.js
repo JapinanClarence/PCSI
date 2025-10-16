@@ -1,5 +1,4 @@
 import { MESSAGES, STATUS_CODES } from '../utils/constants.js';
-
 // API Key validation middleware
 export const validateApiKey = (req, res, next) => {
   const apiKey = req.headers['x-api-key'] || req.headers['api-key'];

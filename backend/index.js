@@ -1,5 +1,17 @@
 import dotenv from "dotenv";
+
+// Load environment variables first
 dotenv.config();
+
+// Validate required environment variables
+const requiredEnvVars = ['API_KEY', 'MONGO_URI', 'JWT_ACCESS_SECRET', 'JWT_REFRESH_SECRET'];
+const missingEnvVars = requiredEnvVars.filter(envVar => !process.env[envVar]);
+
+if (missingEnvVars.length > 0) {
+  console.error('Missing required environment variables:', missingEnvVars.join(', '));
+  console.error('Please check your .env file or environment configuration');
+  process.exit(1);
+}
 
 import express from "express";
 import cors from "cors";
@@ -20,25 +32,46 @@ const app = express();
 // Connect to database
 connectDB();
 
-const allowedOrigins = ["http://localhost:5173", "https://pcsi.vercel.app"];
+// CORS configuration to support multiple origins
+const allowedOrigins = process.env.CLIENT_URLS 
+  ? process.env.CLIENT_URLS.split(',').map(url => url.trim())
+  : [
+      process.env.CLIENT_URL || 'http://localhost:5173',
+      'http://localhost:3000',
+      'http://localhost:5173',
+      'https://pcsi.vercel.app'
+    ];
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      // Allow requests with no origin (like mobile apps, curl, or Render health checks)
+      if (!origin) return callback(null, true);
+      
+      if (allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
+        // Log the blocked origin for debugging
+        console.log(`CORS blocked origin: ${origin}`);
+        console.log(`Allowed origins: ${allowedOrigins.join(', ')}`);
         callback(new Error("Not allowed by CORS"));
       }
     },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-api-key']
   })
 );
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
-// Test email configuration on startup
-emailService.testEmailConfiguration();
+// Test email configuration on startup (only if email is configured)
+if (process.env.EMAIL_HOST && process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+  emailService.testEmailConfiguration();
+} else {
+  console.log('Email service: Not configured - skipping email test');
+}
 
 // Root endpoint
 app.get("/", (req, res) => {

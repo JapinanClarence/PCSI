@@ -417,7 +417,7 @@ body[data-scroll-locked] {
 /* Service Card Hover Effects */
 .service-card:hover {
   transform: scale(1.05) translateY(-8px) rotate(0deg) !important;
-  z-index: 100;
+  z-index: 50;
 }
 
 /* Service Card Sizes */

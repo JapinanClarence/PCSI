@@ -40,6 +40,25 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 // Test email configuration on startup
 emailService.testEmailConfiguration();
 
+// Root endpoint
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "PCSI Backend API is running",
+    version: "1.0.0",
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || "development",
+    endpoints: {
+      health: "/api/health",
+      auth: "/api/auth",
+      users: "/api/users",
+      publications: "/api/publications",
+      announcements: "/api/announcements",
+      features: "/api/features"
+    }
+  });
+});
+
 // Health check endpoint (no API key required)
 app.get("/api/health", (req, res) => {
   res.status(200).json({

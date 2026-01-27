@@ -29,6 +29,7 @@ const Publications = () => {
         createdAt: formatDate(publication.createdAt)
       }));
 
+
       setPublications(data || []);
     }catch(error){
       console.error("Error fetching publications:", error);

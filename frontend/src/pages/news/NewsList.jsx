@@ -25,6 +25,7 @@ const NewsList = () => {
         createdAt: formatDate(newsItem.createdAt),
       }));
 
+
       const filteredData = data.filter(
         (newsItem) => newsItem.status === "1"
       );

@@ -113,7 +113,9 @@ function About() {
           <p className="text-lg leading-relaxed">
             <i>Asian Journal of Insect Science</i> follows the Single-Blind peer
             review process, where the referee remains anonymous throughout the
-            review process.
+            review process. The journal operates under a Continuous Publication
+            Model (CPM), whereby accepted articles are published online
+            immediately in their final, fully citable form.
           </p>
         </div>
 

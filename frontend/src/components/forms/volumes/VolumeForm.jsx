@@ -75,7 +75,7 @@ export default function VolumeForm({
       // Check file size
       if (file.size > MAX_FILE_SIZE) {
         toast.error(
-          `File size exceeds ${MAX_FILE_SIZE / 1024 / 1024} MB limit`
+          `File size exceeds ${MAX_FILE_SIZE / 1024 / 1024} MB limit`,
         );
         if (fileInputRef.current) {
           fileInputRef.current.value = null;
@@ -179,7 +179,8 @@ export default function VolumeForm({
                       )}
                     </div>
                     <FieldDescription className={"text-xs"}>
-                      Accepted formats: .jpg, .jpeg, .png | Max size: 5 MB
+                      Accepted formats: .jpg, .jpeg, .png | Max size:{" "}
+                      {MAX_FILE_SIZE / 1024 / 1024} MB
                     </FieldDescription>
                   </Field>
 
@@ -197,7 +198,7 @@ export default function VolumeForm({
                               {...field}
                               onChange={(e) =>
                                 field.onChange(
-                                  e.target.value ? Number(e.target.value) : ""
+                                  e.target.value ? Number(e.target.value) : "",
                                 )
                               }
                             />
@@ -220,7 +221,7 @@ export default function VolumeForm({
                               {...field}
                               onChange={(e) =>
                                 field.onChange(
-                                  e.target.value ? Number(e.target.value) : ""
+                                  e.target.value ? Number(e.target.value) : "",
                                 )
                               }
                             />
@@ -282,7 +283,7 @@ export default function VolumeForm({
                               {...field}
                               onChange={(e) =>
                                 field.onChange(
-                                  e.target.value ? Number(e.target.value) : ""
+                                  e.target.value ? Number(e.target.value) : "",
                                 )
                               }
                             />

@@ -218,6 +218,7 @@ export default function ArticleForm({
     onSubmit(submissionData);
   };
 
+  const maxFileSize = MAX_FILE_SIZE / 1024 /1024;
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent showCloseButton={false}>
@@ -268,7 +269,7 @@ export default function ArticleForm({
                       )}
                     </div>
                     <FieldDescription className="text-xs">
-                      Accepted formats: .jpg, .jpeg, .png | Max size: 5 MB
+                      Accepted formats: .jpg, .jpeg, .png | Max size: {maxFileSize} MB
                     </FieldDescription>
                   </Field>
 
@@ -318,7 +319,7 @@ export default function ArticleForm({
                       )}
                     </div>
                     <FieldDescription className="text-xs">
-                      Accepted formats: .pdf | Max size: 5 MB
+                      Accepted formats: .pdf | Max size: {maxFileSize} MB
                     </FieldDescription>
                   </Field>
 

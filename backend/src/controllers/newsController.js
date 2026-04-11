@@ -1,12 +1,11 @@
 import { asyncHandler } from "../middlewares/errorHandler.js";
 import newsService from "../services/newsService.js";
 import { STATUS_CODES } from "../utils/constants.js";
-import { uploadToCloudinary } from "../config/cloudinaryConfig.js";
 
 const newsController = {
   createNews: asyncHandler(async (req, res) => {
     const { title, description } = req.body;
-    const banner = req.file ? await uploadToCloudinary(req.file) : null;
+    const banner = req.file ? req.file.path : null;
 
     const news = await newsService.createNews(
       title,
@@ -56,7 +55,7 @@ const newsController = {
   }),
   updateNews: asyncHandler(async (req, res) => {
     const { title, description, removeBanner } = req.body;
-    const banner = req.file ? await uploadToCloudinary(req.file) : null;
+    const banner = req.file ? req.file.path : null;
  
     const updateData = {
       title,

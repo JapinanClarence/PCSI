@@ -1,11 +1,12 @@
 import { asyncHandler } from "../middlewares/errorHandler.js";
 import publicationService from "../services/publicationService.js";
 import { STATUS_CODES } from "../utils/constants.js";
+import { uploadToCloudinary } from "../config/cloudinaryConfig.js";
 
 const publicationController = {
   createPublication: asyncHandler(async (req, res) => {
     const { title, description } = req.body;
-    const banner = req.file ? req.file.path : null;
+    const banner = req.file ? await uploadToCloudinary(req.file) : null;
 
     const publication = await publicationService.createPublication(
       title,
@@ -55,7 +56,7 @@ const publicationController = {
   }),
   updatePublication: asyncHandler(async (req, res) => {
     const { title, description, removeBanner } = req.body;
-    const banner = req.file ? req.file.path : null; // Get file path from Cloudinary upload
+    const banner = req.file ? await uploadToCloudinary(req.file) : null;
 
     const updateData = {
       title,

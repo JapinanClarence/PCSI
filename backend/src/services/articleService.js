@@ -16,7 +16,7 @@ const articleService = {
     keywords,
     authors,
     banner,
-    pdfFile
+    pdfFile,
   ) => {
     const article = await Article.create({
       volumeNo,
@@ -59,19 +59,29 @@ const articleService = {
   updateArticle: async (id, data) => {
     const objectId = new mongoose.Types.ObjectId(id);
 
-    // Fetch existing article
     const article = await Article.findById(objectId);
     if (!article) {
       throw new Error("Article not found");
     }
 
-    // Build uniqueness check conditions only for fields that are being changed
+    // Normalize for comparison (trim + case-insensitive for title)
     const orConditions = [];
-    if (data.title && data.title !== article.title) {
-      orConditions.push({ title: data.title });
+
+    if (data.title !== undefined) {
+      const incomingTitle = data.title.trim();
+      const existingTitle = article.title?.trim();
+      if (incomingTitle.toLowerCase() !== existingTitle?.toLowerCase()) {
+        orConditions.push({
+          title: { $regex: `^${incomingTitle}$`, $options: "i" },
+        });
+      }
     }
-    if (data.volumeNo !== undefined && data.volumeNo !== article.volumeNo) {
-      orConditions.push({ volumeNo: data.volumeNo });
+
+    if (data.volumeNo !== undefined) {
+      // Strict type-safe comparison (avoids "1" !== 1 false positives)
+      if (String(data.volumeNo) !== String(article.volumeNo)) {
+        orConditions.push({ volumeNo: data.volumeNo });
+      }
     }
 
     if (orConditions.length > 0) {
@@ -79,56 +89,64 @@ const articleService = {
         $or: orConditions,
         _id: { $ne: objectId },
       });
+
       if (existingArticle) {
-        throw new Error("Volume No. or Title already exists");
+        // Tell the user exactly which field conflicts
+        const conflictFields = [];
+        if (
+          existingArticle.title?.toLowerCase() ===
+          data.title?.trim().toLowerCase()
+        ) {
+          conflictFields.push("Title");
+        }
+        if (String(existingArticle.volumeNo) === String(data.volumeNo)) {
+          conflictFields.push("Volume No.");
+        }
+        throw new Error(`${conflictFields.join(" and ")} already exists`);
       }
     }
 
     // Handle banner deletion scenarios
     if (article.banner) {
       if (data.banner) {
-        // Scenario 1: User uploaded a new banner - delete old banner
         const publicId = `pcsi/${getCloudinaryPublicId(article.banner)}`;
         await cloudinary.uploader.destroy(publicId);
-        // console.log(`Deleted old banner with public ID: ${publicId}`);
       } else if (data.removeBanner) {
-        // Scenario 2: User clicked X to remove banner - delete old banner
         const publicId = `pcsi/${getCloudinaryPublicId(article.banner)}`;
         await cloudinary.uploader.destroy(publicId);
-        // console.log(`Removed banner with public ID: ${publicId}`);
       }
-      // Scenario 3: Neither data.banner nor data.removeBanner - keep existing banner
     }
 
     // Handle pdfFile deletion scenarios
     if (article.pdfFile) {
       if (data.pdfFile) {
-        // Scenario 1: User uploaded a new pdfFile - delete old pdfFile
         const publicId = `pcsi/${getCloudinaryPublicId(article.pdfFile)}`;
-        await cloudinary.uploader.destroy(publicId);
-        // console.log(`Deleted old pdfFile with public ID: ${publicId}`);
+        await cloudinary.uploader.destroy(publicId, { resource_type: "raw" });
       } else if (data.removePdfFile) {
-        // Scenario 2: User clicked X to remove pdfFile - delete old pdfFile
         const publicId = `pcsi/${getCloudinaryPublicId(article.pdfFile)}`;
-        await cloudinary.uploader.destroy(publicId);
-        // console.log(`Removed pdfFile with public ID: ${publicId}`);
+        await cloudinary.uploader.destroy(publicId, { resource_type: "raw" });
       }
-      // Scenario 3: Neither data.pdfFile nor data.removePdfFile - keep existing pdfFile
     }
 
-    // Remove removeBanner and removePdfFile flags from update data as they're not model fields
+    // Strip non-model flags
     const { removeBanner, removePdfFile, ...updateData } = data;
+
+    // Explicitly null out removed files
+    if (data.removeBanner) updateData.banner = null;
+    if (data.removePdfFile) updateData.pdfFile = null;
 
     const result = await Article.findByIdAndUpdate(objectId, updateData, {
       new: true,
+      runValidators: true, // ✅ Enforce schema validation on update
     });
+
     return result;
   },
   toggleArticleStatus: async (id, status) => {
     const article = await Article.findByIdAndUpdate(
       id,
       { status: status.toLowerCase() },
-      { new: true }
+      { new: true },
     );
     return article;
   },

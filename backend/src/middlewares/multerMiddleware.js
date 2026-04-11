@@ -1,49 +1,8 @@
 import multer from "multer";
 import path from "path";
-import cloudinary from "../config/cloudinaryConfig.js";
-import { CloudinaryStorage } from "multer-storage-cloudinary";
 
-// Cloudinary Storage
-const storage = new CloudinaryStorage({
-  cloudinary,
-  params: (req, file) => {
-    const timestamp = Date.now();
-    const baseName = `${timestamp}_pcsi`;
-
-    const isImage = /jpeg|jpg|png/.test(file.mimetype);
-    const isDocument = /pdf|doc|docx/.test(file.mimetype);
-
-    // Decide folder and resource type
-    let folder = "pcsi/others";
-    let resourceType = "auto"; // Changed from "raw" to "auto" for better handling
-
-    if (isImage) {
-      folder = "pcsi/banners";
-      resourceType = "image";
-    }
-
-    if (isDocument) {
-      folder = "pcsi/files";
-      resourceType = "raw"; // Use "raw" for documents to ensure proper upload
-    }
-
-    // For raw files, preserve the original filename to get proper URLs
-    let publicId = baseName;
-    if (resourceType === "raw") {
-      const ext = path.extname(file.originalname);
-      const nameWithoutExt = path.basename(file.originalname, ext);
-      // Use timestamp + original filename to avoid conflicts
-      publicId = `${timestamp}_${nameWithoutExt}${ext}`;
-    }
-
-    return {
-      folder,
-      public_id: publicId,
-      allowed_formats: ["jpg", "jpeg", "png", "pdf", "doc", "docx"],
-      resource_type: resourceType,
-    };
-  },
-});
+// Memory Storage
+const storage = multer.memoryStorage();
 
 // Multer instance
 const upload = multer({

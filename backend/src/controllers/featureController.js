@@ -1,11 +1,12 @@
 import featureService from "../services/featureService.js";
 import { asyncHandler } from "../middlewares/errorHandler.js";
 import { STATUS_CODES } from "../utils/constants.js";
+import { uploadToCloudinary } from "../config/cloudinaryConfig.js";
 
 const featureController = {
   createFeature: asyncHandler(async (req, res) => {
     const { name, description } = req.body;
-    const banner = req.file ? req.file.path : null; // Get file path from Cloudinary upload
+    const banner = req.file ? await uploadToCloudinary(req.file) : null;
     const feature = await featureService.createFeature(
       name,
       description,
@@ -51,7 +52,7 @@ const featureController = {
   }),
   updateFeature: asyncHandler(async (req, res) => {
     const { name, description, removeBanner } = req.body;
-    const banner = req.file ? req.file.path : null; // Get file path from Cloudinary upload
+    const banner = req.file ? await uploadToCloudinary(req.file) : null;
 
     const updateData = {
       name,

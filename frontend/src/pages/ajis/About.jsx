@@ -81,7 +81,7 @@ function About() {
             <Separator />
             <p className="text-lg leading-relaxed">
               <i>Asian Journal of Insect Science</i> is a peer-reviewed
-              international journal published by the{" "}
+              international journal published annually by the{" "}
               <b>Philippine Coleopterists Society Incorporated</b>, dedicated to
               publishing high-quality papers on any aspect of systematic
               entomology, with a preference for scientific papers dealing with

@@ -2,6 +2,8 @@ import Container from "@/components/common/Container";
 import { Separator } from "@/components/ui/separator";
 import volumeService from "@/services/volumeService";
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
+import { ArrowRight } from "lucide-react";
 
 function AJIS() {
   const [volumes, setVolumes] = useState([]);
@@ -10,32 +12,33 @@ function AJIS() {
 
   const latestVolume = volumes?.length > 0 ? volumes[0] : null;
 
-  useEffect(() => {
-    async function fetchVolumes() {
-      setLoading(true);
-      setError(null);
-      try {
-        // Fetch only volumes with status "1" (active volumes)
-        const response = await volumeService.getVolumes(null, { status: "1" });
-        if (response.success) {
-          setVolumes(response.data);
-        } else {
-          setError(response.error || "Failed to load volumes.");
-        }
-      } catch (_) {
-        setError("Failed to load volumes.");
-      } finally {
-        setLoading(false);
+  async function fetchVolumes() {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await volumeService.getVolumes(null, { status: "1" });
+      if (response.success) {
+        setVolumes(response.data);
+      } else {
+        setError(response.error || "Failed to load volumes.");
       }
+    } catch (_) {
+      setError("Failed to load volumes.");
+    } finally {
+      setLoading(false);
     }
+  }
+
+  useEffect(() => {
     fetchVolumes();
   }, []);
+
   return (
     <Container className="py-16 md:py-24">
       <div className="flex flex-col md:flex-row md:items-center gap-14 md:gap-20">
         {/* ---------- Left: intro ---------- */}
         <div className="md:w-3/5 space-y-5">
-          <p className="text-xs font-mono font-medium tracking-[0.2em] uppercase text-[#4B5D45]">
+          <p className="text-xs  font-medium tracking-[0.2em] uppercase text-[#4B5D45]">
             Official journal &middot; Philippine Coleopterists Society, Inc.
           </p>
 
@@ -50,13 +53,13 @@ function AJIS() {
             scientific journal of the Society.
           </p>
 
-          <p className="font-mono text-xs tracking-wide text-[#8A8478]">
+          <p className=" text-xs tracking-wide text-[#8A8478]">
             ONLINE ISSN&nbsp; 3155-6671
           </p>
 
           {latestVolume && (
             <Link
-              to={`/ajis/volumes/${latestVolume._id ?? latestVolume.id}`}
+              to={`/ajis/issues`}
               className="inline-flex items-center gap-2 pt-2 text-sm font-semibold text-[#1C2620] group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4B5D45] rounded-sm"
             >
               <span className="border-b border-[#1C2620] group-hover:border-[#4B5D45] group-hover:text-[#4B5D45] transition-colors">
@@ -93,7 +96,7 @@ function AJIS() {
           ) : (
             <div className="max-w-[260px]">
               {/* Vol/No/Year tag, sits above the case */}
-              <p className="mb-3 font-mono text-xs tracking-[0.15em] uppercase text-[#4B5D45]">
+              <p className="mb-3  text-xs tracking-[0.15em] uppercase text-[#4B5D45]">
                 Vol. {latestVolume.volumeNo} &middot; No.{" "}
                 {latestVolume.seriesNo}
                 &nbsp;&middot;&nbsp;{latestVolume.year}
@@ -128,7 +131,7 @@ function AJIS() {
 
               {/* Museum-label plate */}
               {/* Museum-label plate */}
-              <div className="mt-3 border-t border-[#D8D2C4] pt-3 space-y-1.5 font-mono text-xs text-[#5B6259]">
+              {/* <div className="mt-3 border-t border-[#D8D2C4] pt-3 space-y-1.5  text-xs text-[#5B6259]">
                 {latestVolume.doi && (
                   <div className="flex gap-2">
                     <span className="uppercase tracking-wide text-[#8A8478] shrink-0">
@@ -158,7 +161,7 @@ function AJIS() {
                     )}
                   </span>
                 </div>
-              </div>
+              </div> */}
             </div>
           )}
         </div>

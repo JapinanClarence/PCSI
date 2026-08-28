@@ -49,8 +49,9 @@ function AJIS() {
           <p className="text-lg leading-relaxed text-[#3D453E]">
             As part of our commitment to advancing scientific research and
             knowledge exchange, the Philippine Coleopterists Society, Inc.
-            publishes the Asian Journal of Insect Science (AJIS), the official
-            scientific journal of the Society.
+            manages and publishes the Asian Journal of Insect Science (AJIS)
+            (Online ISSN: 3155-6671), the official scientific journal of the
+            Society.
           </p>
 
           <p className=" text-xs tracking-wide text-[#8A8478]">

@@ -45,34 +45,48 @@ function AJIS() {
         </p>
       </div>
       <div className="md:w-1/3 mb-6 md:mb-0">
-        <p className="mb-4 font-serif text-xl md:text-xl font-semibold">
-          Vol. {latestVolume.volumeNo} No. {latestVolume.seriesNo} (
-          {latestVolume.year}): {latestVolume.month}
-        </p>
-        {latestVolume.banner ? (
+        {latestVolume ? (
           <>
-            <img
-              src={latestVolume.banner}
-              alt={`Vol. ${latestVolume.volumeNo} No. ${latestVolume.seriesNo} Banner`}
-              className="max-h-[280px] object-contain rounded-lg shadow-lg"
-            />
-            <p className="mt-3 font-serif text-gray-500 font-medium">
-              <b>DOI:</b>{" "}
-              <a href={latestVolume.doi}>
-                <u>{latestVolume.doi}</u>
-              </a>
+            <p className="mb-4 font-serif text-xl md:text-xl font-semibold">
+              Vol. {latestVolume.volumeNo} No. {latestVolume.seriesNo} (
+              {latestVolume.year}): {latestVolume.month}
             </p>
-            <p className="text-gray-500 font-serif text-sm">
-              <b>Published:</b>{" "}
-              {new Date(latestVolume.createdAt).toLocaleDateString(undefined, {
-                year: "numeric",
-                month: "long",
-              })}
-            </p>
+
+            {latestVolume.banner ? (
+              <>
+                <img
+                  src={latestVolume.banner}
+                  alt={`Vol. ${latestVolume.volumeNo} No. ${latestVolume.seriesNo} Banner`}
+                  className="max-h-[280px] object-contain rounded-lg shadow-lg"
+                />
+
+                <p className="mt-3 font-serif text-gray-500 font-medium">
+                  <b>DOI:</b>{" "}
+                  <a href={latestVolume.doi}>
+                    <u>{latestVolume.doi}</u>
+                  </a>
+                </p>
+
+                <p className="text-gray-500 font-serif text-sm">
+                  <b>Published:</b>{" "}
+                  {new Date(latestVolume.createdAt).toLocaleDateString(
+                    undefined,
+                    {
+                      year: "numeric",
+                      month: "long",
+                    },
+                  )}
+                </p>
+              </>
+            ) : (
+              <div className="mx-auto max-h-[360px] w-full bg-gray-200 flex items-center justify-center rounded-lg text-gray-400 h-[180px] md:h-[360px]">
+                No banner image available
+              </div>
+            )}
           </>
         ) : (
-          <div className="mx-auto max-h-[360px] w-full bg-gray-200 flex items-center justify-center rounded-lg text-gray-400 h-[180px] md:h-[360px]">
-            No banner image available
+          <div className="text-gray-500 font-serif">
+            No published volume available.
           </div>
         )}
       </div>

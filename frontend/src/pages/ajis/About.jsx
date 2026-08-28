@@ -53,6 +53,9 @@ function About() {
           <h1 className="font-serif text-4xl md:text-4xl font-bold mb-2">
             Asian Journal of Insect Science (AJIS)
           </h1>
+          <span className="text-sm text-muted-foreground font-semibold">
+            Online ISSN: 3155-6671
+          </span>
           <h2 className="font-serif text-1xl md:text-2xl text-gray-600 font-semibold">
             About
           </h2>
